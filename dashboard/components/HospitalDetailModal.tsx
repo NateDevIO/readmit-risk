@@ -59,18 +59,18 @@ export default function HospitalDetailModal({ hospital, onClose }: HospitalDetai
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
+        <div className="sticky top-0 bg-white dark:bg-gray-800 border-b dark:border-gray-700 px-6 py-4 flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">Hospital Details</h2>
-            <p className="text-sm text-gray-500">{hospital.city}, {hospital.state}</p>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Hospital Details</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{hospital.city}, {hospital.state}</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
           >
-            <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -78,7 +78,7 @@ export default function HospitalDetailModal({ hospital, onClose }: HospitalDetai
 
         <div className="p-6">
           {/* Hospital Name */}
-          <h3 className="text-lg font-bold text-gray-900 mb-4">{hospital.name}</h3>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{hospital.name}</h3>
 
           {/* Performance Banner */}
           <div className={`rounded-lg p-4 mb-6 ${performance.bg}`}>
@@ -96,30 +96,30 @@ export default function HospitalDetailModal({ hospital, onClose }: HospitalDetai
 
           {/* Key Metrics */}
           <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">CMS Penalty</p>
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+              <p className="text-xs text-gray-500 dark:text-gray-400">CMS Penalty</p>
               <p className="text-lg font-semibold text-red-600">{hospital.penalty_pct.toFixed(2)}%</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">Est. Penalty Amount</p>
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+              <p className="text-xs text-gray-500 dark:text-gray-400">Est. Penalty Amount</p>
               <p className="text-lg font-semibold text-red-600">{formatCurrency(estimatedPenalty)}</p>
             </div>
           </div>
 
           {/* Comparison to Benchmarks */}
           <div className="mb-6">
-            <h4 className="text-sm font-semibold text-gray-700 mb-3">Benchmark Comparison</h4>
+            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Benchmark Comparison</h4>
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600">National Average</span>
-                <span className="font-medium">{nationalAvg}%</span>
+                <span className="text-gray-600 dark:text-gray-400">National Average</span>
+                <span className="font-medium dark:text-white">{nationalAvg}%</span>
                 <span className={hospital.readmission_rate <= nationalAvg ? 'text-green-600' : 'text-red-600'}>
                   {hospital.readmission_rate <= nationalAvg ? '✓ Below' : '✗ Above'}
                 </span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600">Top Quartile</span>
-                <span className="font-medium">{topQuartile}%</span>
+                <span className="text-gray-600 dark:text-gray-400">Top Quartile</span>
+                <span className="font-medium dark:text-white">{topQuartile}%</span>
                 <span className={hospital.readmission_rate <= topQuartile ? 'text-green-600' : 'text-yellow-600'}>
                   {hospital.readmission_rate <= topQuartile ? '✓ Achieved' : '○ Target'}
                 </span>
@@ -127,7 +127,7 @@ export default function HospitalDetailModal({ hospital, onClose }: HospitalDetai
             </div>
 
             {/* Visual comparison bar */}
-            <div className="mt-3 relative h-4 bg-gray-100 rounded-full overflow-hidden">
+            <div className="mt-3 relative h-4 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
               <div
                 className={`absolute top-0 left-0 h-full rounded-full ${
                   hospital.readmission_rate <= topQuartile ? 'bg-green-500' :
@@ -156,7 +156,7 @@ export default function HospitalDetailModal({ hospital, onClose }: HospitalDetai
 
           {/* Recommendations */}
           <div className="mb-6">
-            <h4 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
               <span className="text-blue-500">💡</span>
               Recommended Actions
             </h4>
@@ -164,20 +164,20 @@ export default function HospitalDetailModal({ hospital, onClose }: HospitalDetai
               {recommendations.map((rec, index) => (
                 <li key={index} className="flex items-start gap-2 text-sm">
                   <span className="text-blue-500 mt-0.5">•</span>
-                  <span className="text-gray-700">{rec}</span>
+                  <span className="text-gray-700 dark:text-gray-300">{rec}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-3 pt-4 border-t">
+          <div className="flex gap-3 pt-4 border-t dark:border-gray-700">
             <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm">
               Add to Watch List
             </button>
             <button
               onClick={onClose}
-              className="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm"
+              className="flex-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium text-sm"
             >
               Close
             </button>

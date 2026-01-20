@@ -44,6 +44,7 @@ export default function DashboardPage() {
         <AnimatedKPI
           title="Total Cost Exposure"
           value={formatCurrency(riskSummary.total_cost_exposure)}
+          rawValue={riskSummary.total_cost_exposure}
           subtitle="Preventable readmission costs"
           colorClass="text-orange-600"
         />
