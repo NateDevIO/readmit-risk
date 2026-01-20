@@ -27,7 +27,7 @@ export default function RootLayout({
           <p>Built with Python, Scikit-learn, Next.js, and Recharts</p>
           <p className="mt-1">
             <a
-              href="https://github.com/yourusername/readmissions-project"
+              href="https://github.com/NateDevIO/readmit-risk"
               className="text-blue-600 dark:text-blue-400 hover:underline"
               target="_blank"
               rel="noopener noreferrer"

@@ -82,7 +82,7 @@ readmit-risk/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/readmit-risk.git
+git clone https://github.com/NateDevIO/readmit-risk.git
 cd readmit-risk
 ```
 

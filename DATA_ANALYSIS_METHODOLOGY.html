@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadmitRisk Data Analysis Methodology</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.7; color: #1a1a1a; max-width: 8.5in; margin: 0 auto; padding: 0.75in; font-size: 12px; }
+        h1 { color: #1e40af; font-size: 24px; margin-bottom: 8px; border-bottom: 3px solid #1e40af; padding-bottom: 10px; }
+        h2 { color: #1e40af; font-size: 18px; margin-top: 25px; margin-bottom: 12px; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
+        h3 { color: #374151; font-size: 14px; margin-top: 18px; margin-bottom: 8px; }
+        h4 { color: #4b5563; font-size: 12px; margin-top: 12px; margin-bottom: 6px; }
+        p { margin-bottom: 10px; }
+        .subtitle { color: #6b7280; font-size: 13px; margin-bottom: 25px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 11px; }
+        th, td { padding: 8px 10px; text-align: left; border: 1px solid #e5e7eb; }
+        th { background: #f3f4f6; font-weight: 600; color: #374151; }
+        code { background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 11px; }
+        pre { background: #1f2937; color: #e5e7eb; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; font-size: 11px; line-height: 1.5; }
+        .note { background: #dbeafe; padding: 12px; border-left: 4px solid #1e40af; margin: 15px 0; border-radius: 0 6px 6px 0; }
+        .warning { background: #fef3c7; padding: 12px; border-left: 4px solid #f59e0b; margin: 15px 0; border-radius: 0 6px 6px 0; }
+        .footer { margin-top: 30px; padding-top: 15px; border-top: 1px solid #e5e7eb; text-align: center; color: #6b7280; font-size: 10px; }
+        .page-break { page-break-before: always; }
+        ul, ol { margin-left: 20px; margin-bottom: 12px; }
+        li { margin-bottom: 4px; }
+        .formula { background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px; border-radius: 6px; margin: 12px 0; text-align: center; font-family: 'Consolas', monospace; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .metric-box { background: #f9fafb; border: 1px solid #e5e7eb; padding: 10px; border-radius: 6px; text-align: center; }
+        .metric-box .value { font-size: 20px; font-weight: bold; color: #1e40af; }
+        .metric-box .label { font-size: 10px; color: #6b7280; }
+    </style>
+</head>
+<body>
+    <h1>Data Analysis Methodology Report</h1>
+    <p class="subtitle">Technical Documentation for ReadmitRisk Hospital Readmission Risk Prediction Pipeline</p>
+
+    <h2>1. Data Sources</h2>
+
+    <h3>1.1 Primary Dataset: UCI Diabetes 130-US Hospitals</h3>
+    <table>
+        <tr><th>Attribute</th><th>Value</th></tr>
+        <tr><td>Source</td><td>UCI Machine Learning Repository</td></tr>
+        <tr><td>Time Period</td><td>1999-2008 (10 years)</td></tr>
+        <tr><td>Hospitals</td><td>130 US hospitals</td></tr>
+        <tr><td>Raw Records</td><td>101,766 hospital encounters</td></tr>
+        <tr><td>Variables</td><td>50 features including demographics, diagnoses, medications, lab results</td></tr>
+        <tr><td>Target Variable</td><td>Readmission status (NO, >30 days, &lt;30 days)</td></tr>
+    </table>
+
+    <h3>1.2 Secondary Dataset: CMS Hospital Readmissions Reduction Program</h3>
+    <p>State-level and hospital-level readmission rates and penalty data based on CMS HRRP patterns. Geographic data covers all 50 states plus District of Columbia.</p>
+
+    <h2>2. Data Cleaning and Preprocessing</h2>
+
+    <h3>2.1 Missing Value Analysis</h3>
+    <table>
+        <tr><th>Column</th><th>Missing Rate</th><th>Treatment</th><th>Rationale</th></tr>
+        <tr><td><code>weight</code></td><td>97%</td><td>Dropped</td><td>Too sparse to impute meaningfully</td></tr>
+        <tr><td><code>payer_code</code></td><td>40%</td><td>Dropped</td><td>High missingness, administrative variable</td></tr>
+        <tr><td><code>medical_specialty</code></td><td>49%</td><td>Dropped</td><td>High missingness, many categories</td></tr>
+        <tr><td><code>race</code></td><td>2%</td><td>Filled with "Unknown"</td><td>Low missingness, categorical</td></tr>
+        <tr><td>Numeric features</td><td>&lt;1%</td><td>Filled with median</td><td>Preserves distribution</td></tr>
+    </table>
+
+    <h3>2.2 Patient Deduplication</h3>
+    <p>The raw dataset contains multiple encounters per patient. To ensure independence of observations and prevent data leakage:</p>
+    <ul>
+        <li>Records sorted by <code>encounter_id</code></li>
+        <li>Duplicates removed based on <code>patient_nbr</code>, keeping first encounter only</li>
+        <li><strong>Before:</strong> 101,766 encounters</li>
+        <li><strong>After:</strong> 71,518 unique patients</li>
+    </ul>
+
+    <h3>2.3 Target Variable Transformation</h3>
+    <p>Original target had 3 categories. Transformed to binary for logistic regression:</p>
+    <table>
+        <tr><th>Original Value</th><th>Binary Value</th><th>Count</th><th>Percentage</th></tr>
+        <tr><td>"&lt;30" (readmitted within 30 days)</td><td>1 (Positive)</td><td>6,293</td><td>8.8%</td></tr>
+        <tr><td>"NO" or ">30"</td><td>0 (Negative)</td><td>65,225</td><td>91.2%</td></tr>
+    </table>
+
+    <div class="warning">
+        <strong>Class Imbalance Note:</strong> The 8.8% positive class rate represents significant class imbalance, addressed via SMOTE oversampling.
+    </div>
+
+    <h2 class="page-break">3. Feature Engineering</h2>
+
+    <h3>3.1 Age Transformation</h3>
+    <p>Original age values are categorical ranges. Converted to numeric midpoints:</p>
+    <pre>age_mapping = {
+    '[0-10)': 5,   '[10-20)': 15,  '[20-30)': 25,
+    '[30-40)': 35, '[40-50)': 45,  '[50-60)': 55,
+    '[60-70)': 65, '[70-80)': 75,  '[80-90)': 85,
+    '[90-100)': 95
+}</pre>
+
+    <h3>3.2 Derived Features</h3>
+    <table>
+        <tr><th>Feature</th><th>Formula</th><th>Clinical Rationale</th></tr>
+        <tr>
+            <td><code>total_visits</code></td>
+            <td><code>number_outpatient + number_emergency + number_inpatient</code></td>
+            <td>Overall healthcare utilization indicator</td>
+        </tr>
+        <tr>
+            <td><code>medication_intensity</code></td>
+            <td><code>num_medications / (time_in_hospital + 1)</code></td>
+            <td>Treatment complexity normalized by stay length</td>
+        </tr>
+        <tr>
+            <td><code>num_med_changes</code></td>
+            <td>Count of medications with "Up" or "Down" dosage changes</td>
+            <td>Medication optimization during stay</td>
+        </tr>
+        <tr>
+            <td><code>A1Cresult_abnormal</code></td>
+            <td>1 if A1C > 7 or > 8, else 0</td>
+            <td>Diabetes control indicator</td>
+        </tr>
+    </table>
+
+    <h3>3.3 Final Feature Set</h3>
+    <div class="two-col">
+        <div>
+            <h4>Numeric Features (12)</h4>
+            <ul>
+                <li><code>time_in_hospital</code></li>
+                <li><code>num_lab_procedures</code></li>
+                <li><code>num_procedures</code></li>
+                <li><code>num_medications</code></li>
+                <li><code>number_outpatient</code></li>
+                <li><code>number_emergency</code></li>
+                <li><code>number_inpatient</code></li>
+                <li><code>number_diagnoses</code></li>
+                <li><code>age_numeric</code></li>
+                <li><code>total_visits</code></li>
+                <li><code>medication_intensity</code></li>
+                <li><code>num_med_changes</code></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Categorical Features (8)</h4>
+            <ul>
+                <li><code>race</code></li>
+                <li><code>gender</code></li>
+                <li><code>admission_type_id</code></li>
+                <li><code>discharge_disposition_id</code></li>
+                <li><code>admission_source_id</code></li>
+                <li><code>diabetesMed</code></li>
+                <li><code>change</code></li>
+                <li><code>A1Cresult_abnormal</code></li>
+            </ul>
+            <p style="margin-top: 10px; font-size: 11px; color: #6b7280;">One-hot encoded with drop_first=True</p>
+        </div>
+    </div>
+
+    <h2>4. Machine Learning Pipeline</h2>
+
+    <h3>4.1 Train-Test Split</h3>
+    <table>
+        <tr><th>Set</th><th>Size</th><th>Positive Class</th><th>Negative Class</th></tr>
+        <tr><td>Training (80%)</td><td>57,214</td><td>5,034 (8.8%)</td><td>52,180 (91.2%)</td></tr>
+        <tr><td>Test (20%)</td><td>14,304</td><td>1,259 (8.8%)</td><td>13,045 (91.2%)</td></tr>
+    </table>
+    <p>Stratified split used to maintain class proportions in both sets.</p>
+
+    <h3>4.2 SMOTE Oversampling</h3>
+    <p>Synthetic Minority Over-sampling Technique (SMOTE) applied to training data only:</p>
+    <pre>from imblearn.over_sampling import SMOTE
+smote = SMOTE(random_state=42)
+X_train_balanced, y_train_balanced = smote.fit_resample(X_train, y_train)</pre>
+    <table>
+        <tr><th>Class</th><th>Before SMOTE</th><th>After SMOTE</th></tr>
+        <tr><td>Negative (0)</td><td>52,180</td><td>52,180</td></tr>
+        <tr><td>Positive (1)</td><td>5,034</td><td>52,180</td></tr>
+        <tr><td><strong>Total</strong></td><td>57,214</td><td>104,360</td></tr>
+    </table>
+
+    <div class="note">
+        <strong>Why SMOTE?</strong> With only 8.8% positive class, a naive model predicting "no readmission" for all patients would achieve 91.2% accuracy but be clinically useless. SMOTE creates synthetic positive examples to help the model learn minority class patterns.
+    </div>
+
+    <h3 class="page-break">4.3 Model Selection and Training</h3>
+    <table>
+        <tr><th>Parameter</th><th>Value</th><th>Rationale</th></tr>
+        <tr><td>Algorithm</td><td>Logistic Regression</td><td>Interpretable coefficients for clinical explainability</td></tr>
+        <tr><td>Regularization</td><td>L2 (Ridge)</td><td>Prevents overfitting with many features</td></tr>
+        <tr><td>C (inverse regularization)</td><td>0.1</td><td>Moderate regularization strength</td></tr>
+        <tr><td>max_iter</td><td>1000</td><td>Ensure convergence</td></tr>
+        <tr><td>Scaling</td><td>StandardScaler</td><td>Zero mean, unit variance for each feature</td></tr>
+    </table>
+
+    <pre>from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train_balanced)
+X_test_scaled = scaler.transform(X_test)
+
+model = LogisticRegression(max_iter=1000, random_state=42, C=0.1)
+model.fit(X_train_scaled, y_train_balanced)</pre>
+
+    <h3>4.4 Model Evaluation</h3>
+    <div class="two-col">
+        <div class="metric-box">
+            <div class="value">0.564</div>
+            <div class="label">ROC-AUC Score</div>
+        </div>
+        <div class="metric-box">
+            <div class="value">0.110</div>
+            <div class="label">Average Precision</div>
+        </div>
+    </div>
+
+    <div class="warning">
+        <strong>Performance Context:</strong> The modest AUC of 0.564 is consistent with published literature on hospital readmission prediction. Readmissions are influenced by many factors outside the EHR (social determinants, outpatient care quality, patient compliance) that are not captured in this dataset.
+    </div>
+
+    <h2>5. Risk Score Calculation</h2>
+
+    <h3>5.1 Probability to Score Conversion</h3>
+    <div class="formula">
+        Risk Score = P(readmission | features) x 100
+    </div>
+    <p>Where P(readmission | features) is the predicted probability from logistic regression's <code>predict_proba()</code> method.</p>
+
+    <h3>5.2 Cost Exposure Estimation</h3>
+    <div class="formula">
+        Estimated Cost = (Risk Score / 100) x $15,000
+    </div>
+    <p>The $15,000 figure represents the average cost of a hospital readmission based on industry benchmarks.</p>
+
+    <h3>5.3 Risk Stratification Tiers</h3>
+    <table>
+        <tr><th>Tier</th><th>Risk Score Range</th><th>Patient Count</th><th>Percentage</th><th>Action Level</th></tr>
+        <tr><td>Critical</td><td>80-100%</td><td>1,931</td><td>2.7%</td><td>Immediate intervention</td></tr>
+        <tr><td>Very High</td><td>70-80%</td><td>2,232</td><td>3.1%</td><td>Priority outreach</td></tr>
+        <tr><td>High</td><td>60-70%</td><td>2,920</td><td>4.1%</td><td>Proactive monitoring</td></tr>
+        <tr><td>Moderate</td><td>40-60%</td><td>9,224</td><td>12.9%</td><td>Standard care</td></tr>
+        <tr><td>Low</td><td>0-40%</td><td>55,211</td><td>77.2%</td><td>Routine follow-up</td></tr>
+    </table>
+
+    <h2 class="page-break">6. Feature Importance Analysis</h2>
+
+    <h3>6.1 Top Risk-Increasing Factors</h3>
+    <table>
+        <tr><th>Rank</th><th>Feature</th><th>Coefficient</th><th>Interpretation</th></tr>
+        <tr><td>1</td><td>Total Prior Visits</td><td>+4.3579</td><td>High utilization = complex patient</td></tr>
+        <tr><td>2</td><td>Number of Medications</td><td>+0.2819</td><td>Polypharmacy indicates severity</td></tr>
+        <tr><td>3</td><td>Lab Procedures</td><td>+0.1021</td><td>More testing = diagnostic complexity</td></tr>
+        <tr><td>4</td><td>Number of Diagnoses</td><td>+0.0078</td><td>Comorbidity burden</td></tr>
+    </table>
+
+    <h3>6.2 Protective Factors</h3>
+    <table>
+        <tr><th>Rank</th><th>Feature</th><th>Coefficient</th><th>Interpretation</th></tr>
+        <tr><td>1</td><td>Outpatient Visits</td><td>-3.1170</td><td>Continuity of care is protective</td></tr>
+        <tr><td>2</td><td>Prior Inpatient Visits</td><td>-1.9585</td><td>Established care relationships</td></tr>
+        <tr><td>3</td><td>Emergency Visits</td><td>-1.5405</td><td>Access to acute care when needed</td></tr>
+    </table>
+
+    <div class="note">
+        <strong>Clinical Insight:</strong> The strong protective effect of outpatient visits (-3.117) suggests that patients with regular outpatient follow-up are less likely to be readmitted, even if they have complex conditions. This supports investment in transitional care and follow-up appointment scheduling.
+    </div>
+
+    <h2>7. Geographic Data Generation</h2>
+
+    <h3>7.1 State-Level Data</h3>
+    <p>State-level readmission rates and penalties are generated based on actual CMS HRRP patterns:</p>
+    <pre>for state_code, info in STATE_DATA.items():
+    # Add realistic variation
+    rate_variation = np.random.uniform(-0.8, 0.8)
+    avg_rate = info['base_rate'] + rate_variation
+
+    # Calculate penalty based on rate
+    if avg_rate > 15.5:
+        penalty_pct = np.random.uniform(0.5, 2.0)
+    elif avg_rate > 14.5:
+        penalty_pct = np.random.uniform(0.2, 0.8)
+    else:
+        penalty_pct = np.random.uniform(0, 0.3)
+
+    # Estimate total penalty
+    total_penalty = hospitals * 5_000_000 * (penalty_pct / 100)</pre>
+
+    <h3>7.2 Penalty Calculation Logic</h3>
+    <p>CMS penalizes hospitals with Excess Readmission Ratios (ERR) greater than 1.0. Penalties are calculated as a percentage of Medicare payments:</p>
+    <ul>
+        <li>States with avg rate > 15.5%: 0.5-2.0% penalty range</li>
+        <li>States with avg rate 14.5-15.5%: 0.2-0.8% penalty range</li>
+        <li>States with avg rate &lt; 14.5%: 0-0.3% penalty range</li>
+        <li>Estimated Medicare payments per hospital: $5,000,000</li>
+    </ul>
+
+    <h2 class="page-break">8. Output Data Verification</h2>
+
+    <h3>8.1 Data Integrity Checks</h3>
+    <table>
+        <tr><th>Validation</th><th>Expected</th><th>Actual</th><th>Status</th></tr>
+        <tr><td>Total patients</td><td>71,518</td><td>71,518</td><td style="color: green;">PASS</td></tr>
+        <tr><td>High-risk patients (60%+)</td><td>7,083</td><td>7,083</td><td style="color: green;">PASS</td></tr>
+        <tr><td>Sum of risk tiers</td><td>7,083</td><td>1,931 + 2,232 + 2,920 = 7,083</td><td style="color: green;">PASS</td></tr>
+        <tr><td>Risk distribution sum</td><td>71,518</td><td>37,663 + 17,548 + 9,224 + 5,152 + 1,931 = 71,518</td><td style="color: green;">PASS</td></tr>
+        <tr><td>Total cost exposure</td><td>$78,501,391.71</td><td>$25,096,147 + $25,025,321 + $28,379,923 = $78,501,391</td><td style="color: green;">PASS</td></tr>
+        <tr><td>States analyzed</td><td>51</td><td>51</td><td style="color: green;">PASS</td></tr>
+        <tr><td>Patient export count</td><td>7,083</td><td>7,083</td><td style="color: green;">PASS</td></tr>
+    </table>
+
+    <h3>8.2 Output Files</h3>
+    <table>
+        <tr><th>File</th><th>Description</th><th>Records/Keys</th><th>Size</th></tr>
+        <tr><td><code>patient_risks.json</code></td><td>High-risk patient details</td><td>7,083 patients</td><td>~1.2 MB</td></tr>
+        <tr><td><code>risk_summary.json</code></td><td>Dashboard statistics</td><td>15 keys</td><td>~3 KB</td></tr>
+        <tr><td><code>state_summary.json</code></td><td>State-level metrics</td><td>51 states</td><td>~8 KB</td></tr>
+        <tr><td><code>hospital_metrics.json</code></td><td>Hospital-level data</td><td>746 hospitals</td><td>~45 KB</td></tr>
+    </table>
+
+    <h2>9. Limitations and Considerations</h2>
+
+    <ol>
+        <li><strong>Data Age:</strong> UCI dataset is from 1999-2008; healthcare patterns may have evolved significantly</li>
+        <li><strong>Model Performance:</strong> AUC of 0.564 indicates modest predictive power, typical for readmission models</li>
+        <li><strong>Geographic Data:</strong> State-level metrics are simulated based on CMS patterns, not actual current data</li>
+        <li><strong>Cost Estimates:</strong> Based on $15,000 average; actual costs vary widely by condition and facility</li>
+        <li><strong>External Factors:</strong> Model cannot capture social determinants, patient compliance, or outpatient care quality</li>
+        <li><strong>Single Disease Focus:</strong> Dataset is diabetes-specific; generalization to other populations requires validation</li>
+    </ol>
+
+    <h2>10. Reproduction Steps</h2>
+    <pre># 1. Install dependencies
+pip install pandas numpy scikit-learn imbalanced-learn
+
+# 2. Download UCI Diabetes dataset to data/raw/
+
+# 3. Run analysis pipeline
+python run_analysis_v2.py
+
+# 4. Copy outputs to dashboard
+cp data/processed/*.json dashboard/lib/
+
+# 5. Start dashboard
+cd dashboard && npm run dev</pre>
+
+    <div class="footer">
+        <p><strong>ReadmitRisk</strong> | Data Analysis Methodology Report</p>
+        <p>Document Version: 1.0 | Generated: January 2026</p>
+        <p>Repository: github.com/NateDevIO/readmit-risk</p>
+    </div>
+</body>
+</html>
