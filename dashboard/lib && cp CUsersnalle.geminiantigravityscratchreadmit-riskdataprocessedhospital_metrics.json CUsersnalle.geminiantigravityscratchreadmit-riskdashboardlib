@@ -1,0 +1,512 @@
+[
+  {
+    "state": "LA",
+    "name": "Louisiana",
+    "lat": 31.169546,
+    "lng": -91.867805,
+    "hospital_count": 109,
+    "avg_readmission_rate": 17.8,
+    "avg_penalty_pct": 1.71,
+    "total_penalty_estimate": 9333648.0
+  },
+  {
+    "state": "WV",
+    "name": "West Virginia",
+    "lat": 38.491226,
+    "lng": -80.954453,
+    "hospital_count": 55,
+    "avg_readmission_rate": 17.6,
+    "avg_penalty_pct": 1.24,
+    "total_penalty_estimate": 3411907.0
+  },
+  {
+    "state": "MS",
+    "name": "Mississippi",
+    "lat": 32.741646,
+    "lng": -89.678696,
+    "hospital_count": 83,
+    "avg_readmission_rate": 17.1,
+    "avg_penalty_pct": 1.28,
+    "total_penalty_estimate": 5312423.0
+  },
+  {
+    "state": "OK",
+    "name": "Oklahoma",
+    "lat": 35.565342,
+    "lng": -96.928917,
+    "hospital_count": 112,
+    "avg_readmission_rate": 16.8,
+    "avg_penalty_pct": 0.8,
+    "total_penalty_estimate": 4469212.0
+  },
+  {
+    "state": "KY",
+    "name": "Kentucky",
+    "lat": 37.66814,
+    "lng": -84.670067,
+    "hospital_count": 96,
+    "avg_readmission_rate": 16.1,
+    "avg_penalty_pct": 1.92,
+    "total_penalty_estimate": 9231976.0
+  },
+  {
+    "state": "AL",
+    "name": "Alabama",
+    "lat": 32.806671,
+    "lng": -86.79113,
+    "hospital_count": 98,
+    "avg_readmission_rate": 16.0,
+    "avg_penalty_pct": 1.93,
+    "total_penalty_estimate": 9437750.0
+  },
+  {
+    "state": "MD",
+    "name": "Maryland",
+    "lat": 39.063946,
+    "lng": -76.802101,
+    "hospital_count": 47,
+    "avg_readmission_rate": 16.0,
+    "avg_penalty_pct": 1.16,
+    "total_penalty_estimate": 2726538.0
+  },
+  {
+    "state": "MO",
+    "name": "Missouri",
+    "lat": 38.456085,
+    "lng": -92.288368,
+    "hospital_count": 113,
+    "avg_readmission_rate": 16.0,
+    "avg_penalty_pct": 0.78,
+    "total_penalty_estimate": 4391642.0
+  },
+  {
+    "state": "TN",
+    "name": "Tennessee",
+    "lat": 35.747845,
+    "lng": -86.692345,
+    "hospital_count": 116,
+    "avg_readmission_rate": 16.0,
+    "avg_penalty_pct": 0.6,
+    "total_penalty_estimate": 3452958.0
+  },
+  {
+    "state": "NY",
+    "name": "New York",
+    "lat": 42.165726,
+    "lng": -74.948051,
+    "hospital_count": 183,
+    "avg_readmission_rate": 15.9,
+    "avg_penalty_pct": 1.04,
+    "total_penalty_estimate": 9471439.0
+  },
+  {
+    "state": "AR",
+    "name": "Arkansas",
+    "lat": 34.969704,
+    "lng": -92.373123,
+    "hospital_count": 78,
+    "avg_readmission_rate": 15.8,
+    "avg_penalty_pct": 1.8,
+    "total_penalty_estimate": 7017130.0
+  },
+  {
+    "state": "DC",
+    "name": "District of Columbia",
+    "lat": 38.897438,
+    "lng": -77.026817,
+    "hospital_count": 8,
+    "avg_readmission_rate": 15.8,
+    "avg_penalty_pct": 1.45,
+    "total_penalty_estimate": 581846.0
+  },
+  {
+    "state": "GA",
+    "name": "Georgia",
+    "lat": 33.040619,
+    "lng": -83.643074,
+    "hospital_count": 139,
+    "avg_readmission_rate": 15.7,
+    "avg_penalty_pct": 0.94,
+    "total_penalty_estimate": 6511064.0
+  },
+  {
+    "state": "PA",
+    "name": "Pennsylvania",
+    "lat": 40.590752,
+    "lng": -77.209755,
+    "hospital_count": 170,
+    "avg_readmission_rate": 15.6,
+    "avg_penalty_pct": 1.59,
+    "total_penalty_estimate": 13544841.0
+  },
+  {
+    "state": "IL",
+    "name": "Illinois",
+    "lat": 40.349457,
+    "lng": -88.986137,
+    "hospital_count": 178,
+    "avg_readmission_rate": 15.5,
+    "avg_penalty_pct": 1.68,
+    "total_penalty_estimate": 14932099.0
+  },
+  {
+    "state": "NJ",
+    "name": "New Jersey",
+    "lat": 40.298904,
+    "lng": -74.521011,
+    "hospital_count": 71,
+    "avg_readmission_rate": 15.4,
+    "avg_penalty_pct": 0.4,
+    "total_penalty_estimate": 1402954.0
+  },
+  {
+    "state": "SC",
+    "name": "South Carolina",
+    "lat": 33.856892,
+    "lng": -80.945007,
+    "hospital_count": 63,
+    "avg_readmission_rate": 15.4,
+    "avg_penalty_pct": 0.27,
+    "total_penalty_estimate": 848993.0
+  },
+  {
+    "state": "CT",
+    "name": "Connecticut",
+    "lat": 41.597782,
+    "lng": -72.755371,
+    "hospital_count": 32,
+    "avg_readmission_rate": 15.3,
+    "avg_penalty_pct": 0.33,
+    "total_penalty_estimate": 523846.0
+  },
+  {
+    "state": "NV",
+    "name": "Nevada",
+    "lat": 38.313515,
+    "lng": -117.055374,
+    "hospital_count": 32,
+    "avg_readmission_rate": 15.3,
+    "avg_penalty_pct": 0.75,
+    "total_penalty_estimate": 1204999.0
+  },
+  {
+    "state": "RI",
+    "name": "Rhode Island",
+    "lat": 41.680893,
+    "lng": -71.51178,
+    "hospital_count": 11,
+    "avg_readmission_rate": 15.3,
+    "avg_penalty_pct": 0.24,
+    "total_penalty_estimate": 134435.0
+  },
+  {
+    "state": "FL",
+    "name": "Florida",
+    "lat": 27.766279,
+    "lng": -81.686783,
+    "hospital_count": 193,
+    "avg_readmission_rate": 15.1,
+    "avg_penalty_pct": 0.51,
+    "total_penalty_estimate": 4968340.0
+  },
+  {
+    "state": "OH",
+    "name": "Ohio",
+    "lat": 40.388783,
+    "lng": -82.764915,
+    "hospital_count": 167,
+    "avg_readmission_rate": 15.1,
+    "avg_penalty_pct": 0.79,
+    "total_penalty_estimate": 6614304.0
+  },
+  {
+    "state": "TX",
+    "name": "Texas",
+    "lat": 31.054487,
+    "lng": -97.563461,
+    "hospital_count": 378,
+    "avg_readmission_rate": 14.9,
+    "avg_penalty_pct": 0.4,
+    "total_penalty_estimate": 7467579.0
+  },
+  {
+    "state": "IN",
+    "name": "Indiana",
+    "lat": 39.849426,
+    "lng": -86.258278,
+    "hospital_count": 118,
+    "avg_readmission_rate": 14.8,
+    "avg_penalty_pct": 0.51,
+    "total_penalty_estimate": 3000390.0
+  },
+  {
+    "state": "KS",
+    "name": "Kansas",
+    "lat": 38.5266,
+    "lng": -96.726486,
+    "hospital_count": 127,
+    "avg_readmission_rate": 14.7,
+    "avg_penalty_pct": 0.3,
+    "total_penalty_estimate": 1919697.0
+  },
+  {
+    "state": "NC",
+    "name": "North Carolina",
+    "lat": 35.630066,
+    "lng": -79.806419,
+    "hospital_count": 112,
+    "avg_readmission_rate": 14.7,
+    "avg_penalty_pct": 0.53,
+    "total_penalty_estimate": 2943459.0
+  },
+  {
+    "state": "DE",
+    "name": "Delaware",
+    "lat": 39.318523,
+    "lng": -75.507141,
+    "hospital_count": 8,
+    "avg_readmission_rate": 14.6,
+    "avg_penalty_pct": 0.31,
+    "total_penalty_estimate": 124017.0
+  },
+  {
+    "state": "NE",
+    "name": "Nebraska",
+    "lat": 41.12537,
+    "lng": -98.268082,
+    "hospital_count": 89,
+    "avg_readmission_rate": 14.6,
+    "avg_penalty_pct": 0.74,
+    "total_penalty_estimate": 3279189.0
+  },
+  {
+    "state": "MI",
+    "name": "Michigan",
+    "lat": 43.326618,
+    "lng": -84.536095,
+    "hospital_count": 134,
+    "avg_readmission_rate": 14.5,
+    "avg_penalty_pct": 0.27,
+    "total_penalty_estimate": 1827734.0
+  },
+  {
+    "state": "CA",
+    "name": "California",
+    "lat": 36.116203,
+    "lng": -119.681564,
+    "hospital_count": 341,
+    "avg_readmission_rate": 14.4,
+    "avg_penalty_pct": 0.21,
+    "total_penalty_estimate": 3621791.0
+  },
+  {
+    "state": "AZ",
+    "name": "Arizona",
+    "lat": 33.729759,
+    "lng": -111.431221,
+    "hospital_count": 77,
+    "avg_readmission_rate": 14.3,
+    "avg_penalty_pct": 0.05,
+    "total_penalty_estimate": 180174.0
+  },
+  {
+    "state": "AK",
+    "name": "Alaska",
+    "lat": 61.370716,
+    "lng": -152.404419,
+    "hospital_count": 22,
+    "avg_readmission_rate": 14.2,
+    "avg_penalty_pct": 0.18,
+    "total_penalty_estimate": 197557.0
+  },
+  {
+    "state": "IA",
+    "name": "Iowa",
+    "lat": 42.011539,
+    "lng": -93.210526,
+    "hospital_count": 116,
+    "avg_readmission_rate": 14.2,
+    "avg_penalty_pct": 0.01,
+    "total_penalty_estimate": 80824.0
+  },
+  {
+    "state": "NM",
+    "name": "New Mexico",
+    "lat": 34.840515,
+    "lng": -106.248482,
+    "hospital_count": 40,
+    "avg_readmission_rate": 14.1,
+    "avg_penalty_pct": 0.08,
+    "total_penalty_estimate": 162809.0
+  },
+  {
+    "state": "VA",
+    "name": "Virginia",
+    "lat": 37.769337,
+    "lng": -78.169968,
+    "hospital_count": 89,
+    "avg_readmission_rate": 14.1,
+    "avg_penalty_pct": 0.21,
+    "total_penalty_estimate": 952182.0
+  },
+  {
+    "state": "MT",
+    "name": "Montana",
+    "lat": 46.921925,
+    "lng": -110.454353,
+    "hospital_count": 48,
+    "avg_readmission_rate": 14.0,
+    "avg_penalty_pct": 0.23,
+    "total_penalty_estimate": 558096.0
+  },
+  {
+    "state": "ME",
+    "name": "Maine",
+    "lat": 44.693947,
+    "lng": -69.381927,
+    "hospital_count": 36,
+    "avg_readmission_rate": 13.9,
+    "avg_penalty_pct": 0.03,
+    "total_penalty_estimate": 52743.0
+  },
+  {
+    "state": "MA",
+    "name": "Massachusetts",
+    "lat": 42.230171,
+    "lng": -71.530106,
+    "hospital_count": 68,
+    "avg_readmission_rate": 13.9,
+    "avg_penalty_pct": 0.15,
+    "total_penalty_estimate": 505080.0
+  },
+  {
+    "state": "VT",
+    "name": "Vermont",
+    "lat": 44.045876,
+    "lng": -72.710686,
+    "hospital_count": 14,
+    "avg_readmission_rate": 13.7,
+    "avg_penalty_pct": 0.14,
+    "total_penalty_estimate": 99165.0
+  },
+  {
+    "state": "WA",
+    "name": "Washington",
+    "lat": 47.400902,
+    "lng": -121.490494,
+    "hospital_count": 88,
+    "avg_readmission_rate": 13.7,
+    "avg_penalty_pct": 0.17,
+    "total_penalty_estimate": 740886.0
+  },
+  {
+    "state": "WI",
+    "name": "Wisconsin",
+    "lat": 44.268543,
+    "lng": -89.616508,
+    "hospital_count": 125,
+    "avg_readmission_rate": 13.6,
+    "avg_penalty_pct": 0.13,
+    "total_penalty_estimate": 801639.0
+  },
+  {
+    "state": "SD",
+    "name": "South Dakota",
+    "lat": 44.299782,
+    "lng": -99.438828,
+    "hospital_count": 53,
+    "avg_readmission_rate": 13.5,
+    "avg_penalty_pct": 0.19,
+    "total_penalty_estimate": 495522.0
+  },
+  {
+    "state": "HI",
+    "name": "Hawaii",
+    "lat": 21.094318,
+    "lng": -157.498337,
+    "hospital_count": 15,
+    "avg_readmission_rate": 13.1,
+    "avg_penalty_pct": 0.04,
+    "total_penalty_estimate": 31386.0
+  },
+  {
+    "state": "ID",
+    "name": "Idaho",
+    "lat": 44.240459,
+    "lng": -114.478828,
+    "hospital_count": 38,
+    "avg_readmission_rate": 13.1,
+    "avg_penalty_pct": 0.11,
+    "total_penalty_estimate": 208826.0
+  },
+  {
+    "state": "NH",
+    "name": "New Hampshire",
+    "lat": 43.452492,
+    "lng": -71.563896,
+    "hospital_count": 26,
+    "avg_readmission_rate": 13.0,
+    "avg_penalty_pct": 0.06,
+    "total_penalty_estimate": 76433.0
+  },
+  {
+    "state": "UT",
+    "name": "Utah",
+    "lat": 40.150032,
+    "lng": -111.862434,
+    "hospital_count": 42,
+    "avg_readmission_rate": 12.8,
+    "avg_penalty_pct": 0.19,
+    "total_penalty_estimate": 401661.0
+  },
+  {
+    "state": "OR",
+    "name": "Oregon",
+    "lat": 44.572021,
+    "lng": -122.070938,
+    "hospital_count": 58,
+    "avg_readmission_rate": 12.7,
+    "avg_penalty_pct": 0.24,
+    "total_penalty_estimate": 709451.0
+  },
+  {
+    "state": "MN",
+    "name": "Minnesota",
+    "lat": 45.694454,
+    "lng": -93.900192,
+    "hospital_count": 131,
+    "avg_readmission_rate": 12.4,
+    "avg_penalty_pct": 0.2,
+    "total_penalty_estimate": 1301856.0
+  },
+  {
+    "state": "CO",
+    "name": "Colorado",
+    "lat": 39.059811,
+    "lng": -105.311104,
+    "hospital_count": 78,
+    "avg_readmission_rate": 12.3,
+    "avg_penalty_pct": 0.29,
+    "total_penalty_estimate": 1134795.0
+  },
+  {
+    "state": "WY",
+    "name": "Wyoming",
+    "lat": 42.755966,
+    "lng": -107.30249,
+    "hospital_count": 25,
+    "avg_readmission_rate": 12.2,
+    "avg_penalty_pct": 0.03,
+    "total_penalty_estimate": 40459.0
+  },
+  {
+    "state": "ND",
+    "name": "North Dakota",
+    "lat": 47.528912,
+    "lng": -99.784012,
+    "hospital_count": 42,
+    "avg_readmission_rate": 12.0,
+    "avg_penalty_pct": 0.24,
+    "total_penalty_estimate": 505384.0
+  }
+]

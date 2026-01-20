@@ -1,0 +1,5224 @@
+[
+  {
+    "name": "Jackson Baptist Hospital",
+    "state": "MS",
+    "city": "Jackson",
+    "readmission_rate": 19.1,
+    "penalty_pct": 1.63
+  },
+  {
+    "name": "Hattiesburg Sacred Heart Hospital",
+    "state": "MS",
+    "city": "Hattiesburg",
+    "readmission_rate": 19.1,
+    "penalty_pct": 2.35
+  },
+  {
+    "name": "Charleston Mercy Hospital",
+    "state": "WV",
+    "city": "Charleston",
+    "readmission_rate": 19.0,
+    "penalty_pct": 0.54
+  },
+  {
+    "name": "Shreveport County Hospital",
+    "state": "LA",
+    "city": "Shreveport",
+    "readmission_rate": 18.6,
+    "penalty_pct": 2.34
+  },
+  {
+    "name": "Morgantown Presbyterian Hospital",
+    "state": "WV",
+    "city": "Morgantown",
+    "readmission_rate": 18.5,
+    "penalty_pct": 1.94
+  },
+  {
+    "name": "Washington University Hospital",
+    "state": "DC",
+    "city": "Washington",
+    "readmission_rate": 18.5,
+    "penalty_pct": 0.77
+  },
+  {
+    "name": "Louisville Regional Medical Center",
+    "state": "KY",
+    "city": "Louisville",
+    "readmission_rate": 18.4,
+    "penalty_pct": 1.2
+  },
+  {
+    "name": "Lexington Providence Hospital",
+    "state": "KY",
+    "city": "Lexington",
+    "readmission_rate": 18.4,
+    "penalty_pct": 1.45
+  },
+  {
+    "name": "Baton Rouge Methodist Hospital",
+    "state": "LA",
+    "city": "Baton Rouge",
+    "readmission_rate": 18.3,
+    "penalty_pct": 2.0
+  },
+  {
+    "name": "Jackson Regional Medical Center",
+    "state": "MS",
+    "city": "Jackson",
+    "readmission_rate": 18.3,
+    "penalty_pct": 1.78
+  },
+  {
+    "name": "Louisville University Hospital",
+    "state": "KY",
+    "city": "Louisville",
+    "readmission_rate": 18.2,
+    "penalty_pct": 2.4
+  },
+  {
+    "name": "Gulfport Community Hospital",
+    "state": "MS",
+    "city": "Gulfport",
+    "readmission_rate": 18.2,
+    "penalty_pct": 1.59
+  },
+  {
+    "name": "Gulfport Methodist Hospital",
+    "state": "MS",
+    "city": "Gulfport",
+    "readmission_rate": 18.2,
+    "penalty_pct": 2.34
+  },
+  {
+    "name": "Hattiesburg Presbyterian Hospital",
+    "state": "MS",
+    "city": "Hattiesburg",
+    "readmission_rate": 18.2,
+    "penalty_pct": 0.81
+  },
+  {
+    "name": "Chattanooga Health System",
+    "state": "TN",
+    "city": "Chattanooga",
+    "readmission_rate": 18.2,
+    "penalty_pct": 1.17
+  },
+  {
+    "name": "Nashville Mercy Hospital",
+    "state": "TN",
+    "city": "Nashville",
+    "readmission_rate": 18.2,
+    "penalty_pct": 1.8
+  },
+  {
+    "name": "Little Rock Regional Medical Center",
+    "state": "AR",
+    "city": "Little Rock",
+    "readmission_rate": 18.1,
+    "penalty_pct": 1.77
+  },
+  {
+    "name": "Little Rock University Hospital",
+    "state": "AR",
+    "city": "Little Rock",
+    "readmission_rate": 18.0,
+    "penalty_pct": 2.06
+  },
+  {
+    "name": "Montgomery General Hospital",
+    "state": "AL",
+    "city": "Montgomery",
+    "readmission_rate": 17.9,
+    "penalty_pct": 2.12
+  },
+  {
+    "name": "Tulsa Methodist Hospital",
+    "state": "OK",
+    "city": "Tulsa",
+    "readmission_rate": 17.9,
+    "penalty_pct": 0.56
+  },
+  {
+    "name": "Montgomery Community Hospital",
+    "state": "AL",
+    "city": "Montgomery",
+    "readmission_rate": 17.8,
+    "penalty_pct": 1.0
+  },
+  {
+    "name": "Birmingham County Hospital",
+    "state": "AL",
+    "city": "Birmingham",
+    "readmission_rate": 17.8,
+    "penalty_pct": 1.58
+  },
+  {
+    "name": "Kansas City Community Hospital",
+    "state": "MO",
+    "city": "Kansas City",
+    "readmission_rate": 17.8,
+    "penalty_pct": 2.18
+  },
+  {
+    "name": "Norman General Hospital",
+    "state": "OK",
+    "city": "Norman",
+    "readmission_rate": 17.8,
+    "penalty_pct": 2.23
+  },
+  {
+    "name": "Knoxville Medical Center",
+    "state": "TN",
+    "city": "Knoxville",
+    "readmission_rate": 17.8,
+    "penalty_pct": 0.94
+  },
+  {
+    "name": "Morgantown Sacred Heart Hospital",
+    "state": "WV",
+    "city": "Morgantown",
+    "readmission_rate": 17.8,
+    "penalty_pct": 2.3
+  },
+  {
+    "name": "Gulfport St. Mary's Hospital",
+    "state": "MS",
+    "city": "Gulfport",
+    "readmission_rate": 17.7,
+    "penalty_pct": 1.3
+  },
+  {
+    "name": "Jackson Mercy Hospital",
+    "state": "MS",
+    "city": "Jackson",
+    "readmission_rate": 17.7,
+    "penalty_pct": 1.71
+  },
+  {
+    "name": "Tulsa Community Hospital",
+    "state": "OK",
+    "city": "Tulsa",
+    "readmission_rate": 17.7,
+    "penalty_pct": 1.2
+  },
+  {
+    "name": "Norman Presbyterian Hospital",
+    "state": "OK",
+    "city": "Norman",
+    "readmission_rate": 17.7,
+    "penalty_pct": 0.76
+  },
+  {
+    "name": "Norman Sacred Heart Hospital",
+    "state": "OK",
+    "city": "Norman",
+    "readmission_rate": 17.7,
+    "penalty_pct": 1.51
+  },
+  {
+    "name": "Huntington St. Mary's Hospital",
+    "state": "WV",
+    "city": "Huntington",
+    "readmission_rate": 17.7,
+    "penalty_pct": 1.43
+  },
+  {
+    "name": "Atlanta Regional Medical Center",
+    "state": "GA",
+    "city": "Atlanta",
+    "readmission_rate": 17.6,
+    "penalty_pct": 1.65
+  },
+  {
+    "name": "Columbus University Hospital",
+    "state": "GA",
+    "city": "Columbus",
+    "readmission_rate": 17.6,
+    "penalty_pct": 1.27
+  },
+  {
+    "name": "Atlanta St. Mary's Hospital",
+    "state": "GA",
+    "city": "Atlanta",
+    "readmission_rate": 17.6,
+    "penalty_pct": 2.31
+  },
+  {
+    "name": "Baton Rouge Health System",
+    "state": "LA",
+    "city": "Baton Rouge",
+    "readmission_rate": 17.6,
+    "penalty_pct": 0.66
+  },
+  {
+    "name": "Baton Rouge Providence Hospital",
+    "state": "LA",
+    "city": "Baton Rouge",
+    "readmission_rate": 17.6,
+    "penalty_pct": 1.24
+  },
+  {
+    "name": "Frederick Methodist Hospital",
+    "state": "MD",
+    "city": "Frederick",
+    "readmission_rate": 17.6,
+    "penalty_pct": 2.23
+  },
+  {
+    "name": "Springfield Sacred Heart Hospital",
+    "state": "MO",
+    "city": "Springfield",
+    "readmission_rate": 17.6,
+    "penalty_pct": 1.22
+  },
+  {
+    "name": "Tulsa St. Mary's Hospital",
+    "state": "OK",
+    "city": "Tulsa",
+    "readmission_rate": 17.6,
+    "penalty_pct": 1.82
+  },
+  {
+    "name": "Charleston University Hospital",
+    "state": "WV",
+    "city": "Charleston",
+    "readmission_rate": 17.6,
+    "penalty_pct": 1.84
+  },
+  {
+    "name": "Huntington Methodist Hospital",
+    "state": "WV",
+    "city": "Huntington",
+    "readmission_rate": 17.6,
+    "penalty_pct": 2.03
+  },
+  {
+    "name": "Birmingham Mercy Hospital",
+    "state": "AL",
+    "city": "Birmingham",
+    "readmission_rate": 17.5,
+    "penalty_pct": 2.22
+  },
+  {
+    "name": "Bowling Green Sacred Heart Hospital",
+    "state": "KY",
+    "city": "Bowling Green",
+    "readmission_rate": 17.5,
+    "penalty_pct": 0.84
+  },
+  {
+    "name": "Charleston Baptist Hospital",
+    "state": "WV",
+    "city": "Charleston",
+    "readmission_rate": 17.5,
+    "penalty_pct": 1.57
+  },
+  {
+    "name": "Huntsville Health System",
+    "state": "AL",
+    "city": "Huntsville",
+    "readmission_rate": 17.4,
+    "penalty_pct": 0.87
+  },
+  {
+    "name": "Montgomery Baptist Hospital",
+    "state": "AL",
+    "city": "Montgomery",
+    "readmission_rate": 17.4,
+    "penalty_pct": 2.29
+  },
+  {
+    "name": "Fayetteville Memorial Hospital",
+    "state": "AR",
+    "city": "Fayetteville",
+    "readmission_rate": 17.4,
+    "penalty_pct": 2.29
+  },
+  {
+    "name": "Chicago County Hospital",
+    "state": "IL",
+    "city": "Chicago",
+    "readmission_rate": 17.4,
+    "penalty_pct": 1.25
+  },
+  {
+    "name": "Rockville Providence Hospital",
+    "state": "MD",
+    "city": "Rockville",
+    "readmission_rate": 17.4,
+    "penalty_pct": 1.61
+  },
+  {
+    "name": "Gulfport Health System",
+    "state": "MS",
+    "city": "Gulfport",
+    "readmission_rate": 17.4,
+    "penalty_pct": 1.72
+  },
+  {
+    "name": "Columbia University Hospital",
+    "state": "MO",
+    "city": "Columbia",
+    "readmission_rate": 17.4,
+    "penalty_pct": 1.54
+  },
+  {
+    "name": "Cleveland Medical Center",
+    "state": "OH",
+    "city": "Cleveland",
+    "readmission_rate": 17.4,
+    "penalty_pct": 2.41
+  },
+  {
+    "name": "Fayetteville Presbyterian Hospital",
+    "state": "AR",
+    "city": "Fayetteville",
+    "readmission_rate": 17.3,
+    "penalty_pct": 0.97
+  },
+  {
+    "name": "Bowling Green County Hospital",
+    "state": "KY",
+    "city": "Bowling Green",
+    "readmission_rate": 17.3,
+    "penalty_pct": 0.98
+  },
+  {
+    "name": "Charleston Medical Center",
+    "state": "WV",
+    "city": "Charleston",
+    "readmission_rate": 17.3,
+    "penalty_pct": 1.46
+  },
+  {
+    "name": "Washington St. Mary's Hospital",
+    "state": "DC",
+    "city": "Washington",
+    "readmission_rate": 17.3,
+    "penalty_pct": 1.31
+  },
+  {
+    "name": "Washington Medical Center",
+    "state": "DC",
+    "city": "Washington",
+    "readmission_rate": 17.3,
+    "penalty_pct": 2.48
+  },
+  {
+    "name": "Savannah Baptist Hospital",
+    "state": "GA",
+    "city": "Savannah",
+    "readmission_rate": 17.2,
+    "penalty_pct": 0.55
+  },
+  {
+    "name": "Indianapolis Regional Medical Center",
+    "state": "IN",
+    "city": "Indianapolis",
+    "readmission_rate": 17.2,
+    "penalty_pct": 1.55
+  },
+  {
+    "name": "Evansville Methodist Hospital",
+    "state": "IN",
+    "city": "Evansville",
+    "readmission_rate": 17.2,
+    "penalty_pct": 2.47
+  },
+  {
+    "name": "Hattiesburg General Hospital",
+    "state": "MS",
+    "city": "Hattiesburg",
+    "readmission_rate": 17.2,
+    "penalty_pct": 2.39
+  },
+  {
+    "name": "Albany University Hospital",
+    "state": "NY",
+    "city": "Albany",
+    "readmission_rate": 17.2,
+    "penalty_pct": 1.45
+  },
+  {
+    "name": "Cincinnati Health System",
+    "state": "OH",
+    "city": "Cincinnati",
+    "readmission_rate": 17.2,
+    "penalty_pct": 2.12
+  },
+  {
+    "name": "Akron Sacred Heart Hospital",
+    "state": "OH",
+    "city": "Akron",
+    "readmission_rate": 17.2,
+    "penalty_pct": 1.49
+  },
+  {
+    "name": "Oklahoma City Medical Center",
+    "state": "OK",
+    "city": "Oklahoma City",
+    "readmission_rate": 17.2,
+    "penalty_pct": 2.17
+  },
+  {
+    "name": "Tulsa Health System",
+    "state": "OK",
+    "city": "Tulsa",
+    "readmission_rate": 17.2,
+    "penalty_pct": 1.86
+  },
+  {
+    "name": "Fort Worth St. Mary's Hospital",
+    "state": "TX",
+    "city": "Fort Worth",
+    "readmission_rate": 17.2,
+    "penalty_pct": 0.58
+  },
+  {
+    "name": "Fort Smith St. Mary's Hospital",
+    "state": "AR",
+    "city": "Fort Smith",
+    "readmission_rate": 17.1,
+    "penalty_pct": 0.67
+  },
+  {
+    "name": "Fort Smith Methodist Hospital",
+    "state": "AR",
+    "city": "Fort Smith",
+    "readmission_rate": 17.1,
+    "penalty_pct": 0.95
+  },
+  {
+    "name": "Fort Smith Providence Hospital",
+    "state": "AR",
+    "city": "Fort Smith",
+    "readmission_rate": 17.1,
+    "penalty_pct": 2.2
+  },
+  {
+    "name": "Fayetteville Sacred Heart Hospital",
+    "state": "AR",
+    "city": "Fayetteville",
+    "readmission_rate": 17.1,
+    "penalty_pct": 1.64
+  },
+  {
+    "name": "Augusta Methodist Hospital",
+    "state": "GA",
+    "city": "Augusta",
+    "readmission_rate": 17.1,
+    "penalty_pct": 1.06
+  },
+  {
+    "name": "Fort Wayne General Hospital",
+    "state": "IN",
+    "city": "Fort Wayne",
+    "readmission_rate": 17.1,
+    "penalty_pct": 2.28
+  },
+  {
+    "name": "Shreveport General Hospital",
+    "state": "LA",
+    "city": "Shreveport",
+    "readmission_rate": 17.1,
+    "penalty_pct": 1.88
+  },
+  {
+    "name": "Gulfport Providence Hospital",
+    "state": "MS",
+    "city": "Gulfport",
+    "readmission_rate": 17.1,
+    "penalty_pct": 1.97
+  },
+  {
+    "name": "Springfield Medical Center",
+    "state": "MO",
+    "city": "Springfield",
+    "readmission_rate": 17.1,
+    "penalty_pct": 0.51
+  },
+  {
+    "name": "New York Regional Medical Center",
+    "state": "NY",
+    "city": "New York",
+    "readmission_rate": 17.1,
+    "penalty_pct": 0.57
+  },
+  {
+    "name": "Rochester Memorial Hospital",
+    "state": "NY",
+    "city": "Rochester",
+    "readmission_rate": 17.1,
+    "penalty_pct": 2.44
+  },
+  {
+    "name": "Greensboro University Hospital",
+    "state": "NC",
+    "city": "Greensboro",
+    "readmission_rate": 17.1,
+    "penalty_pct": 1.2
+  },
+  {
+    "name": "Raleigh Providence Hospital",
+    "state": "NC",
+    "city": "Raleigh",
+    "readmission_rate": 17.1,
+    "penalty_pct": 1.36
+  },
+  {
+    "name": "Cleveland Community Hospital",
+    "state": "OH",
+    "city": "Cleveland",
+    "readmission_rate": 17.1,
+    "penalty_pct": 0.95
+  },
+  {
+    "name": "Norman Memorial Hospital",
+    "state": "OK",
+    "city": "Norman",
+    "readmission_rate": 17.1,
+    "penalty_pct": 1.63
+  },
+  {
+    "name": "Erie Presbyterian Hospital",
+    "state": "PA",
+    "city": "Erie",
+    "readmission_rate": 17.1,
+    "penalty_pct": 0.8
+  },
+  {
+    "name": "Shreveport Sacred Heart Hospital",
+    "state": "LA",
+    "city": "Shreveport",
+    "readmission_rate": 17.0,
+    "penalty_pct": 1.99
+  },
+  {
+    "name": "Bethesda Presbyterian Hospital",
+    "state": "MD",
+    "city": "Bethesda",
+    "readmission_rate": 17.0,
+    "penalty_pct": 1.02
+  },
+  {
+    "name": "Grand Rapids Community Hospital",
+    "state": "MI",
+    "city": "Grand Rapids",
+    "readmission_rate": 17.0,
+    "penalty_pct": 0.86
+  },
+  {
+    "name": "Newark St. Mary's Hospital",
+    "state": "NJ",
+    "city": "Newark",
+    "readmission_rate": 17.0,
+    "penalty_pct": 1.09
+  },
+  {
+    "name": "Camden Health System",
+    "state": "NJ",
+    "city": "Camden",
+    "readmission_rate": 17.0,
+    "penalty_pct": 0.93
+  },
+  {
+    "name": "Jersey City Providence Hospital",
+    "state": "NJ",
+    "city": "Jersey City",
+    "readmission_rate": 17.0,
+    "penalty_pct": 1.49
+  },
+  {
+    "name": "Little Rock Medical Center",
+    "state": "AR",
+    "city": "Little Rock",
+    "readmission_rate": 16.9,
+    "penalty_pct": 0.52
+  },
+  {
+    "name": "Wilmington Medical Center",
+    "state": "DE",
+    "city": "Wilmington",
+    "readmission_rate": 16.9,
+    "penalty_pct": 1.98
+  },
+  {
+    "name": "Evansville Sacred Heart Hospital",
+    "state": "IN",
+    "city": "Evansville",
+    "readmission_rate": 16.9,
+    "penalty_pct": 2.15
+  },
+  {
+    "name": "Lexington Community Hospital",
+    "state": "KY",
+    "city": "Lexington",
+    "readmission_rate": 16.9,
+    "penalty_pct": 2.07
+  },
+  {
+    "name": "Springfield Methodist Hospital",
+    "state": "MO",
+    "city": "Springfield",
+    "readmission_rate": 16.9,
+    "penalty_pct": 1.4
+  },
+  {
+    "name": "Trenton Sacred Heart Hospital",
+    "state": "NJ",
+    "city": "Trenton",
+    "readmission_rate": 16.9,
+    "penalty_pct": 1.37
+  },
+  {
+    "name": "Albany Providence Hospital",
+    "state": "NY",
+    "city": "Albany",
+    "readmission_rate": 16.9,
+    "penalty_pct": 1.73
+  },
+  {
+    "name": "Durham Memorial Hospital",
+    "state": "NC",
+    "city": "Durham",
+    "readmission_rate": 16.9,
+    "penalty_pct": 2.1
+  },
+  {
+    "name": "Norman County Hospital",
+    "state": "OK",
+    "city": "Norman",
+    "readmission_rate": 16.9,
+    "penalty_pct": 2.01
+  },
+  {
+    "name": "Memphis Baptist Hospital",
+    "state": "TN",
+    "city": "Memphis",
+    "readmission_rate": 16.9,
+    "penalty_pct": 1.5
+  },
+  {
+    "name": "Washington Regional Medical Center",
+    "state": "DC",
+    "city": "Washington",
+    "readmission_rate": 16.9,
+    "penalty_pct": 1.59
+  },
+  {
+    "name": "Washington Memorial Hospital",
+    "state": "DC",
+    "city": "Washington",
+    "readmission_rate": 16.9,
+    "penalty_pct": 1.49
+  },
+  {
+    "name": "Fort Lauderdale St. Mary's Hospital",
+    "state": "FL",
+    "city": "Fort Lauderdale",
+    "readmission_rate": 16.8,
+    "penalty_pct": 1.91
+  },
+  {
+    "name": "Bowling Green General Hospital",
+    "state": "KY",
+    "city": "Bowling Green",
+    "readmission_rate": 16.8,
+    "penalty_pct": 1.02
+  },
+  {
+    "name": "Lexington Health System",
+    "state": "KY",
+    "city": "Lexington",
+    "readmission_rate": 16.8,
+    "penalty_pct": 1.16
+  },
+  {
+    "name": "Trenton Medical Center",
+    "state": "NJ",
+    "city": "Trenton",
+    "readmission_rate": 16.8,
+    "penalty_pct": 2.37
+  },
+  {
+    "name": "Syracuse St. Mary's Hospital",
+    "state": "NY",
+    "city": "Syracuse",
+    "readmission_rate": 16.8,
+    "penalty_pct": 2.19
+  },
+  {
+    "name": "Providence Regional Medical Center",
+    "state": "RI",
+    "city": "Providence",
+    "readmission_rate": 16.8,
+    "penalty_pct": 1.32
+  },
+  {
+    "name": "Cranston General Hospital",
+    "state": "RI",
+    "city": "Cranston",
+    "readmission_rate": 16.8,
+    "penalty_pct": 0.87
+  },
+  {
+    "name": "Charleston Regional Medical Center",
+    "state": "SC",
+    "city": "Charleston",
+    "readmission_rate": 16.8,
+    "penalty_pct": 1.46
+  },
+  {
+    "name": "San Antonio County Hospital",
+    "state": "TX",
+    "city": "San Antonio",
+    "readmission_rate": 16.8,
+    "penalty_pct": 1.34
+  },
+  {
+    "name": "Houston Methodist Hospital",
+    "state": "TX",
+    "city": "Houston",
+    "readmission_rate": 16.8,
+    "penalty_pct": 0.92
+  },
+  {
+    "name": "Charleston Regional Medical Center",
+    "state": "WV",
+    "city": "Charleston",
+    "readmission_rate": 16.8,
+    "penalty_pct": 1.4
+  },
+  {
+    "name": "Mobile Medical Center",
+    "state": "AL",
+    "city": "Mobile",
+    "readmission_rate": 16.7,
+    "penalty_pct": 2.24
+  },
+  {
+    "name": "Little Rock Baptist Hospital",
+    "state": "AR",
+    "city": "Little Rock",
+    "readmission_rate": 16.7,
+    "penalty_pct": 1.88
+  },
+  {
+    "name": "Savannah Providence Hospital",
+    "state": "GA",
+    "city": "Savannah",
+    "readmission_rate": 16.7,
+    "penalty_pct": 2.11
+  },
+  {
+    "name": "Springfield Community Hospital",
+    "state": "IL",
+    "city": "Springfield",
+    "readmission_rate": 16.7,
+    "penalty_pct": 1.62
+  },
+  {
+    "name": "Las Vegas Mercy Hospital",
+    "state": "NV",
+    "city": "Las Vegas",
+    "readmission_rate": 16.7,
+    "penalty_pct": 2.1
+  },
+  {
+    "name": "Cleveland Presbyterian Hospital",
+    "state": "OH",
+    "city": "Cleveland",
+    "readmission_rate": 16.7,
+    "penalty_pct": 1.49
+  },
+  {
+    "name": "Greenville Presbyterian Hospital",
+    "state": "SC",
+    "city": "Greenville",
+    "readmission_rate": 16.7,
+    "penalty_pct": 0.58
+  },
+  {
+    "name": "Dallas Community Hospital",
+    "state": "TX",
+    "city": "Dallas",
+    "readmission_rate": 16.7,
+    "penalty_pct": 1.95
+  },
+  {
+    "name": "Houston General Hospital",
+    "state": "TX",
+    "city": "Houston",
+    "readmission_rate": 16.7,
+    "penalty_pct": 1.66
+  },
+  {
+    "name": "Morgantown General Hospital",
+    "state": "WV",
+    "city": "Morgantown",
+    "readmission_rate": 16.7,
+    "penalty_pct": 2.23
+  },
+  {
+    "name": "Morgantown County Hospital",
+    "state": "WV",
+    "city": "Morgantown",
+    "readmission_rate": 16.7,
+    "penalty_pct": 1.3
+  },
+  {
+    "name": "Phoenix County Hospital",
+    "state": "AZ",
+    "city": "Phoenix",
+    "readmission_rate": 16.6,
+    "penalty_pct": 0.78
+  },
+  {
+    "name": "Mesa Methodist Hospital",
+    "state": "AZ",
+    "city": "Mesa",
+    "readmission_rate": 16.6,
+    "penalty_pct": 2.25
+  },
+  {
+    "name": "Rockford Health System",
+    "state": "IL",
+    "city": "Rockford",
+    "readmission_rate": 16.6,
+    "penalty_pct": 1.67
+  },
+  {
+    "name": "Louisville Medical Center",
+    "state": "KY",
+    "city": "Louisville",
+    "readmission_rate": 16.6,
+    "penalty_pct": 2.46
+  },
+  {
+    "name": "New Orleans Mercy Hospital",
+    "state": "LA",
+    "city": "New Orleans",
+    "readmission_rate": 16.6,
+    "penalty_pct": 1.47
+  },
+  {
+    "name": "Henderson Presbyterian Hospital",
+    "state": "NV",
+    "city": "Henderson",
+    "readmission_rate": 16.6,
+    "penalty_pct": 1.47
+  },
+  {
+    "name": "Charlotte Regional Medical Center",
+    "state": "NC",
+    "city": "Charlotte",
+    "readmission_rate": 16.6,
+    "penalty_pct": 0.54
+  },
+  {
+    "name": "Raleigh Community Hospital",
+    "state": "NC",
+    "city": "Raleigh",
+    "readmission_rate": 16.6,
+    "penalty_pct": 1.56
+  },
+  {
+    "name": "Durham Medical Center",
+    "state": "NC",
+    "city": "Durham",
+    "readmission_rate": 16.6,
+    "penalty_pct": 2.47
+  },
+  {
+    "name": "Columbus Regional Medical Center",
+    "state": "OH",
+    "city": "Columbus",
+    "readmission_rate": 16.6,
+    "penalty_pct": 0.81
+  },
+  {
+    "name": "Warwick Methodist Hospital",
+    "state": "RI",
+    "city": "Warwick",
+    "readmission_rate": 16.6,
+    "penalty_pct": 1.73
+  },
+  {
+    "name": "Norfolk Medical Center",
+    "state": "VA",
+    "city": "Norfolk",
+    "readmission_rate": 16.6,
+    "penalty_pct": 0.69
+  },
+  {
+    "name": "Jersey City Baptist Hospital",
+    "state": "NJ",
+    "city": "Jersey City",
+    "readmission_rate": 16.5,
+    "penalty_pct": 0.6
+  },
+  {
+    "name": "Toledo Providence Hospital",
+    "state": "OH",
+    "city": "Toledo",
+    "readmission_rate": 16.5,
+    "penalty_pct": 0.65
+  },
+  {
+    "name": "Warwick Community Hospital",
+    "state": "RI",
+    "city": "Warwick",
+    "readmission_rate": 16.5,
+    "penalty_pct": 0.96
+  },
+  {
+    "name": "Memphis Community Hospital",
+    "state": "TN",
+    "city": "Memphis",
+    "readmission_rate": 16.5,
+    "penalty_pct": 2.13
+  },
+  {
+    "name": "Knoxville Methodist Hospital",
+    "state": "TN",
+    "city": "Knoxville",
+    "readmission_rate": 16.5,
+    "penalty_pct": 1.94
+  },
+  {
+    "name": "Norfolk Methodist Hospital",
+    "state": "VA",
+    "city": "Norfolk",
+    "readmission_rate": 16.5,
+    "penalty_pct": 1.87
+  },
+  {
+    "name": "Dover Community Hospital",
+    "state": "DE",
+    "city": "Dover",
+    "readmission_rate": 16.4,
+    "penalty_pct": 1.89
+  },
+  {
+    "name": "Bowling Green Memorial Hospital",
+    "state": "KY",
+    "city": "Bowling Green",
+    "readmission_rate": 16.4,
+    "penalty_pct": 1.74
+  },
+  {
+    "name": "Hattiesburg Memorial Hospital",
+    "state": "MS",
+    "city": "Hattiesburg",
+    "readmission_rate": 16.4,
+    "penalty_pct": 1.19
+  },
+  {
+    "name": "Reno St. Mary's Hospital",
+    "state": "NV",
+    "city": "Reno",
+    "readmission_rate": 16.4,
+    "penalty_pct": 1.18
+  },
+  {
+    "name": "Jersey City General Hospital",
+    "state": "NJ",
+    "city": "Jersey City",
+    "readmission_rate": 16.4,
+    "penalty_pct": 1.45
+  },
+  {
+    "name": "Toledo County Hospital",
+    "state": "OH",
+    "city": "Toledo",
+    "readmission_rate": 16.4,
+    "penalty_pct": 1.6
+  },
+  {
+    "name": "Warwick St. Mary's Hospital",
+    "state": "RI",
+    "city": "Warwick",
+    "readmission_rate": 16.4,
+    "penalty_pct": 1.45
+  },
+  {
+    "name": "Providence Medical Center",
+    "state": "RI",
+    "city": "Providence",
+    "readmission_rate": 16.4,
+    "penalty_pct": 2.05
+  },
+  {
+    "name": "Columbia Methodist Hospital",
+    "state": "SC",
+    "city": "Columbia",
+    "readmission_rate": 16.4,
+    "penalty_pct": 2.22
+  },
+  {
+    "name": "Chattanooga University Hospital",
+    "state": "TN",
+    "city": "Chattanooga",
+    "readmission_rate": 16.4,
+    "penalty_pct": 1.96
+  },
+  {
+    "name": "Atlanta Mercy Hospital",
+    "state": "GA",
+    "city": "Atlanta",
+    "readmission_rate": 16.3,
+    "penalty_pct": 2.25
+  },
+  {
+    "name": "Kansas City Community Hospital",
+    "state": "KS",
+    "city": "Kansas City",
+    "readmission_rate": 16.3,
+    "penalty_pct": 1.71
+  },
+  {
+    "name": "Baltimore Regional Medical Center",
+    "state": "MD",
+    "city": "Baltimore",
+    "readmission_rate": 16.3,
+    "penalty_pct": 1.64
+  },
+  {
+    "name": "St. Louis St. Mary's Hospital",
+    "state": "MO",
+    "city": "St. Louis",
+    "readmission_rate": 16.3,
+    "penalty_pct": 1.3
+  },
+  {
+    "name": "Oklahoma City Regional Medical Center",
+    "state": "OK",
+    "city": "Oklahoma City",
+    "readmission_rate": 16.3,
+    "penalty_pct": 1.68
+  },
+  {
+    "name": "Philadelphia Regional Medical Center",
+    "state": "PA",
+    "city": "Philadelphia",
+    "readmission_rate": 16.3,
+    "penalty_pct": 0.76
+  },
+  {
+    "name": "Pittsburgh Community Hospital",
+    "state": "PA",
+    "city": "Pittsburgh",
+    "readmission_rate": 16.3,
+    "penalty_pct": 0.55
+  },
+  {
+    "name": "Greenville Memorial Hospital",
+    "state": "SC",
+    "city": "Greenville",
+    "readmission_rate": 16.3,
+    "penalty_pct": 1.36
+  },
+  {
+    "name": "Phoenix Mercy Hospital",
+    "state": "AZ",
+    "city": "Phoenix",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.61
+  },
+  {
+    "name": "Detroit Mercy Hospital",
+    "state": "MI",
+    "city": "Detroit",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.51
+  },
+  {
+    "name": "Reno Methodist Hospital",
+    "state": "NV",
+    "city": "Reno",
+    "readmission_rate": 16.2,
+    "penalty_pct": 0.78
+  },
+  {
+    "name": "Buffalo Community Hospital",
+    "state": "NY",
+    "city": "Buffalo",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.09
+  },
+  {
+    "name": "Charlotte St. Mary's Hospital",
+    "state": "NC",
+    "city": "Charlotte",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.3
+  },
+  {
+    "name": "Greensboro Health System",
+    "state": "NC",
+    "city": "Greensboro",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.34
+  },
+  {
+    "name": "Toledo University Hospital",
+    "state": "OH",
+    "city": "Toledo",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.66
+  },
+  {
+    "name": "Austin Memorial Hospital",
+    "state": "TX",
+    "city": "Austin",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.35
+  },
+  {
+    "name": "Virginia Beach County Hospital",
+    "state": "VA",
+    "city": "Virginia Beach",
+    "readmission_rate": 16.2,
+    "penalty_pct": 0.85
+  },
+  {
+    "name": "Virginia Beach Mercy Hospital",
+    "state": "VA",
+    "city": "Virginia Beach",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.64
+  },
+  {
+    "name": "Huntington Community Hospital",
+    "state": "WV",
+    "city": "Huntington",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.25
+  },
+  {
+    "name": "Washington General Hospital",
+    "state": "DC",
+    "city": "Washington",
+    "readmission_rate": 16.2,
+    "penalty_pct": 1.94
+  },
+  {
+    "name": "San Diego Memorial Hospital",
+    "state": "CA",
+    "city": "San Diego",
+    "readmission_rate": 16.1,
+    "penalty_pct": 1.29
+  },
+  {
+    "name": "Sacramento Providence Hospital",
+    "state": "CA",
+    "city": "Sacramento",
+    "readmission_rate": 16.1,
+    "penalty_pct": 2.21
+  },
+  {
+    "name": "New Haven General Hospital",
+    "state": "CT",
+    "city": "New Haven",
+    "readmission_rate": 16.1,
+    "penalty_pct": 1.22
+  },
+  {
+    "name": "South Bend Presbyterian Hospital",
+    "state": "IN",
+    "city": "South Bend",
+    "readmission_rate": 16.1,
+    "penalty_pct": 1.57
+  },
+  {
+    "name": "Des Moines Mercy Hospital",
+    "state": "IA",
+    "city": "Des Moines",
+    "readmission_rate": 16.1,
+    "penalty_pct": 1.61
+  },
+  {
+    "name": "Frederick Memorial Hospital",
+    "state": "MD",
+    "city": "Frederick",
+    "readmission_rate": 16.1,
+    "penalty_pct": 0.97
+  },
+  {
+    "name": "Jackson University Hospital",
+    "state": "MS",
+    "city": "Jackson",
+    "readmission_rate": 16.1,
+    "penalty_pct": 2.32
+  },
+  {
+    "name": "Trenton Methodist Hospital",
+    "state": "NJ",
+    "city": "Trenton",
+    "readmission_rate": 16.1,
+    "penalty_pct": 1.69
+  },
+  {
+    "name": "Las Cruces General Hospital",
+    "state": "NM",
+    "city": "Las Cruces",
+    "readmission_rate": 16.1,
+    "penalty_pct": 1.39
+  },
+  {
+    "name": "Albuquerque Mercy Hospital",
+    "state": "NM",
+    "city": "Albuquerque",
+    "readmission_rate": 16.1,
+    "penalty_pct": 0.58
+  },
+  {
+    "name": "Philadelphia County Hospital",
+    "state": "PA",
+    "city": "Philadelphia",
+    "readmission_rate": 16.1,
+    "penalty_pct": 0.94
+  },
+  {
+    "name": "Knoxville Memorial Hospital",
+    "state": "TN",
+    "city": "Knoxville",
+    "readmission_rate": 16.1,
+    "penalty_pct": 1.79
+  },
+  {
+    "name": "Austin Mercy Hospital",
+    "state": "TX",
+    "city": "Austin",
+    "readmission_rate": 16.1,
+    "penalty_pct": 0.76
+  },
+  {
+    "name": "San Antonio Providence Hospital",
+    "state": "TX",
+    "city": "San Antonio",
+    "readmission_rate": 16.1,
+    "penalty_pct": 2.32
+  },
+  {
+    "name": "Morgantown Memorial Hospital",
+    "state": "WV",
+    "city": "Morgantown",
+    "readmission_rate": 16.1,
+    "penalty_pct": 0.65
+  },
+  {
+    "name": "San Jose Baptist Hospital",
+    "state": "CA",
+    "city": "San Jose",
+    "readmission_rate": 16.0,
+    "penalty_pct": 2.41
+  },
+  {
+    "name": "New Haven Providence Hospital",
+    "state": "CT",
+    "city": "New Haven",
+    "readmission_rate": 16.0,
+    "penalty_pct": 1.04
+  },
+  {
+    "name": "Tampa Mercy Hospital",
+    "state": "FL",
+    "city": "Tampa",
+    "readmission_rate": 16.0,
+    "penalty_pct": 0.83
+  },
+  {
+    "name": "Fort Wayne Providence Hospital",
+    "state": "IN",
+    "city": "Fort Wayne",
+    "readmission_rate": 16.0,
+    "penalty_pct": 0.83
+  },
+  {
+    "name": "Davenport General Hospital",
+    "state": "IA",
+    "city": "Davenport",
+    "readmission_rate": 16.0,
+    "penalty_pct": 0.8
+  },
+  {
+    "name": "Cedar Rapids Health System",
+    "state": "IA",
+    "city": "Cedar Rapids",
+    "readmission_rate": 16.0,
+    "penalty_pct": 2.18
+  },
+  {
+    "name": "Wichita County Hospital",
+    "state": "KS",
+    "city": "Wichita",
+    "readmission_rate": 16.0,
+    "penalty_pct": 1.31
+  },
+  {
+    "name": "Frederick Sacred Heart Hospital",
+    "state": "MD",
+    "city": "Frederick",
+    "readmission_rate": 16.0,
+    "penalty_pct": 1.06
+  },
+  {
+    "name": "Jackson Medical Center",
+    "state": "MS",
+    "city": "Jackson",
+    "readmission_rate": 16.0,
+    "penalty_pct": 1.67
+  },
+  {
+    "name": "St. Louis County Hospital",
+    "state": "MO",
+    "city": "St. Louis",
+    "readmission_rate": 16.0,
+    "penalty_pct": 2.34
+  },
+  {
+    "name": "Santa Fe St. Mary's Hospital",
+    "state": "NM",
+    "city": "Santa Fe",
+    "readmission_rate": 16.0,
+    "penalty_pct": 0.77
+  },
+  {
+    "name": "Philadelphia St. Mary's Hospital",
+    "state": "PA",
+    "city": "Philadelphia",
+    "readmission_rate": 16.0,
+    "penalty_pct": 1.39
+  },
+  {
+    "name": "Warwick Health System",
+    "state": "RI",
+    "city": "Warwick",
+    "readmission_rate": 16.0,
+    "penalty_pct": 2.19
+  },
+  {
+    "name": "Charleston Baptist Hospital",
+    "state": "SC",
+    "city": "Charleston",
+    "readmission_rate": 16.0,
+    "penalty_pct": 1.08
+  },
+  {
+    "name": "Huntington Providence Hospital",
+    "state": "WV",
+    "city": "Huntington",
+    "readmission_rate": 16.0,
+    "penalty_pct": 0.52
+  },
+  {
+    "name": "Mobile Sacred Heart Hospital",
+    "state": "AL",
+    "city": "Mobile",
+    "readmission_rate": 15.9,
+    "penalty_pct": 0.94
+  },
+  {
+    "name": "Fort Smith Community Hospital",
+    "state": "AR",
+    "city": "Fort Smith",
+    "readmission_rate": 15.9,
+    "penalty_pct": 1.2
+  },
+  {
+    "name": "Los Angeles Methodist Hospital",
+    "state": "CA",
+    "city": "Los Angeles",
+    "readmission_rate": 15.9,
+    "penalty_pct": 1.24
+  },
+  {
+    "name": "Bridgeport Health System",
+    "state": "CT",
+    "city": "Bridgeport",
+    "readmission_rate": 15.9,
+    "penalty_pct": 0.93
+  },
+  {
+    "name": "Fort Lauderdale Baptist Hospital",
+    "state": "FL",
+    "city": "Fort Lauderdale",
+    "readmission_rate": 15.9,
+    "penalty_pct": 0.59
+  },
+  {
+    "name": "Des Moines Regional Medical Center",
+    "state": "IA",
+    "city": "Des Moines",
+    "readmission_rate": 15.9,
+    "penalty_pct": 1.95
+  },
+  {
+    "name": "New Orleans Regional Medical Center",
+    "state": "LA",
+    "city": "New Orleans",
+    "readmission_rate": 15.9,
+    "penalty_pct": 0.58
+  },
+  {
+    "name": "Baton Rouge St. Mary's Hospital",
+    "state": "LA",
+    "city": "Baton Rouge",
+    "readmission_rate": 15.9,
+    "penalty_pct": 1.23
+  },
+  {
+    "name": "Lansing Health System",
+    "state": "MI",
+    "city": "Lansing",
+    "readmission_rate": 15.9,
+    "penalty_pct": 1.55
+  },
+  {
+    "name": "Kansas City Providence Hospital",
+    "state": "MO",
+    "city": "Kansas City",
+    "readmission_rate": 15.9,
+    "penalty_pct": 1.34
+  },
+  {
+    "name": "Allentown Methodist Hospital",
+    "state": "PA",
+    "city": "Allentown",
+    "readmission_rate": 15.9,
+    "penalty_pct": 1.05
+  },
+  {
+    "name": "Cranston County Hospital",
+    "state": "RI",
+    "city": "Cranston",
+    "readmission_rate": 15.9,
+    "penalty_pct": 1.75
+  },
+  {
+    "name": "Mobile Memorial Hospital",
+    "state": "AL",
+    "city": "Mobile",
+    "readmission_rate": 15.8,
+    "penalty_pct": 2.01
+  },
+  {
+    "name": "Little Rock Mercy Hospital",
+    "state": "AR",
+    "city": "Little Rock",
+    "readmission_rate": 15.8,
+    "penalty_pct": 1.99
+  },
+  {
+    "name": "Sacramento University Hospital",
+    "state": "CA",
+    "city": "Sacramento",
+    "readmission_rate": 15.8,
+    "penalty_pct": 1.76
+  },
+  {
+    "name": "Fort Wayne Community Hospital",
+    "state": "IN",
+    "city": "Fort Wayne",
+    "readmission_rate": 15.8,
+    "penalty_pct": 1.89
+  },
+  {
+    "name": "Davenport Memorial Hospital",
+    "state": "IA",
+    "city": "Davenport",
+    "readmission_rate": 15.8,
+    "penalty_pct": 2.23
+  },
+  {
+    "name": "Baton Rouge Community Hospital",
+    "state": "LA",
+    "city": "Baton Rouge",
+    "readmission_rate": 15.8,
+    "penalty_pct": 1.06
+  },
+  {
+    "name": "Shreveport Memorial Hospital",
+    "state": "LA",
+    "city": "Shreveport",
+    "readmission_rate": 15.8,
+    "penalty_pct": 0.68
+  },
+  {
+    "name": "Shreveport Presbyterian Hospital",
+    "state": "LA",
+    "city": "Shreveport",
+    "readmission_rate": 15.8,
+    "penalty_pct": 0.92
+  },
+  {
+    "name": "Springfield Sacred Heart Hospital",
+    "state": "MA",
+    "city": "Springfield",
+    "readmission_rate": 15.8,
+    "penalty_pct": 2.43
+  },
+  {
+    "name": "Santa Fe Health System",
+    "state": "NM",
+    "city": "Santa Fe",
+    "readmission_rate": 15.8,
+    "penalty_pct": 1.96
+  },
+  {
+    "name": "Juneau Presbyterian Hospital",
+    "state": "AK",
+    "city": "Juneau",
+    "readmission_rate": 15.7,
+    "penalty_pct": 0.98
+  },
+  {
+    "name": "Scottsdale Health System",
+    "state": "AZ",
+    "city": "Scottsdale",
+    "readmission_rate": 15.7,
+    "penalty_pct": 1.27
+  },
+  {
+    "name": "Bridgeport Presbyterian Hospital",
+    "state": "CT",
+    "city": "Bridgeport",
+    "readmission_rate": 15.7,
+    "penalty_pct": 2.45
+  },
+  {
+    "name": "Newark General Hospital",
+    "state": "DE",
+    "city": "Newark",
+    "readmission_rate": 15.7,
+    "penalty_pct": 1.06
+  },
+  {
+    "name": "Springfield Providence Hospital",
+    "state": "IL",
+    "city": "Springfield",
+    "readmission_rate": 15.7,
+    "penalty_pct": 2.49
+  },
+  {
+    "name": "St. Louis Regional Medical Center",
+    "state": "MO",
+    "city": "St. Louis",
+    "readmission_rate": 15.7,
+    "penalty_pct": 0.73
+  },
+  {
+    "name": "Oklahoma City Mercy Hospital",
+    "state": "OK",
+    "city": "Oklahoma City",
+    "readmission_rate": 15.7,
+    "penalty_pct": 1.99
+  },
+  {
+    "name": "Dallas Presbyterian Hospital",
+    "state": "TX",
+    "city": "Dallas",
+    "readmission_rate": 15.7,
+    "penalty_pct": 1.76
+  },
+  {
+    "name": "Fairbanks Community Hospital",
+    "state": "AK",
+    "city": "Fairbanks",
+    "readmission_rate": 15.6,
+    "penalty_pct": 1.15
+  },
+  {
+    "name": "Fairbanks St. Mary's Hospital",
+    "state": "AK",
+    "city": "Fairbanks",
+    "readmission_rate": 15.6,
+    "penalty_pct": 1.0
+  },
+  {
+    "name": "Phoenix St. Mary's Hospital",
+    "state": "AZ",
+    "city": "Phoenix",
+    "readmission_rate": 15.6,
+    "penalty_pct": 0.53
+  },
+  {
+    "name": "Augusta Memorial Hospital",
+    "state": "GA",
+    "city": "Augusta",
+    "readmission_rate": 15.6,
+    "penalty_pct": 1.59
+  },
+  {
+    "name": "South Bend University Hospital",
+    "state": "IN",
+    "city": "South Bend",
+    "readmission_rate": 15.6,
+    "penalty_pct": 2.3
+  },
+  {
+    "name": "Fort Wayne Baptist Hospital",
+    "state": "IN",
+    "city": "Fort Wayne",
+    "readmission_rate": 15.6,
+    "penalty_pct": 0.66
+  },
+  {
+    "name": "New Orleans University Hospital",
+    "state": "LA",
+    "city": "New Orleans",
+    "readmission_rate": 15.6,
+    "penalty_pct": 1.42
+  },
+  {
+    "name": "Boston Regional Medical Center",
+    "state": "MA",
+    "city": "Boston",
+    "readmission_rate": 15.6,
+    "penalty_pct": 0.87
+  },
+  {
+    "name": "Reno Health System",
+    "state": "NV",
+    "city": "Reno",
+    "readmission_rate": 15.6,
+    "penalty_pct": 1.32
+  },
+  {
+    "name": "Concord Memorial Hospital",
+    "state": "NH",
+    "city": "Concord",
+    "readmission_rate": 15.6,
+    "penalty_pct": 1.55
+  },
+  {
+    "name": "Buffalo Presbyterian Hospital",
+    "state": "NY",
+    "city": "Buffalo",
+    "readmission_rate": 15.6,
+    "penalty_pct": 2.08
+  },
+  {
+    "name": "Birmingham Regional Medical Center",
+    "state": "AL",
+    "city": "Birmingham",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.56
+  },
+  {
+    "name": "Mobile Methodist Hospital",
+    "state": "AL",
+    "city": "Mobile",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Mesa Medical Center",
+    "state": "AZ",
+    "city": "Mesa",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Davenport County Hospital",
+    "state": "IA",
+    "city": "Davenport",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.52
+  },
+  {
+    "name": "Davenport Sacred Heart Hospital",
+    "state": "IA",
+    "city": "Davenport",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Topeka Methodist Hospital",
+    "state": "KS",
+    "city": "Topeka",
+    "readmission_rate": 15.5,
+    "penalty_pct": 1.74
+  },
+  {
+    "name": "Louisville Mercy Hospital",
+    "state": "KY",
+    "city": "Louisville",
+    "readmission_rate": 15.5,
+    "penalty_pct": 1.19
+  },
+  {
+    "name": "Cambridge Presbyterian Hospital",
+    "state": "MA",
+    "city": "Cambridge",
+    "readmission_rate": 15.5,
+    "penalty_pct": 1.69
+  },
+  {
+    "name": "Lansing University Hospital",
+    "state": "MI",
+    "city": "Lansing",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.86
+  },
+  {
+    "name": "Hattiesburg County Hospital",
+    "state": "MS",
+    "city": "Hattiesburg",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.88
+  },
+  {
+    "name": "Las Vegas Medical Center",
+    "state": "NV",
+    "city": "Las Vegas",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.34
+  },
+  {
+    "name": "Santa Fe Community Hospital",
+    "state": "NM",
+    "city": "Santa Fe",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.73
+  },
+  {
+    "name": "Las Cruces County Hospital",
+    "state": "NM",
+    "city": "Las Cruces",
+    "readmission_rate": 15.5,
+    "penalty_pct": 1.82
+  },
+  {
+    "name": "Oklahoma City University Hospital",
+    "state": "OK",
+    "city": "Oklahoma City",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.89
+  },
+  {
+    "name": "Providence University Hospital",
+    "state": "RI",
+    "city": "Providence",
+    "readmission_rate": 15.5,
+    "penalty_pct": 1.24
+  },
+  {
+    "name": "Charleston Mercy Hospital",
+    "state": "SC",
+    "city": "Charleston",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.71
+  },
+  {
+    "name": "Richmond Baptist Hospital",
+    "state": "VA",
+    "city": "Richmond",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.85
+  },
+  {
+    "name": "Norfolk Sacred Heart Hospital",
+    "state": "VA",
+    "city": "Norfolk",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.71
+  },
+  {
+    "name": "Madison Providence Hospital",
+    "state": "WI",
+    "city": "Madison",
+    "readmission_rate": 15.5,
+    "penalty_pct": 0.54
+  },
+  {
+    "name": "Birmingham St. Mary's Hospital",
+    "state": "AL",
+    "city": "Birmingham",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.25
+  },
+  {
+    "name": "Anchorage Baptist Hospital",
+    "state": "AK",
+    "city": "Anchorage",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Phoenix Regional Medical Center",
+    "state": "AZ",
+    "city": "Phoenix",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.58
+  },
+  {
+    "name": "San Jose St. Mary's Hospital",
+    "state": "CA",
+    "city": "San Jose",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.55
+  },
+  {
+    "name": "Orlando Medical Center",
+    "state": "FL",
+    "city": "Orlando",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.53
+  },
+  {
+    "name": "Orlando Presbyterian Hospital",
+    "state": "FL",
+    "city": "Orlando",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.87
+  },
+  {
+    "name": "Savannah Community Hospital",
+    "state": "GA",
+    "city": "Savannah",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.68
+  },
+  {
+    "name": "Davenport Presbyterian Hospital",
+    "state": "IA",
+    "city": "Davenport",
+    "readmission_rate": 15.4,
+    "penalty_pct": 1.0
+  },
+  {
+    "name": "Lexington St. Mary's Hospital",
+    "state": "KY",
+    "city": "Lexington",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.93
+  },
+  {
+    "name": "Bowling Green Presbyterian Hospital",
+    "state": "KY",
+    "city": "Bowling Green",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.68
+  },
+  {
+    "name": "Lewiston Methodist Hospital",
+    "state": "ME",
+    "city": "Lewiston",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.55
+  },
+  {
+    "name": "Camden Presbyterian Hospital",
+    "state": "NJ",
+    "city": "Camden",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.79
+  },
+  {
+    "name": "Eugene Medical Center",
+    "state": "OR",
+    "city": "Eugene",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.41
+  },
+  {
+    "name": "Eugene Sacred Heart Hospital",
+    "state": "OR",
+    "city": "Eugene",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.97
+  },
+  {
+    "name": "Arlington Health System",
+    "state": "VA",
+    "city": "Arlington",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.5
+  },
+  {
+    "name": "Washington Community Hospital",
+    "state": "DC",
+    "city": "Washington",
+    "readmission_rate": 15.4,
+    "penalty_pct": 0.45
+  },
+  {
+    "name": "Hartford County Hospital",
+    "state": "CT",
+    "city": "Hartford",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.18
+  },
+  {
+    "name": "Dover St. Mary's Hospital",
+    "state": "DE",
+    "city": "Dover",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.74
+  },
+  {
+    "name": "Dover Health System",
+    "state": "DE",
+    "city": "Dover",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.65
+  },
+  {
+    "name": "Miami General Hospital",
+    "state": "FL",
+    "city": "Miami",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.19
+  },
+  {
+    "name": "Nampa Sacred Heart Hospital",
+    "state": "ID",
+    "city": "Nampa",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.78
+  },
+  {
+    "name": "Peoria Memorial Hospital",
+    "state": "IL",
+    "city": "Peoria",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.92
+  },
+  {
+    "name": "Overland Park Presbyterian Hospital",
+    "state": "KS",
+    "city": "Overland Park",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.29
+  },
+  {
+    "name": "Lexington Methodist Hospital",
+    "state": "KY",
+    "city": "Lexington",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "New Orleans Medical Center",
+    "state": "LA",
+    "city": "New Orleans",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.82
+  },
+  {
+    "name": "New Orleans Baptist Hospital",
+    "state": "LA",
+    "city": "New Orleans",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Baltimore County Hospital",
+    "state": "MD",
+    "city": "Baltimore",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.98
+  },
+  {
+    "name": "Kansas City Baptist Hospital",
+    "state": "MO",
+    "city": "Kansas City",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.41
+  },
+  {
+    "name": "Omaha Regional Medical Center",
+    "state": "NE",
+    "city": "Omaha",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.95
+  },
+  {
+    "name": "Henderson County Hospital",
+    "state": "NV",
+    "city": "Henderson",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.49
+  },
+  {
+    "name": "Camden University Hospital",
+    "state": "NJ",
+    "city": "Camden",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.42
+  },
+  {
+    "name": "Columbus Methodist Hospital",
+    "state": "OH",
+    "city": "Columbus",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Erie University Hospital",
+    "state": "PA",
+    "city": "Erie",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.79
+  },
+  {
+    "name": "Memphis General Hospital",
+    "state": "TN",
+    "city": "Memphis",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Virginia Beach Regional Medical Center",
+    "state": "VA",
+    "city": "Virginia Beach",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.88
+  },
+  {
+    "name": "Vancouver University Hospital",
+    "state": "WA",
+    "city": "Vancouver",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.14
+  },
+  {
+    "name": "Huntington Health System",
+    "state": "WV",
+    "city": "Huntington",
+    "readmission_rate": 15.3,
+    "penalty_pct": 0.41
+  },
+  {
+    "name": "Indianapolis County Hospital",
+    "state": "IN",
+    "city": "Indianapolis",
+    "readmission_rate": 15.2,
+    "penalty_pct": 0.42
+  },
+  {
+    "name": "Cedar Rapids Providence Hospital",
+    "state": "IA",
+    "city": "Cedar Rapids",
+    "readmission_rate": 15.2,
+    "penalty_pct": 0.95
+  },
+  {
+    "name": "Columbia Health System",
+    "state": "MO",
+    "city": "Columbia",
+    "readmission_rate": 15.2,
+    "penalty_pct": 0.46
+  },
+  {
+    "name": "Omaha Mercy Hospital",
+    "state": "NE",
+    "city": "Omaha",
+    "readmission_rate": 15.2,
+    "penalty_pct": 0.46
+  },
+  {
+    "name": "Nashua Methodist Hospital",
+    "state": "NH",
+    "city": "Nashua",
+    "readmission_rate": 15.2,
+    "penalty_pct": 0.64
+  },
+  {
+    "name": "Greenville County Hospital",
+    "state": "SC",
+    "city": "Greenville",
+    "readmission_rate": 15.2,
+    "penalty_pct": 0.53
+  },
+  {
+    "name": "Chattanooga Presbyterian Hospital",
+    "state": "TN",
+    "city": "Chattanooga",
+    "readmission_rate": 15.2,
+    "penalty_pct": 1.0
+  },
+  {
+    "name": "Seattle St. Mary's Hospital",
+    "state": "WA",
+    "city": "Seattle",
+    "readmission_rate": 15.2,
+    "penalty_pct": 0.47
+  },
+  {
+    "name": "Huntsville University Hospital",
+    "state": "AL",
+    "city": "Huntsville",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Huntsville Presbyterian Hospital",
+    "state": "AL",
+    "city": "Huntsville",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.48
+  },
+  {
+    "name": "Fayetteville General Hospital",
+    "state": "AR",
+    "city": "Fayetteville",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.91
+  },
+  {
+    "name": "New Haven Community Hospital",
+    "state": "CT",
+    "city": "New Haven",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Miami Regional Medical Center",
+    "state": "FL",
+    "city": "Miami",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Chicago Regional Medical Center",
+    "state": "IL",
+    "city": "Chicago",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.18
+  },
+  {
+    "name": "Evansville Memorial Hospital",
+    "state": "IN",
+    "city": "Evansville",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.66
+  },
+  {
+    "name": "Evansville Medical Center",
+    "state": "IN",
+    "city": "Evansville",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.66
+  },
+  {
+    "name": "Louisville Baptist Hospital",
+    "state": "KY",
+    "city": "Louisville",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Lewiston Community Hospital",
+    "state": "ME",
+    "city": "Lewiston",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.91
+  },
+  {
+    "name": "Rockville Community Hospital",
+    "state": "MD",
+    "city": "Rockville",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.99
+  },
+  {
+    "name": "Lansing Presbyterian Hospital",
+    "state": "MI",
+    "city": "Lansing",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Bellevue County Hospital",
+    "state": "NE",
+    "city": "Bellevue",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Trenton Memorial Hospital",
+    "state": "NJ",
+    "city": "Trenton",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.45
+  },
+  {
+    "name": "Albuquerque Baptist Hospital",
+    "state": "NM",
+    "city": "Albuquerque",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.86
+  },
+  {
+    "name": "Santa Fe Providence Hospital",
+    "state": "NM",
+    "city": "Santa Fe",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.93
+  },
+  {
+    "name": "Memphis Providence Hospital",
+    "state": "TN",
+    "city": "Memphis",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.71
+  },
+  {
+    "name": "Austin Health System",
+    "state": "TX",
+    "city": "Austin",
+    "readmission_rate": 15.1,
+    "penalty_pct": 0.89
+  },
+  {
+    "name": "Tucson Providence Hospital",
+    "state": "AZ",
+    "city": "Tucson",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Stamford Methodist Hospital",
+    "state": "CT",
+    "city": "Stamford",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.67
+  },
+  {
+    "name": "Jacksonville County Hospital",
+    "state": "FL",
+    "city": "Jacksonville",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.65
+  },
+  {
+    "name": "Overland Park University Hospital",
+    "state": "KS",
+    "city": "Overland Park",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.42
+  },
+  {
+    "name": "Ann Arbor Methodist Hospital",
+    "state": "MI",
+    "city": "Ann Arbor",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.44
+  },
+  {
+    "name": "Raleigh General Hospital",
+    "state": "NC",
+    "city": "Raleigh",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.66
+  },
+  {
+    "name": "Oklahoma City Baptist Hospital",
+    "state": "OK",
+    "city": "Oklahoma City",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.89
+  },
+  {
+    "name": "Tulsa Providence Hospital",
+    "state": "OK",
+    "city": "Tulsa",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.84
+  },
+  {
+    "name": "Allentown Medical Center",
+    "state": "PA",
+    "city": "Allentown",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.51
+  },
+  {
+    "name": "Philadelphia Mercy Hospital",
+    "state": "PA",
+    "city": "Philadelphia",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.95
+  },
+  {
+    "name": "Pittsburgh Providence Hospital",
+    "state": "PA",
+    "city": "Pittsburgh",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.67
+  },
+  {
+    "name": "Nashville County Hospital",
+    "state": "TN",
+    "city": "Nashville",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.81
+  },
+  {
+    "name": "Dallas Medical Center",
+    "state": "TX",
+    "city": "Dallas",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.75
+  },
+  {
+    "name": "Burlington Mercy Hospital",
+    "state": "VT",
+    "city": "Burlington",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.97
+  },
+  {
+    "name": "Washington Health System",
+    "state": "DC",
+    "city": "Washington",
+    "readmission_rate": 15.0,
+    "penalty_pct": 0.19
+  },
+  {
+    "name": "Tucson General Hospital",
+    "state": "AZ",
+    "city": "Tucson",
+    "readmission_rate": 14.9,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Fort Smith Health System",
+    "state": "AR",
+    "city": "Fort Smith",
+    "readmission_rate": 14.9,
+    "penalty_pct": 0.7
+  },
+  {
+    "name": "Hartford Mercy Hospital",
+    "state": "CT",
+    "city": "Hartford",
+    "readmission_rate": 14.9,
+    "penalty_pct": 0.39
+  },
+  {
+    "name": "Miami Methodist Hospital",
+    "state": "FL",
+    "city": "Miami",
+    "readmission_rate": 14.9,
+    "penalty_pct": 0.66
+  },
+  {
+    "name": "Augusta Sacred Heart Hospital",
+    "state": "GA",
+    "city": "Augusta",
+    "readmission_rate": 14.9,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Hilo Community Hospital",
+    "state": "HI",
+    "city": "Hilo",
+    "readmission_rate": 14.9,
+    "penalty_pct": 0.47
+  },
+  {
+    "name": "Columbus General Hospital",
+    "state": "OH",
+    "city": "Columbus",
+    "readmission_rate": 14.9,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Allentown Sacred Heart Hospital",
+    "state": "PA",
+    "city": "Allentown",
+    "readmission_rate": 14.9,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Sacramento County Hospital",
+    "state": "CA",
+    "city": "Sacramento",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Aurora Memorial Hospital",
+    "state": "CO",
+    "city": "Aurora",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.73
+  },
+  {
+    "name": "Orlando Community Hospital",
+    "state": "FL",
+    "city": "Orlando",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.78
+  },
+  {
+    "name": "Grand Rapids Baptist Hospital",
+    "state": "MI",
+    "city": "Grand Rapids",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.83
+  },
+  {
+    "name": "Columbia Presbyterian Hospital",
+    "state": "MO",
+    "city": "Columbia",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.51
+  },
+  {
+    "name": "Lincoln St. Mary's Hospital",
+    "state": "NE",
+    "city": "Lincoln",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.69
+  },
+  {
+    "name": "Bellevue Presbyterian Hospital",
+    "state": "NE",
+    "city": "Bellevue",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.87
+  },
+  {
+    "name": "Las Vegas University Hospital",
+    "state": "NV",
+    "city": "Las Vegas",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.9
+  },
+  {
+    "name": "Reno Providence Hospital",
+    "state": "NV",
+    "city": "Reno",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.12
+  },
+  {
+    "name": "Newark Regional Medical Center",
+    "state": "NJ",
+    "city": "Newark",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.76
+  },
+  {
+    "name": "Syracuse Baptist Hospital",
+    "state": "NY",
+    "city": "Syracuse",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.75
+  },
+  {
+    "name": "Charlotte County Hospital",
+    "state": "NC",
+    "city": "Charlotte",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.76
+  },
+  {
+    "name": "Charleston Medical Center",
+    "state": "SC",
+    "city": "Charleston",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.51
+  },
+  {
+    "name": "Spokane General Hospital",
+    "state": "WA",
+    "city": "Spokane",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.8
+  },
+  {
+    "name": "Vancouver Health System",
+    "state": "WA",
+    "city": "Vancouver",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.46
+  },
+  {
+    "name": "Green Bay General Hospital",
+    "state": "WI",
+    "city": "Green Bay",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.59
+  },
+  {
+    "name": "Green Bay Sacred Heart Hospital",
+    "state": "WI",
+    "city": "Green Bay",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.6
+  },
+  {
+    "name": "Casper Community Hospital",
+    "state": "WY",
+    "city": "Casper",
+    "readmission_rate": 14.8,
+    "penalty_pct": 0.64
+  },
+  {
+    "name": "Aurora Sacred Heart Hospital",
+    "state": "CO",
+    "city": "Aurora",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.4
+  },
+  {
+    "name": "Stamford Memorial Hospital",
+    "state": "CT",
+    "city": "Stamford",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.59
+  },
+  {
+    "name": "Newark Memorial Hospital",
+    "state": "DE",
+    "city": "Newark",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Honolulu Mercy Hospital",
+    "state": "HI",
+    "city": "Honolulu",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.62
+  },
+  {
+    "name": "Meridian Providence Hospital",
+    "state": "ID",
+    "city": "Meridian",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.95
+  },
+  {
+    "name": "Springfield Baptist Hospital",
+    "state": "IL",
+    "city": "Springfield",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.88
+  },
+  {
+    "name": "Overland Park Health System",
+    "state": "KS",
+    "city": "Overland Park",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.6
+  },
+  {
+    "name": "Baltimore St. Mary's Hospital",
+    "state": "MD",
+    "city": "Baltimore",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Ann Arbor Sacred Heart Hospital",
+    "state": "MI",
+    "city": "Ann Arbor",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.59
+  },
+  {
+    "name": "New York General Hospital",
+    "state": "NY",
+    "city": "New York",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.85
+  },
+  {
+    "name": "Rochester Mercy Hospital",
+    "state": "NY",
+    "city": "Rochester",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.66
+  },
+  {
+    "name": "Cincinnati Memorial Hospital",
+    "state": "OH",
+    "city": "Cincinnati",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.58
+  },
+  {
+    "name": "Greenville General Hospital",
+    "state": "SC",
+    "city": "Greenville",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.82
+  },
+  {
+    "name": "Norfolk Memorial Hospital",
+    "state": "VA",
+    "city": "Norfolk",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.7
+  },
+  {
+    "name": "Arlington Presbyterian Hospital",
+    "state": "VA",
+    "city": "Arlington",
+    "readmission_rate": 14.7,
+    "penalty_pct": 0.66
+  },
+  {
+    "name": "Aurora Medical Center",
+    "state": "CO",
+    "city": "Aurora",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.77
+  },
+  {
+    "name": "Aurora Methodist Hospital",
+    "state": "CO",
+    "city": "Aurora",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.92
+  },
+  {
+    "name": "Stamford Sacred Heart Hospital",
+    "state": "CT",
+    "city": "Stamford",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Savannah General Hospital",
+    "state": "GA",
+    "city": "Savannah",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.16
+  },
+  {
+    "name": "Meridian Community Hospital",
+    "state": "ID",
+    "city": "Meridian",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.81
+  },
+  {
+    "name": "Cedar Rapids Community Hospital",
+    "state": "IA",
+    "city": "Cedar Rapids",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.48
+  },
+  {
+    "name": "Kansas City General Hospital",
+    "state": "KS",
+    "city": "Kansas City",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.8
+  },
+  {
+    "name": "Topeka Medical Center",
+    "state": "KS",
+    "city": "Topeka",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.87
+  },
+  {
+    "name": "Portland Baptist Hospital",
+    "state": "ME",
+    "city": "Portland",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.71
+  },
+  {
+    "name": "Springfield Medical Center",
+    "state": "MA",
+    "city": "Springfield",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Detroit County Hospital",
+    "state": "MI",
+    "city": "Detroit",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.89
+  },
+  {
+    "name": "Lincoln Providence Hospital",
+    "state": "NE",
+    "city": "Lincoln",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Durham Sacred Heart Hospital",
+    "state": "NC",
+    "city": "Durham",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.71
+  },
+  {
+    "name": "Grand Forks General Hospital",
+    "state": "ND",
+    "city": "Grand Forks",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.31
+  },
+  {
+    "name": "Bismarck Providence Hospital",
+    "state": "ND",
+    "city": "Bismarck",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Portland St. Mary's Hospital",
+    "state": "OR",
+    "city": "Portland",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Columbia Providence Hospital",
+    "state": "SC",
+    "city": "Columbia",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.99
+  },
+  {
+    "name": "Nashville Regional Medical Center",
+    "state": "TN",
+    "city": "Nashville",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.91
+  },
+  {
+    "name": "Nashville St. Mary's Hospital",
+    "state": "TN",
+    "city": "Nashville",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Knoxville Sacred Heart Hospital",
+    "state": "TN",
+    "city": "Knoxville",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "San Antonio University Hospital",
+    "state": "TX",
+    "city": "San Antonio",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.43
+  },
+  {
+    "name": "Vancouver Presbyterian Hospital",
+    "state": "WA",
+    "city": "Vancouver",
+    "readmission_rate": 14.6,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Anchorage Mercy Hospital",
+    "state": "AK",
+    "city": "Anchorage",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Fayetteville County Hospital",
+    "state": "AR",
+    "city": "Fayetteville",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Los Angeles General Hospital",
+    "state": "CA",
+    "city": "Los Angeles",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.54
+  },
+  {
+    "name": "Denver Regional Medical Center",
+    "state": "CO",
+    "city": "Denver",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.39
+  },
+  {
+    "name": "Hilo Methodist Hospital",
+    "state": "HI",
+    "city": "Hilo",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.18
+  },
+  {
+    "name": "Peoria Methodist Hospital",
+    "state": "IL",
+    "city": "Peoria",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.39
+  },
+  {
+    "name": "Indianapolis Mercy Hospital",
+    "state": "IN",
+    "city": "Indianapolis",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.83
+  },
+  {
+    "name": "Des Moines Medical Center",
+    "state": "IA",
+    "city": "Des Moines",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Portland Mercy Hospital",
+    "state": "ME",
+    "city": "Portland",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.77
+  },
+  {
+    "name": "Springfield Memorial Hospital",
+    "state": "MA",
+    "city": "Springfield",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "St. Louis Mercy Hospital",
+    "state": "MO",
+    "city": "St. Louis",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "Bellevue Memorial Hospital",
+    "state": "NE",
+    "city": "Bellevue",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.16
+  },
+  {
+    "name": "Omaha Baptist Hospital",
+    "state": "NE",
+    "city": "Omaha",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.31
+  },
+  {
+    "name": "Newark Mercy Hospital",
+    "state": "NJ",
+    "city": "Newark",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Durham Methodist Hospital",
+    "state": "NC",
+    "city": "Durham",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Salem General Hospital",
+    "state": "OR",
+    "city": "Salem",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.59
+  },
+  {
+    "name": "Burlington University Hospital",
+    "state": "VT",
+    "city": "Burlington",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Richmond Community Hospital",
+    "state": "VA",
+    "city": "Richmond",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.56
+  },
+  {
+    "name": "Spokane Baptist Hospital",
+    "state": "WA",
+    "city": "Spokane",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.79
+  },
+  {
+    "name": "Tacoma Methodist Hospital",
+    "state": "WA",
+    "city": "Tacoma",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Madison Health System",
+    "state": "WI",
+    "city": "Madison",
+    "readmission_rate": 14.5,
+    "penalty_pct": 0.11
+  },
+  {
+    "name": "South Bend Health System",
+    "state": "IN",
+    "city": "South Bend",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.08
+  },
+  {
+    "name": "Rockville General Hospital",
+    "state": "MD",
+    "city": "Rockville",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.11
+  },
+  {
+    "name": "Frederick Medical Center",
+    "state": "MD",
+    "city": "Frederick",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Baltimore Mercy Hospital",
+    "state": "MD",
+    "city": "Baltimore",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Boston Mercy Hospital",
+    "state": "MA",
+    "city": "Boston",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.16
+  },
+  {
+    "name": "Minneapolis Regional Medical Center",
+    "state": "MN",
+    "city": "Minneapolis",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.25
+  },
+  {
+    "name": "St. Paul General Hospital",
+    "state": "MN",
+    "city": "St. Paul",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Springfield Memorial Hospital",
+    "state": "MO",
+    "city": "Springfield",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Jersey City Community Hospital",
+    "state": "NJ",
+    "city": "Jersey City",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Fargo University Hospital",
+    "state": "ND",
+    "city": "Fargo",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.19
+  },
+  {
+    "name": "Fargo Medical Center",
+    "state": "ND",
+    "city": "Fargo",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Pittsburgh General Hospital",
+    "state": "PA",
+    "city": "Pittsburgh",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.4
+  },
+  {
+    "name": "Charleston University Hospital",
+    "state": "SC",
+    "city": "Charleston",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Green Bay Presbyterian Hospital",
+    "state": "WI",
+    "city": "Green Bay",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Laramie General Hospital",
+    "state": "WY",
+    "city": "Laramie",
+    "readmission_rate": 14.4,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Tucson Baptist Hospital",
+    "state": "AZ",
+    "city": "Tucson",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Colorado Springs Baptist Hospital",
+    "state": "CO",
+    "city": "Colorado Springs",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Denver Mercy Hospital",
+    "state": "CO",
+    "city": "Denver",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Hartford Regional Medical Center",
+    "state": "CT",
+    "city": "Hartford",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Columbus Presbyterian Hospital",
+    "state": "GA",
+    "city": "Columbus",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Hilo St. Mary's Hospital",
+    "state": "HI",
+    "city": "Hilo",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Wichita Regional Medical Center",
+    "state": "KS",
+    "city": "Wichita",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Lewiston St. Mary's Hospital",
+    "state": "ME",
+    "city": "Lewiston",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Great Falls Presbyterian Hospital",
+    "state": "MT",
+    "city": "Great Falls",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.18
+  },
+  {
+    "name": "Las Vegas Baptist Hospital",
+    "state": "NV",
+    "city": "Las Vegas",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.38
+  },
+  {
+    "name": "Nashua Health System",
+    "state": "NH",
+    "city": "Nashua",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Rochester Health System",
+    "state": "NY",
+    "city": "Rochester",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Syracuse Sacred Heart Hospital",
+    "state": "NY",
+    "city": "Syracuse",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Greensboro Presbyterian Hospital",
+    "state": "NC",
+    "city": "Greensboro",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.09
+  },
+  {
+    "name": "Salem Baptist Hospital",
+    "state": "OR",
+    "city": "Salem",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.03
+  },
+  {
+    "name": "Fort Worth Baptist Hospital",
+    "state": "TX",
+    "city": "Fort Worth",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Salt Lake City Regional Medical Center",
+    "state": "UT",
+    "city": "Salt Lake City",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "Salt Lake City Medical Center",
+    "state": "UT",
+    "city": "Salt Lake City",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Salt Lake City Baptist Hospital",
+    "state": "UT",
+    "city": "Salt Lake City",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.18
+  },
+  {
+    "name": "Laramie Memorial Hospital",
+    "state": "WY",
+    "city": "Laramie",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Laramie County Hospital",
+    "state": "WY",
+    "city": "Laramie",
+    "readmission_rate": 14.3,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Montgomery Providence Hospital",
+    "state": "AL",
+    "city": "Montgomery",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Fairbanks Health System",
+    "state": "AK",
+    "city": "Fairbanks",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Mesa Memorial Hospital",
+    "state": "AZ",
+    "city": "Mesa",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "Augusta Medical Center",
+    "state": "GA",
+    "city": "Augusta",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Columbus Health System",
+    "state": "GA",
+    "city": "Columbus",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Meridian Methodist Hospital",
+    "state": "ID",
+    "city": "Meridian",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.03
+  },
+  {
+    "name": "Bangor Memorial Hospital",
+    "state": "ME",
+    "city": "Bangor",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Henderson Sacred Heart Hospital",
+    "state": "NV",
+    "city": "Henderson",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Manchester Regional Medical Center",
+    "state": "NH",
+    "city": "Manchester",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Newark County Hospital",
+    "state": "NJ",
+    "city": "Newark",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Akron St. Mary's Hospital",
+    "state": "OH",
+    "city": "Akron",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Greenville Sacred Heart Hospital",
+    "state": "SC",
+    "city": "Greenville",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Houston Regional Medical Center",
+    "state": "TX",
+    "city": "Houston",
+    "readmission_rate": 14.2,
+    "penalty_pct": 0.19
+  },
+  {
+    "name": "Tampa Health System",
+    "state": "FL",
+    "city": "Tampa",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Atlanta County Hospital",
+    "state": "GA",
+    "city": "Atlanta",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Boise Regional Medical Center",
+    "state": "ID",
+    "city": "Boise",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Peoria Medical Center",
+    "state": "IL",
+    "city": "Peoria",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Topeka Sacred Heart Hospital",
+    "state": "KS",
+    "city": "Topeka",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Bethesda University Hospital",
+    "state": "MD",
+    "city": "Bethesda",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.06
+  },
+  {
+    "name": "Rockville Baptist Hospital",
+    "state": "MD",
+    "city": "Rockville",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.16
+  },
+  {
+    "name": "Grand Rapids Providence Hospital",
+    "state": "MI",
+    "city": "Grand Rapids",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Kansas City General Hospital",
+    "state": "MO",
+    "city": "Kansas City",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Henderson General Hospital",
+    "state": "NV",
+    "city": "Henderson",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Concord Presbyterian Hospital",
+    "state": "NH",
+    "city": "Concord",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Raleigh Baptist Hospital",
+    "state": "NC",
+    "city": "Raleigh",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Fargo Mercy Hospital",
+    "state": "ND",
+    "city": "Fargo",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Akron Baptist Hospital",
+    "state": "OH",
+    "city": "Akron",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.16
+  },
+  {
+    "name": "Cincinnati Mercy Hospital",
+    "state": "OH",
+    "city": "Cincinnati",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.09
+  },
+  {
+    "name": "Columbia Community Hospital",
+    "state": "SC",
+    "city": "Columbia",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Rapid City Health System",
+    "state": "SD",
+    "city": "Rapid City",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.08
+  },
+  {
+    "name": "Casper Health System",
+    "state": "WY",
+    "city": "Casper",
+    "readmission_rate": 14.1,
+    "penalty_pct": 0.11
+  },
+  {
+    "name": "Rockford University Hospital",
+    "state": "IL",
+    "city": "Rockford",
+    "readmission_rate": 14.0,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Bethesda Health System",
+    "state": "MD",
+    "city": "Bethesda",
+    "readmission_rate": 14.0,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Grand Rapids General Hospital",
+    "state": "MI",
+    "city": "Grand Rapids",
+    "readmission_rate": 14.0,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "St. Paul Providence Hospital",
+    "state": "MN",
+    "city": "St. Paul",
+    "readmission_rate": 14.0,
+    "penalty_pct": 0.06
+  },
+  {
+    "name": "Salem Community Hospital",
+    "state": "OR",
+    "city": "Salem",
+    "readmission_rate": 14.0,
+    "penalty_pct": 0.39
+  },
+  {
+    "name": "Eugene Memorial Hospital",
+    "state": "OR",
+    "city": "Eugene",
+    "readmission_rate": 14.0,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Bend University Hospital",
+    "state": "OR",
+    "city": "Bend",
+    "readmission_rate": 14.0,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Bend Health System",
+    "state": "OR",
+    "city": "Bend",
+    "readmission_rate": 14.0,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Erie Health System",
+    "state": "PA",
+    "city": "Erie",
+    "readmission_rate": 14.0,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Juneau Memorial Hospital",
+    "state": "AK",
+    "city": "Juneau",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Scottsdale Presbyterian Hospital",
+    "state": "AZ",
+    "city": "Scottsdale",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "San Diego Mercy Hospital",
+    "state": "CA",
+    "city": "San Diego",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.39
+  },
+  {
+    "name": "Boulder Health System",
+    "state": "CO",
+    "city": "Boulder",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Colorado Springs Providence Hospital",
+    "state": "CO",
+    "city": "Colorado Springs",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Bridgeport University Hospital",
+    "state": "CT",
+    "city": "Bridgeport",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Honolulu Regional Medical Center",
+    "state": "HI",
+    "city": "Honolulu",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Kailua General Hospital",
+    "state": "HI",
+    "city": "Kailua",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Meridian Health System",
+    "state": "ID",
+    "city": "Meridian",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Peoria Sacred Heart Hospital",
+    "state": "IL",
+    "city": "Peoria",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Kansas City Providence Hospital",
+    "state": "KS",
+    "city": "Kansas City",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Lewiston Providence Hospital",
+    "state": "ME",
+    "city": "Lewiston",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Worcester Providence Hospital",
+    "state": "MA",
+    "city": "Worcester",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Ann Arbor Medical Center",
+    "state": "MI",
+    "city": "Ann Arbor",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Reno Community Hospital",
+    "state": "NV",
+    "city": "Reno",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Columbia St. Mary's Hospital",
+    "state": "SC",
+    "city": "Columbia",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.23
+  },
+  {
+    "name": "Fort Worth Sacred Heart Hospital",
+    "state": "TX",
+    "city": "Fort Worth",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Virginia Beach St. Mary's Hospital",
+    "state": "VA",
+    "city": "Virginia Beach",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Milwaukee Mercy Hospital",
+    "state": "WI",
+    "city": "Milwaukee",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Cheyenne Mercy Hospital",
+    "state": "WY",
+    "city": "Cheyenne",
+    "readmission_rate": 13.9,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Juneau General Hospital",
+    "state": "AK",
+    "city": "Juneau",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.12
+  },
+  {
+    "name": "Springfield General Hospital",
+    "state": "IL",
+    "city": "Springfield",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Chicago Mercy Hospital",
+    "state": "IL",
+    "city": "Chicago",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Des Moines Baptist Hospital",
+    "state": "IA",
+    "city": "Des Moines",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.11
+  },
+  {
+    "name": "Worcester Community Hospital",
+    "state": "MA",
+    "city": "Worcester",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Cambridge Health System",
+    "state": "MA",
+    "city": "Cambridge",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Worcester Baptist Hospital",
+    "state": "MA",
+    "city": "Worcester",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Detroit St. Mary's Hospital",
+    "state": "MI",
+    "city": "Detroit",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "St. Paul Baptist Hospital",
+    "state": "MN",
+    "city": "St. Paul",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Henderson Memorial Hospital",
+    "state": "NV",
+    "city": "Henderson",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.23
+  },
+  {
+    "name": "Concord Sacred Heart Hospital",
+    "state": "NH",
+    "city": "Concord",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.02
+  },
+  {
+    "name": "Cranston Memorial Hospital",
+    "state": "RI",
+    "city": "Cranston",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Rapid City Providence Hospital",
+    "state": "SD",
+    "city": "Rapid City",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Provo Community Hospital",
+    "state": "UT",
+    "city": "Provo",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Rutland Memorial Hospital",
+    "state": "VT",
+    "city": "Rutland",
+    "readmission_rate": 13.8,
+    "penalty_pct": 0.19
+  },
+  {
+    "name": "Wilmington University Hospital",
+    "state": "DE",
+    "city": "Wilmington",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Jacksonville Providence Hospital",
+    "state": "FL",
+    "city": "Jacksonville",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Boston St. Mary's Hospital",
+    "state": "MA",
+    "city": "Boston",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.23
+  },
+  {
+    "name": "Detroit Regional Medical Center",
+    "state": "MI",
+    "city": "Detroit",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.29
+  },
+  {
+    "name": "Albuquerque University Hospital",
+    "state": "NM",
+    "city": "Albuquerque",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Albany County Hospital",
+    "state": "NY",
+    "city": "Albany",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "New York Methodist Hospital",
+    "state": "NY",
+    "city": "New York",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Bismarck Community Hospital",
+    "state": "ND",
+    "city": "Bismarck",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Bismarck Methodist Hospital",
+    "state": "ND",
+    "city": "Bismarck",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.14
+  },
+  {
+    "name": "Sioux Falls Mercy Hospital",
+    "state": "SD",
+    "city": "Sioux Falls",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Cheyenne Baptist Hospital",
+    "state": "WY",
+    "city": "Cheyenne",
+    "readmission_rate": 13.7,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Denver St. Mary's Hospital",
+    "state": "CO",
+    "city": "Denver",
+    "readmission_rate": 13.6,
+    "penalty_pct": 0.4
+  },
+  {
+    "name": "Jacksonville University Hospital",
+    "state": "FL",
+    "city": "Jacksonville",
+    "readmission_rate": 13.6,
+    "penalty_pct": 0.02
+  },
+  {
+    "name": "Chicago St. Mary's Hospital",
+    "state": "IL",
+    "city": "Chicago",
+    "readmission_rate": 13.6,
+    "penalty_pct": 0.19
+  },
+  {
+    "name": "Rockford Presbyterian Hospital",
+    "state": "IL",
+    "city": "Rockford",
+    "readmission_rate": 13.6,
+    "penalty_pct": 0.39
+  },
+  {
+    "name": "Cedar Rapids St. Mary's Hospital",
+    "state": "IA",
+    "city": "Cedar Rapids",
+    "readmission_rate": 13.6,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Pittsburgh Baptist Hospital",
+    "state": "PA",
+    "city": "Pittsburgh",
+    "readmission_rate": 13.6,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Columbia Health System",
+    "state": "SC",
+    "city": "Columbia",
+    "readmission_rate": 13.6,
+    "penalty_pct": 0.03
+  },
+  {
+    "name": "Tacoma Medical Center",
+    "state": "WA",
+    "city": "Tacoma",
+    "readmission_rate": 13.6,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Tampa Memorial Hospital",
+    "state": "FL",
+    "city": "Tampa",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Fort Lauderdale Sacred Heart Hospital",
+    "state": "FL",
+    "city": "Fort Lauderdale",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.23
+  },
+  {
+    "name": "Indianapolis St. Mary's Hospital",
+    "state": "IN",
+    "city": "Indianapolis",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.11
+  },
+  {
+    "name": "Springfield Methodist Hospital",
+    "state": "MA",
+    "city": "Springfield",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Ann Arbor Memorial Hospital",
+    "state": "MI",
+    "city": "Ann Arbor",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Billings Regional Medical Center",
+    "state": "MT",
+    "city": "Billings",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.25
+  },
+  {
+    "name": "Missoula Methodist Hospital",
+    "state": "MT",
+    "city": "Missoula",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.03
+  },
+  {
+    "name": "Buffalo Medical Center",
+    "state": "NY",
+    "city": "Buffalo",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Ogden County Hospital",
+    "state": "UT",
+    "city": "Ogden",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Richmond General Hospital",
+    "state": "VA",
+    "city": "Richmond",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Seattle Mercy Hospital",
+    "state": "WA",
+    "city": "Seattle",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.0
+  },
+  {
+    "name": "Milwaukee University Hospital",
+    "state": "WI",
+    "city": "Milwaukee",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Casper Methodist Hospital",
+    "state": "WY",
+    "city": "Casper",
+    "readmission_rate": 13.5,
+    "penalty_pct": 0.18
+  },
+  {
+    "name": "San Jose Sacred Heart Hospital",
+    "state": "CA",
+    "city": "San Jose",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Boulder University Hospital",
+    "state": "CO",
+    "city": "Boulder",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Hilo Providence Hospital",
+    "state": "HI",
+    "city": "Hilo",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.18
+  },
+  {
+    "name": "Topeka Memorial Hospital",
+    "state": "KS",
+    "city": "Topeka",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Lincoln Community Hospital",
+    "state": "NE",
+    "city": "Lincoln",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.11
+  },
+  {
+    "name": "Nashua Providence Hospital",
+    "state": "NH",
+    "city": "Nashua",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Las Cruces Memorial Hospital",
+    "state": "NM",
+    "city": "Las Cruces",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Allentown Memorial Hospital",
+    "state": "PA",
+    "city": "Allentown",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Providence Baptist Hospital",
+    "state": "RI",
+    "city": "Providence",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Sioux Falls Regional Medical Center",
+    "state": "SD",
+    "city": "Sioux Falls",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Sioux Falls Baptist Hospital",
+    "state": "SD",
+    "city": "Sioux Falls",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Montpelier St. Mary's Hospital",
+    "state": "VT",
+    "city": "Montpelier",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Casper St. Mary's Hospital",
+    "state": "WY",
+    "city": "Casper",
+    "readmission_rate": 13.4,
+    "penalty_pct": 0.16
+  },
+  {
+    "name": "Anchorage University Hospital",
+    "state": "AK",
+    "city": "Anchorage",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.39
+  },
+  {
+    "name": "Juneau Sacred Heart Hospital",
+    "state": "AK",
+    "city": "Juneau",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.25
+  },
+  {
+    "name": "Tucson Community Hospital",
+    "state": "AZ",
+    "city": "Tucson",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Mesa Sacred Heart Hospital",
+    "state": "AZ",
+    "city": "Mesa",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "San Francisco Community Hospital",
+    "state": "CA",
+    "city": "San Francisco",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "San Diego Health System",
+    "state": "CA",
+    "city": "San Diego",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Stamford Medical Center",
+    "state": "CT",
+    "city": "Stamford",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Bangor General Hospital",
+    "state": "ME",
+    "city": "Bangor",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Bangor Sacred Heart Hospital",
+    "state": "ME",
+    "city": "Bangor",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Rochester Memorial Hospital",
+    "state": "MN",
+    "city": "Rochester",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Minneapolis St. Mary's Hospital",
+    "state": "MN",
+    "city": "Minneapolis",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Billings Mercy Hospital",
+    "state": "MT",
+    "city": "Billings",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.18
+  },
+  {
+    "name": "Albuquerque Regional Medical Center",
+    "state": "NM",
+    "city": "Albuquerque",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Santa Fe Methodist Hospital",
+    "state": "NM",
+    "city": "Santa Fe",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Charlotte Mercy Hospital",
+    "state": "NC",
+    "city": "Charlotte",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Arlington University Hospital",
+    "state": "VA",
+    "city": "Arlington",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Green Bay County Hospital",
+    "state": "WI",
+    "city": "Green Bay",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Laramie Presbyterian Hospital",
+    "state": "WY",
+    "city": "Laramie",
+    "readmission_rate": 13.3,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "Wilmington Regional Medical Center",
+    "state": "DE",
+    "city": "Wilmington",
+    "readmission_rate": 13.2,
+    "penalty_pct": 0.39
+  },
+  {
+    "name": "Meridian St. Mary's Hospital",
+    "state": "ID",
+    "city": "Meridian",
+    "readmission_rate": 13.2,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Great Falls General Hospital",
+    "state": "MT",
+    "city": "Great Falls",
+    "readmission_rate": 13.2,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Las Vegas Regional Medical Center",
+    "state": "NV",
+    "city": "Las Vegas",
+    "readmission_rate": 13.2,
+    "penalty_pct": 0.03
+  },
+  {
+    "name": "Las Cruces Presbyterian Hospital",
+    "state": "NM",
+    "city": "Las Cruces",
+    "readmission_rate": 13.2,
+    "penalty_pct": 0.4
+  },
+  {
+    "name": "Sioux Falls Medical Center",
+    "state": "SD",
+    "city": "Sioux Falls",
+    "readmission_rate": 13.2,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Montpelier Health System",
+    "state": "VT",
+    "city": "Montpelier",
+    "readmission_rate": 13.2,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Scottsdale University Hospital",
+    "state": "AZ",
+    "city": "Scottsdale",
+    "readmission_rate": 13.1,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Boulder Presbyterian Hospital",
+    "state": "CO",
+    "city": "Boulder",
+    "readmission_rate": 13.1,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Worcester General Hospital",
+    "state": "MA",
+    "city": "Worcester",
+    "readmission_rate": 13.1,
+    "penalty_pct": 0.19
+  },
+  {
+    "name": "Bellevue Sacred Heart Hospital",
+    "state": "NE",
+    "city": "Bellevue",
+    "readmission_rate": 13.1,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Bismarck St. Mary's Hospital",
+    "state": "ND",
+    "city": "Bismarck",
+    "readmission_rate": 13.1,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "Rapid City Community Hospital",
+    "state": "SD",
+    "city": "Rapid City",
+    "readmission_rate": 13.1,
+    "penalty_pct": 0.0
+  },
+  {
+    "name": "San Francisco Medical Center",
+    "state": "CA",
+    "city": "San Francisco",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.29
+  },
+  {
+    "name": "New Haven Baptist Hospital",
+    "state": "CT",
+    "city": "New Haven",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Wichita St. Mary's Hospital",
+    "state": "KS",
+    "city": "Wichita",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Kansas City Baptist Hospital",
+    "state": "KS",
+    "city": "Kansas City",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Wichita Mercy Hospital",
+    "state": "KS",
+    "city": "Wichita",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Lewiston Health System",
+    "state": "ME",
+    "city": "Lewiston",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Cambridge University Hospital",
+    "state": "MA",
+    "city": "Cambridge",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Albuquerque Medical Center",
+    "state": "NM",
+    "city": "Albuquerque",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Las Cruces Sacred Heart Hospital",
+    "state": "NM",
+    "city": "Las Cruces",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.23
+  },
+  {
+    "name": "Bismarck Health System",
+    "state": "ND",
+    "city": "Bismarck",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Provo Health System",
+    "state": "UT",
+    "city": "Provo",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Green Bay Memorial Hospital",
+    "state": "WI",
+    "city": "Green Bay",
+    "readmission_rate": 13.0,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Anchorage Medical Center",
+    "state": "AK",
+    "city": "Anchorage",
+    "readmission_rate": 12.9,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Hartford St. Mary's Hospital",
+    "state": "CT",
+    "city": "Hartford",
+    "readmission_rate": 12.9,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Hilo Health System",
+    "state": "HI",
+    "city": "Hilo",
+    "readmission_rate": 12.9,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Boise Mercy Hospital",
+    "state": "ID",
+    "city": "Boise",
+    "readmission_rate": 12.9,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Portland Mercy Hospital",
+    "state": "OR",
+    "city": "Portland",
+    "readmission_rate": 12.9,
+    "penalty_pct": 0.25
+  },
+  {
+    "name": "Ogden Sacred Heart Hospital",
+    "state": "UT",
+    "city": "Ogden",
+    "readmission_rate": 12.9,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Burlington Baptist Hospital",
+    "state": "VT",
+    "city": "Burlington",
+    "readmission_rate": 12.9,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Spokane Community Hospital",
+    "state": "WA",
+    "city": "Spokane",
+    "readmission_rate": 12.9,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Tacoma Sacred Heart Hospital",
+    "state": "WA",
+    "city": "Tacoma",
+    "readmission_rate": 12.9,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Fairbanks Providence Hospital",
+    "state": "AK",
+    "city": "Fairbanks",
+    "readmission_rate": 12.8,
+    "penalty_pct": 0.29
+  },
+  {
+    "name": "Nampa General Hospital",
+    "state": "ID",
+    "city": "Nampa",
+    "readmission_rate": 12.8,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Boston County Hospital",
+    "state": "MA",
+    "city": "Boston",
+    "readmission_rate": 12.8,
+    "penalty_pct": 0.4
+  },
+  {
+    "name": "Missoula Providence Hospital",
+    "state": "MT",
+    "city": "Missoula",
+    "readmission_rate": 12.8,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Omaha Medical Center",
+    "state": "NE",
+    "city": "Omaha",
+    "readmission_rate": 12.8,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Manchester Medical Center",
+    "state": "NH",
+    "city": "Manchester",
+    "readmission_rate": 12.8,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Richmond Providence Hospital",
+    "state": "VA",
+    "city": "Richmond",
+    "readmission_rate": 12.8,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Milwaukee Medical Center",
+    "state": "WI",
+    "city": "Milwaukee",
+    "readmission_rate": 12.8,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Bangor County Hospital",
+    "state": "ME",
+    "city": "Bangor",
+    "readmission_rate": 12.7,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Eugene Methodist Hospital",
+    "state": "OR",
+    "city": "Eugene",
+    "readmission_rate": 12.7,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Madison St. Mary's Hospital",
+    "state": "WI",
+    "city": "Madison",
+    "readmission_rate": 12.7,
+    "penalty_pct": 0.12
+  },
+  {
+    "name": "Los Angeles Regional Medical Center",
+    "state": "CA",
+    "city": "Los Angeles",
+    "readmission_rate": 12.6,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Portland University Hospital",
+    "state": "ME",
+    "city": "Portland",
+    "readmission_rate": 12.6,
+    "penalty_pct": 0.18
+  },
+  {
+    "name": "Seattle County Hospital",
+    "state": "WA",
+    "city": "Seattle",
+    "readmission_rate": 12.6,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Spokane Providence Hospital",
+    "state": "WA",
+    "city": "Spokane",
+    "readmission_rate": 12.6,
+    "penalty_pct": 0.15
+  },
+  {
+    "name": "Milwaukee Regional Medical Center",
+    "state": "WI",
+    "city": "Milwaukee",
+    "readmission_rate": 12.6,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Denver County Hospital",
+    "state": "CO",
+    "city": "Denver",
+    "readmission_rate": 12.5,
+    "penalty_pct": 0.12
+  },
+  {
+    "name": "Honolulu Baptist Hospital",
+    "state": "HI",
+    "city": "Honolulu",
+    "readmission_rate": 12.5,
+    "penalty_pct": 0.0
+  },
+  {
+    "name": "Bangor Presbyterian Hospital",
+    "state": "ME",
+    "city": "Bangor",
+    "readmission_rate": 12.5,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Concord County Hospital",
+    "state": "NH",
+    "city": "Concord",
+    "readmission_rate": 12.5,
+    "penalty_pct": 0.0
+  },
+  {
+    "name": "Aberdeen General Hospital",
+    "state": "SD",
+    "city": "Aberdeen",
+    "readmission_rate": 12.5,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Fairbanks Methodist Hospital",
+    "state": "AK",
+    "city": "Fairbanks",
+    "readmission_rate": 12.4,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Kailua Memorial Hospital",
+    "state": "HI",
+    "city": "Kailua",
+    "readmission_rate": 12.4,
+    "penalty_pct": 0.31
+  },
+  {
+    "name": "Manchester University Hospital",
+    "state": "NH",
+    "city": "Manchester",
+    "readmission_rate": 12.4,
+    "penalty_pct": 0.11
+  },
+  {
+    "name": "Manchester Mercy Hospital",
+    "state": "NH",
+    "city": "Manchester",
+    "readmission_rate": 12.4,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Montpelier Methodist Hospital",
+    "state": "VT",
+    "city": "Montpelier",
+    "readmission_rate": 12.4,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Cheyenne Medical Center",
+    "state": "WY",
+    "city": "Cheyenne",
+    "readmission_rate": 12.4,
+    "penalty_pct": 0.09
+  },
+  {
+    "name": "Anchorage Regional Medical Center",
+    "state": "AK",
+    "city": "Anchorage",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.14
+  },
+  {
+    "name": "San Francisco Presbyterian Hospital",
+    "state": "CA",
+    "city": "San Francisco",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Honolulu University Hospital",
+    "state": "HI",
+    "city": "Honolulu",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Des Moines University Hospital",
+    "state": "IA",
+    "city": "Des Moines",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.01
+  },
+  {
+    "name": "Cedar Rapids Methodist Hospital",
+    "state": "IA",
+    "city": "Cedar Rapids",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Portland Regional Medical Center",
+    "state": "ME",
+    "city": "Portland",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Portland Medical Center",
+    "state": "ME",
+    "city": "Portland",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Lincoln Methodist Hospital",
+    "state": "NE",
+    "city": "Lincoln",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Nashua Community Hospital",
+    "state": "NH",
+    "city": "Nashua",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Grand Forks Memorial Hospital",
+    "state": "ND",
+    "city": "Grand Forks",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Aberdeen Sacred Heart Hospital",
+    "state": "SD",
+    "city": "Aberdeen",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Milwaukee Baptist Hospital",
+    "state": "WI",
+    "city": "Milwaukee",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Madison Methodist Hospital",
+    "state": "WI",
+    "city": "Madison",
+    "readmission_rate": 12.3,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Kailua County Hospital",
+    "state": "HI",
+    "city": "Kailua",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Kailua Presbyterian Hospital",
+    "state": "HI",
+    "city": "Kailua",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.38
+  },
+  {
+    "name": "Rochester Methodist Hospital",
+    "state": "MN",
+    "city": "Rochester",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Concord General Hospital",
+    "state": "NH",
+    "city": "Concord",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.23
+  },
+  {
+    "name": "Manchester Baptist Hospital",
+    "state": "NH",
+    "city": "Manchester",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Grand Forks Sacred Heart Hospital",
+    "state": "ND",
+    "city": "Grand Forks",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Aberdeen Memorial Hospital",
+    "state": "SD",
+    "city": "Aberdeen",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Salt Lake City University Hospital",
+    "state": "UT",
+    "city": "Salt Lake City",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Burlington Medical Center",
+    "state": "VT",
+    "city": "Burlington",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.02
+  },
+  {
+    "name": "Seattle Regional Medical Center",
+    "state": "WA",
+    "city": "Seattle",
+    "readmission_rate": 12.2,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Kailua Sacred Heart Hospital",
+    "state": "HI",
+    "city": "Kailua",
+    "readmission_rate": 12.1,
+    "penalty_pct": 0.13
+  },
+  {
+    "name": "Provo Providence Hospital",
+    "state": "UT",
+    "city": "Provo",
+    "readmission_rate": 12.1,
+    "penalty_pct": 0.1
+  },
+  {
+    "name": "Juneau County Hospital",
+    "state": "AK",
+    "city": "Juneau",
+    "readmission_rate": 12.0,
+    "penalty_pct": 0.11
+  },
+  {
+    "name": "Boise Medical Center",
+    "state": "ID",
+    "city": "Boise",
+    "readmission_rate": 12.0,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Missoula Health System",
+    "state": "MT",
+    "city": "Missoula",
+    "readmission_rate": 12.0,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "Great Falls County Hospital",
+    "state": "MT",
+    "city": "Great Falls",
+    "readmission_rate": 12.0,
+    "penalty_pct": 0.08
+  },
+  {
+    "name": "Omaha University Hospital",
+    "state": "NE",
+    "city": "Omaha",
+    "readmission_rate": 12.0,
+    "penalty_pct": 0.06
+  },
+  {
+    "name": "Bellevue General Hospital",
+    "state": "NE",
+    "city": "Bellevue",
+    "readmission_rate": 12.0,
+    "penalty_pct": 0.09
+  },
+  {
+    "name": "Lincoln Health System",
+    "state": "NE",
+    "city": "Lincoln",
+    "readmission_rate": 12.0,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Great Falls Memorial Hospital",
+    "state": "MT",
+    "city": "Great Falls",
+    "readmission_rate": 11.9,
+    "penalty_pct": 0.38
+  },
+  {
+    "name": "Portland County Hospital",
+    "state": "OR",
+    "city": "Portland",
+    "readmission_rate": 11.9,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Rutland General Hospital",
+    "state": "VT",
+    "city": "Rutland",
+    "readmission_rate": 11.9,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Cheyenne University Hospital",
+    "state": "WY",
+    "city": "Cheyenne",
+    "readmission_rate": 11.9,
+    "penalty_pct": 0.08
+  },
+  {
+    "name": "Casper Providence Hospital",
+    "state": "WY",
+    "city": "Casper",
+    "readmission_rate": 11.9,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Colorado Springs Community Hospital",
+    "state": "CO",
+    "city": "Colorado Springs",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Nampa Memorial Hospital",
+    "state": "ID",
+    "city": "Nampa",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.2
+  },
+  {
+    "name": "Duluth Health System",
+    "state": "MN",
+    "city": "Duluth",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Billings University Hospital",
+    "state": "MT",
+    "city": "Billings",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.17
+  },
+  {
+    "name": "Great Falls Sacred Heart Hospital",
+    "state": "MT",
+    "city": "Great Falls",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "Nashua St. Mary's Hospital",
+    "state": "NH",
+    "city": "Nashua",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Bend Presbyterian Hospital",
+    "state": "OR",
+    "city": "Bend",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.23
+  },
+  {
+    "name": "Provo St. Mary's Hospital",
+    "state": "UT",
+    "city": "Provo",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.24
+  },
+  {
+    "name": "Burlington Regional Medical Center",
+    "state": "VT",
+    "city": "Burlington",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "Madison Community Hospital",
+    "state": "WI",
+    "city": "Madison",
+    "readmission_rate": 11.8,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Colorado Springs General Hospital",
+    "state": "CO",
+    "city": "Colorado Springs",
+    "readmission_rate": 11.7,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Nampa County Hospital",
+    "state": "ID",
+    "city": "Nampa",
+    "readmission_rate": 11.7,
+    "penalty_pct": 0.28
+  },
+  {
+    "name": "Boise Baptist Hospital",
+    "state": "ID",
+    "city": "Boise",
+    "readmission_rate": 11.7,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Nampa Presbyterian Hospital",
+    "state": "ID",
+    "city": "Nampa",
+    "readmission_rate": 11.7,
+    "penalty_pct": 0.39
+  },
+  {
+    "name": "Rochester Sacred Heart Hospital",
+    "state": "MN",
+    "city": "Rochester",
+    "readmission_rate": 11.7,
+    "penalty_pct": 0.29
+  },
+  {
+    "name": "Salem Providence Hospital",
+    "state": "OR",
+    "city": "Salem",
+    "readmission_rate": 11.7,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Salt Lake City Mercy Hospital",
+    "state": "UT",
+    "city": "Salt Lake City",
+    "readmission_rate": 11.7,
+    "penalty_pct": 0.33
+  },
+  {
+    "name": "Tacoma Memorial Hospital",
+    "state": "WA",
+    "city": "Tacoma",
+    "readmission_rate": 11.7,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Boise University Hospital",
+    "state": "ID",
+    "city": "Boise",
+    "readmission_rate": 11.6,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Aberdeen County Hospital",
+    "state": "SD",
+    "city": "Aberdeen",
+    "readmission_rate": 11.6,
+    "penalty_pct": 0.04
+  },
+  {
+    "name": "Missoula St. Mary's Hospital",
+    "state": "MT",
+    "city": "Missoula",
+    "readmission_rate": 11.5,
+    "penalty_pct": 0.4
+  },
+  {
+    "name": "Billings Medical Center",
+    "state": "MT",
+    "city": "Billings",
+    "readmission_rate": 11.5,
+    "penalty_pct": 0.3
+  },
+  {
+    "name": "Fargo Regional Medical Center",
+    "state": "ND",
+    "city": "Fargo",
+    "readmission_rate": 11.5,
+    "penalty_pct": 0.38
+  },
+  {
+    "name": "Grand Forks County Hospital",
+    "state": "ND",
+    "city": "Grand Forks",
+    "readmission_rate": 11.5,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "Fargo Baptist Hospital",
+    "state": "ND",
+    "city": "Fargo",
+    "readmission_rate": 11.5,
+    "penalty_pct": 0.07
+  },
+  {
+    "name": "Portland Regional Medical Center",
+    "state": "OR",
+    "city": "Portland",
+    "readmission_rate": 11.5,
+    "penalty_pct": 0.11
+  },
+  {
+    "name": "Duluth University Hospital",
+    "state": "MN",
+    "city": "Duluth",
+    "readmission_rate": 11.4,
+    "penalty_pct": 0.32
+  },
+  {
+    "name": "Rochester Medical Center",
+    "state": "MN",
+    "city": "Rochester",
+    "readmission_rate": 11.4,
+    "penalty_pct": 0.12
+  },
+  {
+    "name": "Ogden Memorial Hospital",
+    "state": "UT",
+    "city": "Ogden",
+    "readmission_rate": 11.4,
+    "penalty_pct": 0.35
+  },
+  {
+    "name": "Honolulu Medical Center",
+    "state": "HI",
+    "city": "Honolulu",
+    "readmission_rate": 11.3,
+    "penalty_pct": 0.36
+  },
+  {
+    "name": "St. Paul Community Hospital",
+    "state": "MN",
+    "city": "St. Paul",
+    "readmission_rate": 11.3,
+    "penalty_pct": 0.38
+  },
+  {
+    "name": "Minneapolis Mercy Hospital",
+    "state": "MN",
+    "city": "Minneapolis",
+    "readmission_rate": 11.3,
+    "penalty_pct": 0.16
+  },
+  {
+    "name": "Missoula Community Hospital",
+    "state": "MT",
+    "city": "Missoula",
+    "readmission_rate": 11.3,
+    "penalty_pct": 0.27
+  },
+  {
+    "name": "Billings Baptist Hospital",
+    "state": "MT",
+    "city": "Billings",
+    "readmission_rate": 11.3,
+    "penalty_pct": 0.19
+  },
+  {
+    "name": "Sioux Falls University Hospital",
+    "state": "SD",
+    "city": "Sioux Falls",
+    "readmission_rate": 11.3,
+    "penalty_pct": 0.14
+  },
+  {
+    "name": "Provo Methodist Hospital",
+    "state": "UT",
+    "city": "Provo",
+    "readmission_rate": 11.3,
+    "penalty_pct": 0.03
+  },
+  {
+    "name": "Rutland County Hospital",
+    "state": "VT",
+    "city": "Rutland",
+    "readmission_rate": 11.3,
+    "penalty_pct": 0.05
+  },
+  {
+    "name": "Rutland Presbyterian Hospital",
+    "state": "VT",
+    "city": "Rutland",
+    "readmission_rate": 11.3,
+    "penalty_pct": 0.06
+  },
+  {
+    "name": "Duluth Presbyterian Hospital",
+    "state": "MN",
+    "city": "Duluth",
+    "readmission_rate": 11.2,
+    "penalty_pct": 0.34
+  },
+  {
+    "name": "Montpelier Community Hospital",
+    "state": "VT",
+    "city": "Montpelier",
+    "readmission_rate": 11.2,
+    "penalty_pct": 0.29
+  },
+  {
+    "name": "Cheyenne Regional Medical Center",
+    "state": "WY",
+    "city": "Cheyenne",
+    "readmission_rate": 11.2,
+    "penalty_pct": 0.25
+  },
+  {
+    "name": "Aberdeen Presbyterian Hospital",
+    "state": "SD",
+    "city": "Aberdeen",
+    "readmission_rate": 11.1,
+    "penalty_pct": 0.22
+  },
+  {
+    "name": "Ogden General Hospital",
+    "state": "UT",
+    "city": "Ogden",
+    "readmission_rate": 11.1,
+    "penalty_pct": 0.16
+  },
+  {
+    "name": "Ogden Presbyterian Hospital",
+    "state": "UT",
+    "city": "Ogden",
+    "readmission_rate": 11.1,
+    "penalty_pct": 0.21
+  },
+  {
+    "name": "Montpelier Providence Hospital",
+    "state": "VT",
+    "city": "Montpelier",
+    "readmission_rate": 11.1,
+    "penalty_pct": 0.38
+  },
+  {
+    "name": "Laramie Sacred Heart Hospital",
+    "state": "WY",
+    "city": "Laramie",
+    "readmission_rate": 11.1,
+    "penalty_pct": 0.26
+  },
+  {
+    "name": "Rapid City St. Mary's Hospital",
+    "state": "SD",
+    "city": "Rapid City",
+    "readmission_rate": 11.0,
+    "penalty_pct": 0.03
+  },
+  {
+    "name": "Rapid City Methodist Hospital",
+    "state": "SD",
+    "city": "Rapid City",
+    "readmission_rate": 11.0,
+    "penalty_pct": 0.37
+  },
+  {
+    "name": "Minneapolis County Hospital",
+    "state": "MN",
+    "city": "Minneapolis",
+    "readmission_rate": 10.9,
+    "penalty_pct": 0.23
+  },
+  {
+    "name": "Grand Forks Presbyterian Hospital",
+    "state": "ND",
+    "city": "Grand Forks",
+    "readmission_rate": 10.8,
+    "penalty_pct": 0.39
+  }
+]

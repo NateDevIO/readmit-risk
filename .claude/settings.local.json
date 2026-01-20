@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m venv:*)",
+      "Bash(venvScriptsactivate)",
+      "Bash(pip install:*)",
+      "Bash(\"C:\\\\Users\\\\nalle\\\\.gemini\\\\antigravity\\\\scratch\\\\readmit-risk\\\\venv\\\\Scripts\\\\pip.exe\" install pandas numpy scikit-learn imbalanced-learn jupyter matplotlib seaborn requests)",
+      "Bash(\"C:\\\\Users\\\\nalle\\\\.gemini\\\\antigravity\\\\scratch\\\\readmit-risk\\\\venv\\\\Scripts\\\\python.exe\":*)",
+      "Bash(npm install)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(\"C:\\\\Users\\\\nalle\\\\.gemini\\\\antigravity\\\\scratch\\\\readmit-risk\\\\venv\\\\Scripts\\\\python.exe\" -c:*)",
+      "Bash(dir:*)",
+      "Bash(copy /Y \"C:\\\\Users\\\\nalle\\\\.gemini\\\\antigravity\\\\scratch\\\\readmit-risk\\\\data\\\\processed\\\\*.json\" \"C:\\\\Users\\\\nalle\\\\.gemini\\\\antigravity\\\\scratch\\\\readmit-risk\\\\dashboard\\\\lib\"\")",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: ReadmitRisk hospital readmission prevention platform\n\nFeatures:\n- ML risk prediction pipeline using logistic regression with SMOTE\n- Next.js 14 dashboard with TypeScript and Tailwind CSS\n- Patient risk stratification with individual risk explainers\n- Geographic analysis with CMS hospital penalty data\n- ROI calculator with evidence-based intervention presets\n- Executive summary with actionable insights\n- Dark mode support\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}
