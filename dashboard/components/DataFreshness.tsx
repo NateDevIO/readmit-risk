@@ -24,18 +24,18 @@ export default function DataFreshness({ riskSummary }: DataFreshnessProps) {
     <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-bold text-gray-900">Model Information</h2>
-        <span className="flex items-center gap-1 text-xs text-green-600 font-medium">
-          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-          Up to date
+        <span className="flex items-center gap-1 text-xs text-amber-600 font-medium">
+          <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+          Demo Data
         </span>
       </div>
 
-      {/* Data Freshness */}
-      <div className="mb-4 p-3 bg-blue-50 rounded-lg">
-        <p className="text-xs text-blue-600 font-medium">Analysis Date</p>
-        <p className="text-sm font-semibold text-blue-900">{analysisDate}</p>
-        <p className="text-xs text-blue-600 mt-1">
-          Based on {riskSummary.total_patients.toLocaleString()} patient records
+      {/* Data Source Info */}
+      <div className="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+        <p className="text-xs text-amber-700 font-medium">Data Source</p>
+        <p className="text-sm font-semibold text-amber-900">UCI Diabetes Dataset (1999-2008)</p>
+        <p className="text-xs text-amber-600 mt-1">
+          {riskSummary.total_patients.toLocaleString()} patient records from 130 US hospitals
         </p>
       </div>
 
@@ -88,7 +88,7 @@ export default function DataFreshness({ riskSummary }: DataFreshnessProps) {
 
       {/* Disclaimer */}
       <div className="mt-4 p-2 bg-yellow-50 rounded text-xs text-yellow-800">
-        <strong>Note:</strong> Risk scores are predictive estimates. Clinical judgment should guide all care decisions.
+        <strong>Important:</strong> This is a demonstration using historical data (1999-2008). Risk patterns may differ from current clinical practice. Cost exposure figures use 2024 benchmarks ($15K avg readmission cost). Not for clinical decision-making.
       </div>
     </div>
   );

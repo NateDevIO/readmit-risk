@@ -74,7 +74,7 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
 
   const exportToCSV = (count: number = 100) => {
     const exportData = sortedMembers.slice(0, count);
-    const headers = ['Patient ID', 'Age', 'Days Hospitalized', 'Medications', 'Diagnoses', 'Risk Score', 'Estimated Cost'];
+    const headers = ['Patient ID', 'Age', 'Days Hospitalized', 'Medications', 'Diagnoses', 'Risk Score', 'Cost Exposure'];
     const csvContent = [
       headers.join(','),
       ...exportData.map(m => [
@@ -227,7 +227,7 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
                   { key: 'number_diagnoses', label: 'Dx' },
                   { key: 'total_visits', label: 'Visits' },
                   { key: 'risk_score', label: 'Risk Score' },
-                  { key: 'estimated_cost', label: 'Est. Cost' },
+                  { key: 'estimated_cost', label: 'Cost Exposure' },
                 ].map((col) => (
                   <th
                     key={col.key}

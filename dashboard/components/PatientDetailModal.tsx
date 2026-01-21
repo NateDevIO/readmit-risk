@@ -166,8 +166,9 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
                 <p className="text-4xl font-bold">{patient.risk_score.toFixed(1)}%</p>
               </div>
               <div className="text-right">
-                <p className="text-sm font-medium opacity-80">Estimated Cost</p>
+                <p className="text-sm font-medium opacity-80">Cost Exposure</p>
                 <p className="text-2xl font-bold">${patient.estimated_cost.toLocaleString()}</p>
+                <p className="text-xs opacity-60">Based on $15K avg</p>
               </div>
             </div>
           </div>
