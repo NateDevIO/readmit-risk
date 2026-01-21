@@ -1,8 +1,12 @@
 // app/page.tsx
 import Link from 'next/link';
-import { riskSummary, formatCurrency } from '@/lib/data';
+import { riskSummary, formatCurrency, patientRisks, calculateTotalCostRange } from '@/lib/data';
 
 export default function Home() {
+  // Calculate cost exposure range for high-risk patients
+  const highRiskPatients = patientRisks.filter(p => p.risk_score >= 60);
+  const totalCostRange = calculateTotalCostRange(highRiskPatients);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -46,7 +50,7 @@ export default function Home() {
               <ul className="space-y-3 text-red-700">
                 <li className="flex items-start gap-2">
                   <span className="text-red-500">&#8226;</span>
-                  Average readmission cost: $15,000+
+                  Readmission cost range: $10,000 - $25,000
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-red-500">&#8226;</span>
@@ -82,10 +86,10 @@ export default function Home() {
               <p className="text-gray-600">High-Risk Members</p>
             </div>
             <div className="text-center p-4">
-              <p className="text-4xl font-bold text-blue-600 mb-2">
-                {formatCurrency(riskSummary.total_cost_exposure)}
+              <p className="text-2xl font-bold text-blue-600 mb-2">
+                {formatCurrency(totalCostRange.low)} - {formatCurrency(totalCostRange.high)}
               </p>
-              <p className="text-gray-600">Cost Exposure</p>
+              <p className="text-gray-600">Cost Exposure Range</p>
             </div>
             <div className="text-center p-4">
               <p className="text-4xl font-bold text-blue-600 mb-2">

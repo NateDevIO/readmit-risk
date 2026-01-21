@@ -90,6 +90,17 @@ export default function DataFreshness({ riskSummary }: DataFreshnessProps) {
       <div className="mt-4 p-2 bg-yellow-50 rounded text-xs text-yellow-800">
         <strong>Important:</strong> This is a demonstration using historical data (1999-2008). Risk patterns may differ from current clinical practice. Cost exposure figures use 2024 benchmarks ($15K avg readmission cost). Not for clinical decision-making.
       </div>
+
+      {/* Methodology Link */}
+      <div className="mt-3 text-center">
+        <a
+          href="/DATA_ANALYSIS_METHODOLOGY.html"
+          target="_blank"
+          className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+        >
+          View methodology details
+        </a>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 // components/PatientDetailModal.tsx
 'use client';
 
-import { Patient } from '@/lib/data';
+import { Patient, calculateCostRange, formatCurrency } from '@/lib/data';
 
 interface PatientDetailModalProps {
   patient: Patient | null;
@@ -166,9 +166,16 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
                 <p className="text-4xl font-bold">{patient.risk_score.toFixed(1)}%</p>
               </div>
               <div className="text-right">
-                <p className="text-sm font-medium opacity-80">Cost Exposure</p>
-                <p className="text-2xl font-bold">${patient.estimated_cost.toLocaleString()}</p>
-                <p className="text-xs opacity-60">Based on $15K avg</p>
+                <p className="text-sm font-medium opacity-80">Cost Exposure Range</p>
+                {(() => {
+                  const range = calculateCostRange(patient.risk_score);
+                  return (
+                    <>
+                      <p className="text-xl font-bold">{formatCurrency(range.low)} - {formatCurrency(range.high)}</p>
+                      <p className="text-xs opacity-60">Based on $10K-$25K benchmarks</p>
+                    </>
+                  );
+                })()}
               </div>
             </div>
           </div>

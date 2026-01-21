@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Patient, getRiskLevel, formatCurrency } from '@/lib/data';
+import { Patient, getRiskLevel, formatCurrency, calculateCostRange } from '@/lib/data';
 import PatientDetailModal from './PatientDetailModal';
 
 interface MemberTableProps {
@@ -74,18 +74,23 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
 
   const exportToCSV = (count: number = 100) => {
     const exportData = sortedMembers.slice(0, count);
-    const headers = ['Patient ID', 'Age', 'Days Hospitalized', 'Medications', 'Diagnoses', 'Risk Score', 'Cost Exposure'];
+    const headers = ['Patient ID', 'Age', 'Days Hospitalized', 'Medications', 'Diagnoses', 'Risk Score', 'Cost Low', 'Cost Mid', 'Cost High'];
     const csvContent = [
       headers.join(','),
-      ...exportData.map(m => [
-        m.patient_id,
-        m.age,
-        m.time_in_hospital,
-        m.num_medications,
-        m.number_diagnoses,
-        m.risk_score.toFixed(1),
-        m.estimated_cost.toFixed(2)
-      ].join(','))
+      ...exportData.map(m => {
+        const costRange = calculateCostRange(m.risk_score);
+        return [
+          m.patient_id,
+          m.age,
+          m.time_in_hospital,
+          m.num_medications,
+          m.number_diagnoses,
+          m.risk_score.toFixed(1),
+          costRange.low.toFixed(2),
+          costRange.mid.toFixed(2),
+          costRange.high.toFixed(2)
+        ].join(',');
+      })
     ].join('\n');
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -280,7 +285,10 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
                     </span>
                   </td>
                   <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                    {formatCurrency(member.estimated_cost)}
+                    {(() => {
+                      const range = calculateCostRange(member.risk_score);
+                      return `${formatCurrency(range.low)} - ${formatCurrency(range.high)}`;
+                    })()}
                   </td>
                   <td className="px-4 py-3">
                     <button

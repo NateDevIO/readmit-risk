@@ -2,13 +2,17 @@
 'use client';
 
 import Link from 'next/link';
-import { RiskSummary, formatCurrency } from '@/lib/data';
+import { RiskSummary, formatCurrency, patientRisks, calculateTotalCostRange } from '@/lib/data';
 
 interface ExecutiveSummaryProps {
   riskSummary: RiskSummary;
 }
 
 export default function ExecutiveSummary({ riskSummary }: ExecutiveSummaryProps) {
+  // Calculate cost exposure range for high-risk patients
+  const highRiskPatients = patientRisks.filter(p => p.risk_score >= 60);
+  const totalCostRange = calculateTotalCostRange(highRiskPatients);
+
   // Generate dynamic insights based on data
   const insights = [
     {
@@ -22,7 +26,7 @@ export default function ExecutiveSummary({ riskSummary }: ExecutiveSummaryProps)
     {
       icon: '💰',
       title: 'Cost Exposure',
-      description: `${formatCurrency(riskSummary.total_cost_exposure)} in preventable readmission costs identified`,
+      description: `${formatCurrency(totalCostRange.low)} - ${formatCurrency(totalCostRange.high)} in preventable readmission costs`,
       action: 'Model intervention ROI',
       actionHref: '#roi-calculator',
       urgency: 'medium' as const,
@@ -57,6 +61,13 @@ export default function ExecutiveSummary({ riskSummary }: ExecutiveSummaryProps)
             day: 'numeric',
             year: 'numeric'
           })}</p>
+          <a
+            href="/EXECUTIVE_REPORT.html"
+            target="_blank"
+            className="text-xs text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            Export Report →
+          </a>
         </div>
       </div>
 
@@ -103,8 +114,8 @@ export default function ExecutiveSummary({ riskSummary }: ExecutiveSummaryProps)
           <p className="text-xs text-slate-400">High Risk (60%+)</p>
         </div>
         <div>
-          <p className="text-2xl font-bold text-orange-400">{formatCurrency(riskSummary.total_cost_exposure)}</p>
-          <p className="text-xs text-slate-400">Cost Exposure</p>
+          <p className="text-xl font-bold text-orange-400">{formatCurrency(totalCostRange.low)} - {formatCurrency(totalCostRange.high)}</p>
+          <p className="text-xs text-slate-400">Cost Exposure Range</p>
         </div>
         <div>
           <p className="text-2xl font-bold text-green-400">{(riskSummary.model_auc * 100).toFixed(0)}%</p>

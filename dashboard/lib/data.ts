@@ -99,3 +99,43 @@ export function getRiskLevel(score: number): 'high' | 'medium' | 'low' {
   if (score >= 40) return 'medium';
   return 'low';
 }
+
+// Cost range calculation based on industry benchmarks
+// Base costs: $10K (low) to $25K (high) with $15K midpoint
+const COST_LOW_BASE = 10000;
+const COST_MID_BASE = 15000;
+const COST_HIGH_BASE = 25000;
+
+export interface CostRange {
+  low: number;
+  mid: number;
+  high: number;
+}
+
+export function calculateCostRange(riskScore: number): CostRange {
+  const riskFactor = riskScore / 100;
+  return {
+    low: riskFactor * COST_LOW_BASE,
+    mid: riskFactor * COST_MID_BASE,
+    high: riskFactor * COST_HIGH_BASE,
+  };
+}
+
+export function formatCostRange(range: CostRange): string {
+  return `${formatCurrency(range.low)} - ${formatCurrency(range.high)}`;
+}
+
+// Calculate total cost range for a group of patients
+export function calculateTotalCostRange(patients: Patient[]): CostRange {
+  return patients.reduce(
+    (acc, patient) => {
+      const range = calculateCostRange(patient.risk_score);
+      return {
+        low: acc.low + range.low,
+        mid: acc.mid + range.mid,
+        high: acc.high + range.high,
+      };
+    },
+    { low: 0, mid: 0, high: 0 }
+  );
+}

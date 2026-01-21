@@ -283,7 +283,7 @@ export default function SavingsCalculator({
       <div className="mt-4 p-3 bg-gray-50 rounded-lg">
         <p className="text-xs text-gray-500">
           <strong>Assumptions:</strong> Based on {totalHighRiskPatients.toLocaleString()} high-risk members
-          with avg readmission cost of ${avgCostPerReadmission.toLocaleString()}.
+          with readmission cost of ${avgCostPerReadmission.toLocaleString()} (typical range: $10K-$25K).
           Effectiveness rates based on published literature. Actual results may vary.
         </p>
       </div>

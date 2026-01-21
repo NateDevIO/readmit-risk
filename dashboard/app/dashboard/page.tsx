@@ -12,9 +12,13 @@ import TrendSimulation from '@/components/TrendSimulation';
 import GoalTracker from '@/components/GoalTracker';
 import DataFreshness from '@/components/DataFreshness';
 import MemberTable from '@/components/MemberTable';
-import { patientRisks, riskSummary, formatCurrency } from '@/lib/data';
+import { patientRisks, riskSummary, formatCurrency, calculateTotalCostRange } from '@/lib/data';
 
 export default function DashboardPage() {
+  // Calculate cost exposure range for high-risk patients
+  const highRiskPatients = patientRisks.filter(p => p.risk_score >= 60);
+  const totalCostRange = calculateTotalCostRange(highRiskPatients);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
@@ -41,13 +45,13 @@ export default function DashboardPage() {
           subtitle={`${((riskSummary.high_risk_count / riskSummary.total_patients) * 100).toFixed(1)}% of population`}
           colorClass="text-red-600"
         />
-        <AnimatedKPI
-          title="Total Cost Exposure"
-          value={formatCurrency(riskSummary.total_cost_exposure)}
-          rawValue={riskSummary.total_cost_exposure}
-          subtitle="Preventable readmission costs"
-          colorClass="text-orange-600"
-        />
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Total Cost Exposure</p>
+          <p className="text-2xl font-bold text-orange-600">
+            {formatCurrency(totalCostRange.low)} - {formatCurrency(totalCostRange.high)}
+          </p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Based on $10K-$25K benchmarks</p>
+        </div>
         <AnimatedKPI
           title="Model Performance"
           value={`${(riskSummary.model_auc * 100).toFixed(0)}%`}
@@ -97,11 +101,11 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <TrendSimulation
           currentHighRiskCount={riskSummary.high_risk_count}
-          currentCostExposure={riskSummary.total_cost_exposure}
+          currentCostExposure={totalCostRange.mid}
         />
         <GoalTracker
           currentHighRiskCount={riskSummary.high_risk_count}
-          currentCostExposure={riskSummary.total_cost_exposure}
+          currentCostExposure={totalCostRange.mid}
         />
       </div>
 
