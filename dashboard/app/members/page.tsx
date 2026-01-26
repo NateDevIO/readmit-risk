@@ -4,10 +4,13 @@
 import { useState } from 'react';
 import MemberTable from '@/components/MemberTable';
 import DatasetSelector from '@/components/DatasetSelector';
-import { getDataset, Dataset } from '@/lib/data';
+import { getDataset, Dataset, riskSummaryMimic } from '@/lib/data';
 
 export default function MembersPage() {
-  const [selectedDataset, setSelectedDataset] = useState<Dataset>('mimic');
+  // Default to MIMIC if available, otherwise UCI
+  const [selectedDataset, setSelectedDataset] = useState<Dataset>(
+    riskSummaryMimic ? 'mimic' : 'uci'
+  );
 
   // Get current dataset
   const currentData = getDataset(selectedDataset);

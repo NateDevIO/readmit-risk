@@ -1,7 +1,7 @@
 // app/dashboard/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ExecutiveSummary from '@/components/ExecutiveSummary';
 import AnimatedKPI from '@/components/AnimatedKPI';
 import SavingsCalculator from '@/components/SavingsCalculator';
@@ -17,10 +17,13 @@ import MemberTable from '@/components/MemberTable';
 import DatasetSelector from '@/components/DatasetSelector';
 import DatasetInfo from '@/components/DatasetInfo';
 import FeatureImportanceChart from '@/components/FeatureImportanceChart';
-import { getDataset, Dataset, formatCurrency, calculateTotalCostRange } from '@/lib/data';
+import { getDataset, Dataset, formatCurrency, calculateTotalCostRange, riskSummaryMimic } from '@/lib/data';
 
 export default function DashboardPage() {
-  const [selectedDataset, setSelectedDataset] = useState<Dataset>('mimic');
+  // Default to MIMIC if available, otherwise UCI
+  const [selectedDataset, setSelectedDataset] = useState<Dataset>(
+    riskSummaryMimic ? 'mimic' : 'uci'
+  );
 
   // Get current dataset
   const currentData = getDataset(selectedDataset);

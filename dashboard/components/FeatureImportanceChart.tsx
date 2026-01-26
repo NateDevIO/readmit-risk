@@ -37,60 +37,65 @@ export default function FeatureImportanceChart({ dataset }: FeatureImportanceCha
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-3 sm:p-6 border border-gray-100 dark:border-gray-700">
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
           Top 10 Predictive Features
         </h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
           Features with highest importance scores from Gradient Boosting model
         </p>
       </div>
 
-      <ResponsiveContainer width="100%" height={400}>
-        <BarChart
-          data={chartData}
-          layout="vertical"
-          margin={{ top: 5, right: 30, left: 120, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-          <XAxis
-            type="number"
-            tick={{ fontSize: 12 }}
-            tickFormatter={(value) => `${value.toFixed(1)}%`}
-          />
-          <YAxis
-            type="category"
-            dataKey="name"
-            tick={{ fontSize: 11 }}
-            width={110}
-          />
-          <Tooltip
-            formatter={(value: number, name: string, props: any) => [
-              `${value.toFixed(2)}%`,
-              props.payload.fullName,
-            ]}
-            contentStyle={{
-              backgroundColor: 'rgba(0, 0, 0, 0.85)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              borderRadius: '8px',
-              color: '#ffffff',
-            }}
-            labelStyle={{
-              color: '#ffffff',
-              fontWeight: 600,
-            }}
-            itemStyle={{
-              color: '#ffffff',
-            }}
-          />
-          <Bar dataKey="importance" radius={[0, 4, 4, 0]}>
-            {chartData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-            ))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+      <div className="overflow-x-auto -mx-3 sm:mx-0">
+        <div className="min-w-[500px]">
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart
+              data={chartData}
+              layout="vertical"
+              margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
+              <XAxis
+                type="number"
+                tick={{ fontSize: 10 }}
+                tickFormatter={(value) => `${value.toFixed(1)}%`}
+                domain={[0, 'auto']}
+              />
+              <YAxis
+                type="category"
+                dataKey="name"
+                tick={{ fontSize: 10 }}
+                width={100}
+              />
+              <Tooltip
+                formatter={(value: number, name: string, props: any) => [
+                  `${value.toFixed(2)}%`,
+                  props.payload.fullName,
+                ]}
+                contentStyle={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderRadius: '8px',
+                  color: '#ffffff',
+                }}
+                labelStyle={{
+                  color: '#ffffff',
+                  fontWeight: 600,
+                }}
+                itemStyle={{
+                  color: '#ffffff',
+                }}
+              />
+              <Bar dataKey="importance" radius={[0, 4, 4, 0]}>
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
 
       <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-500 dark:text-gray-400">
