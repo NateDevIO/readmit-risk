@@ -36,11 +36,17 @@ export default function StateHeatmap({ stateData }: StateHeatmapProps) {
 
   return (
     <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-900">
-          State Readmission Analysis
-        </h2>
-        <div className="flex gap-2">
+      <div className="mb-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">
+              State Readmission Analysis
+            </h2>
+            <p className="text-xs text-gray-500 mt-1">
+              Dataset includes {stateData.length} states: {stateData.map(s => s.state).join(', ')}
+            </p>
+          </div>
+          <div className="flex gap-2">
           <button
             onClick={() => setSortBy('rate')}
             className={`px-3 py-1 text-sm rounded-md transition-colors ${
@@ -61,6 +67,7 @@ export default function StateHeatmap({ stateData }: StateHeatmapProps) {
           >
             By Penalty
           </button>
+        </div>
         </div>
       </div>
 

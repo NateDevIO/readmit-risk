@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadmitRisk Executive Report - UCI Diabetes Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #f9fafb;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            color: white;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            left: 0;
+            top: 120px;
+            width: 280px;
+            height: calc(100vh - 120px);
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            overflow-y: auto;
+            padding: 3rem 0;
+            z-index: 50;
+        }
+
+        .nav-container nav a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-container nav a:hover {
+            background: #f3f4f6;
+            color: #1e40af;
+            border-left-color: #1e40af;
+        }
+
+        .nav-container nav a.active {
+            background: #eff6ff;
+            color: #1e40af;
+            border-left-color: #1e40af;
+        }
+
+        /* Main Content */
+        .container {
+            margin-left: 280px;
+            max-width: 1200px;
+            padding: 3rem 2rem 2rem 4rem;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #1e40af;
+            font-size: 1.875rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e5e7eb;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #374151;
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: #4b5563;
+            font-size: 1.125rem;
+            margin: 1rem 0 0.5rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+
+        /* Alert Box */
+        .alert-warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .alert-warning p {
+            margin: 0;
+            color: #92400e;
+            font-size: 0.875rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value.critical {
+            color: #dc2626;
+        }
+
+        .stat-value.warning {
+            color: #f59e0b;
+        }
+
+        .stat-value.success {
+            color: #059669;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        tr.total-row {
+            background: #f3f4f6;
+            font-weight: bold;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box h4 {
+            color: #92400e;
+            margin-top: 0;
+        }
+
+        .highlight-box p {
+            color: #78350f;
+        }
+
+        /* Recommendation Box */
+        .recommendation-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid #1e40af;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .recommendation-box h4 {
+            color: #1e40af;
+            margin-top: 0;
+        }
+
+        .recommendation-box p {
+            color: #1e3a8a;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Risk Bar */
+        .risk-bar {
+            height: 20px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .risk-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header, .nav-container {
+                display: none;
+            }
+            .container {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            .content-section {
+                break-inside: avoid;
+                box-shadow: none;
+            }
+            .new-page {
+                break-before: page;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                display: none;
+            }
+            .container {
+                margin-left: 0;
+                padding: 1.5rem 1rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <h1>ReadmitRisk Executive Report</h1>
+            <p class="subtitle">Hospital Readmission Risk Analysis and Cost Exposure Assessment - UCI Diabetes Dataset</p>
+        </div>
+    </div>
+
+    <!-- Side Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#executive-summary">Executive Summary</a>
+            <a href="#risk-stratification">Risk Stratification</a>
+            <a href="#risk-factors">Risk Factor Analysis</a>
+            <a href="#population">Population Distribution</a>
+            <a href="#geographic">Geographic Analysis</a>
+            <a href="#interventions">Interventions</a>
+            <a href="#roi">ROI Analysis</a>
+            <a href="#next-steps">Next Steps</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-section" id="overview">
+            <!-- Data Disclaimer -->
+            <div class="alert-warning">
+                <p><strong>Data Source Notice:</strong> This analysis uses the UCI Diabetes 130-US Hospitals dataset (1999-2008) for demonstration purposes. Risk patterns identified may differ from current clinical practice. Cost exposure figures are calculated using 2024 industry benchmarks ($15,000 average readmission cost). This report is intended for portfolio/demonstration purposes and should not be used for clinical decision-making.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">71,518</div>
+                    <div class="stat-label">Total Patients Analyzed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value warning">7,083</div>
+                    <div class="stat-label">High-Risk Patients (60%+)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$78.5M</div>
+                    <div class="stat-label">Total Cost Exposure</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8.8%</div>
+                    <div class="stat-label">Readmission Rate</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>This report presents findings from our machine learning-based risk stratification analysis of 71,518 patients from 130 US hospitals. The analysis identifies patients at elevated risk for 30-day hospital readmissions and quantifies the associated cost exposure.</p>
+
+            <div class="highlight-box">
+                <h4>Key Finding</h4>
+                <p><strong>1,931 patients (2.7%)</strong> have critical risk scores above 80% and require immediate intervention. These patients represent <strong>$25.1M in potential cost exposure</strong> and should be prioritized for care management outreach.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="risk-stratification">
+            <h2>Risk Stratification Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value critical">1,931</div>
+                    <div class="stat-label">Critical (80%+)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value warning">2,232</div>
+                    <div class="stat-label">Very High (70-80%)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2,920</div>
+                    <div class="stat-label">High (60-70%)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value success">64,435</div>
+                    <div class="stat-label">Moderate/Low (&lt;60%)</div>
+                </div>
+            </div>
+
+            <h3>Cost Exposure by Risk Tier</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Risk Tier</th>
+                        <th>Patient Count</th>
+                        <th>Avg Risk Score</th>
+                        <th>Total Cost Exposure</th>
+                        <th>Avg Exposure/Patient</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Critical (80%+)</strong></td>
+                        <td>1,931</td>
+                        <td>86.6%</td>
+                        <td>$25,096,147</td>
+                        <td>$12,996</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Very High (70-80%)</strong></td>
+                        <td>2,232</td>
+                        <td>74.7%</td>
+                        <td>$25,025,322</td>
+                        <td>$11,212</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High (60-70%)</strong></td>
+                        <td>2,920</td>
+                        <td>64.8%</td>
+                        <td>$28,379,923</td>
+                        <td>$9,719</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td>Total High-Risk</td>
+                        <td>7,083</td>
+                        <td>73.9%</td>
+                        <td>$78,501,392</td>
+                        <td>$11,083</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-section new-page" id="risk-factors">
+            <h2>Risk Factor Analysis</h2>
+            <p>The predictive model identified several key factors that significantly influence readmission risk:</p>
+
+            <div class="two-col">
+                <div>
+                    <h3>Risk-Increasing Factors</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Total Prior Visits</td>
+                                <td style="color: #dc2626; font-weight: bold;">+4.36</td>
+                            </tr>
+                            <tr>
+                                <td>Number of Medications</td>
+                                <td style="color: #dc2626; font-weight: bold;">+0.28</td>
+                            </tr>
+                            <tr>
+                                <td>Lab Procedures</td>
+                                <td style="color: #dc2626; font-weight: bold;">+0.10</td>
+                            </tr>
+                            <tr>
+                                <td>Number of Diagnoses</td>
+                                <td style="color: #dc2626; font-weight: bold;">+0.01</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h3>Protective Factors</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Outpatient Visits</td>
+                                <td style="color: #059669; font-weight: bold;">-3.12</td>
+                            </tr>
+                            <tr>
+                                <td>Prior Inpatient Visits</td>
+                                <td style="color: #059669; font-weight: bold;">-1.96</td>
+                            </tr>
+                            <tr>
+                                <td>Emergency Visits</td>
+                                <td style="color: #059669; font-weight: bold;">-1.54</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Clinical Interpretation</h4>
+                <p>Patients with high total healthcare utilization (visits, medications, diagnoses) face elevated readmission risk, indicating complex care needs. However, outpatient follow-up care appears strongly protective, suggesting that continuity of care and regular monitoring can mitigate readmission risk.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="population">
+            <h2>Population Distribution</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Risk Score Range</th>
+                        <th>Patient Count</th>
+                        <th>Percentage</th>
+                        <th>Visual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0-20%</td>
+                        <td>37,663</td>
+                        <td>52.7%</td>
+                        <td>
+                            <div class="risk-bar">
+                                <div class="risk-fill" style="width: 52.7%; background: #10b981;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20-40%</td>
+                        <td>17,548</td>
+                        <td>24.5%</td>
+                        <td>
+                            <div class="risk-bar">
+                                <div class="risk-fill" style="width: 24.5%; background: #84cc16;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>40-60%</td>
+                        <td>9,224</td>
+                        <td>12.9%</td>
+                        <td>
+                            <div class="risk-bar">
+                                <div class="risk-fill" style="width: 12.9%; background: #eab308;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>60-80%</td>
+                        <td>5,152</td>
+                        <td>7.2%</td>
+                        <td>
+                            <div class="risk-bar">
+                                <div class="risk-fill" style="width: 7.2%; background: #f97316;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>80-100%</td>
+                        <td>1,931</td>
+                        <td>2.7%</td>
+                        <td>
+                            <div class="risk-bar">
+                                <div class="risk-fill" style="width: 2.7%; background: #dc2626;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-section new-page" id="geographic">
+            <h2>Geographic Analysis</h2>
+            <p>Analysis of hospital readmission rates and CMS penalties across all 50 states reveals significant regional variation:</p>
+
+            <h3>Top 10 States by Readmission Rate</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>State</th>
+                        <th>Avg Readmission Rate</th>
+                        <th>Hospitals</th>
+                        <th>Est. Total Penalties</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Louisiana</td>
+                        <td>17.8%</td>
+                        <td>109</td>
+                        <td>$9,333,648</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>West Virginia</td>
+                        <td>17.6%</td>
+                        <td>55</td>
+                        <td>$3,411,907</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Mississippi</td>
+                        <td>17.1%</td>
+                        <td>83</td>
+                        <td>$5,312,423</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Oklahoma</td>
+                        <td>16.8%</td>
+                        <td>112</td>
+                        <td>$4,469,212</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Kentucky</td>
+                        <td>16.1%</td>
+                        <td>96</td>
+                        <td>$9,231,976</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Alabama</td>
+                        <td>16.0%</td>
+                        <td>98</td>
+                        <td>$9,437,750</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Maryland</td>
+                        <td>16.0%</td>
+                        <td>47</td>
+                        <td>$2,726,538</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Missouri</td>
+                        <td>16.0%</td>
+                        <td>113</td>
+                        <td>$4,391,642</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Tennessee</td>
+                        <td>16.0%</td>
+                        <td>116</td>
+                        <td>$3,452,958</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>New York</td>
+                        <td>15.9%</td>
+                        <td>183</td>
+                        <td>$9,471,439</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>National Summary</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">51</div>
+                    <div class="stat-label">States Analyzed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4,692</div>
+                    <div class="stat-label">Total Hospitals</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value warning">14.6%</div>
+                    <div class="stat-label">National Avg Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value critical">$153M</div>
+                    <div class="stat-label">Est. Total Penalties</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="interventions">
+            <h2>Recommended Interventions</h2>
+
+            <div class="recommendation-box">
+                <h4>1. Transitional Care Management (TCM)</h4>
+                <p><strong>Cost:</strong> $200-400 per patient | <strong>Effectiveness:</strong> 20-30% readmission reduction</p>
+                <p>Structured post-discharge follow-up with medication reconciliation and care coordination. Best for patients with complex conditions.</p>
+            </div>
+
+            <div class="recommendation-box">
+                <h4>2. Post-Discharge Phone Calls</h4>
+                <p><strong>Cost:</strong> $50-100 per patient | <strong>Effectiveness:</strong> 10-15% readmission reduction</p>
+                <p>Nurse-led calls within 48-72 hours of discharge to assess symptoms, medication adherence, and follow-up appointment scheduling.</p>
+            </div>
+
+            <div class="recommendation-box">
+                <h4>3. Home Health Visits</h4>
+                <p><strong>Cost:</strong> $300-500 per patient | <strong>Effectiveness:</strong> 25-35% readmission reduction</p>
+                <p>In-home nursing assessments for highest-risk patients with mobility or transportation barriers.</p>
+            </div>
+        </div>
+
+        <div class="content-section new-page" id="roi">
+            <h2>ROI Analysis</h2>
+            <p>Potential return on investment for targeting the critical risk tier (1,931 patients):</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Intervention Cost</th>
+                        <th>Readmissions Prevented</th>
+                        <th>Savings</th>
+                        <th>Net ROI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Conservative (15% reduction)</td>
+                        <td>$386,200</td>
+                        <td>290</td>
+                        <td>$4,350,000</td>
+                        <td style="color: #059669; font-weight: bold;">$3,963,800</td>
+                    </tr>
+                    <tr>
+                        <td>Moderate (25% reduction)</td>
+                        <td>$579,300</td>
+                        <td>483</td>
+                        <td>$7,245,000</td>
+                        <td style="color: #059669; font-weight: bold;">$6,665,700</td>
+                    </tr>
+                    <tr>
+                        <td>Aggressive (35% reduction)</td>
+                        <td>$772,400</td>
+                        <td>676</td>
+                        <td>$10,140,000</td>
+                        <td style="color: #059669; font-weight: bold;">$9,367,600</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <h4>Key Takeaway</h4>
+                <p>Even conservative intervention programs targeting the highest-risk patients can achieve <strong>10:1 or greater ROI</strong> while improving patient outcomes and reducing CMS penalty exposure.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="next-steps">
+            <h2>Next Steps</h2>
+            <ol>
+                <li><strong>Prioritize Critical Tier:</strong> Deploy care management resources to the 1,931 patients with 80%+ risk scores immediately.</li>
+                <li><strong>Implement TCM Program:</strong> Establish transitional care management protocols for high-risk discharges.</li>
+                <li><strong>Enhance Outpatient Follow-up:</strong> Given the protective effect of outpatient visits, ensure follow-up appointments are scheduled before discharge.</li>
+                <li><strong>Regional Focus:</strong> Concentrate quality improvement efforts in states with highest readmission rates (Louisiana, West Virginia, Mississippi).</li>
+                <li><strong>Monitor and Iterate:</strong> Track intervention outcomes and refine the predictive model quarterly.</li>
+            </ol>
+        </div>
+
+        <div class="footer">
+            <p><strong>ReadmitRisk</strong> | Hospital Readmission Prevention Platform</p>
+            <p>Report Generated: January 2026 | Data Source: UCI Diabetes Dataset (1999-2008) and CMS HRRP Patterns</p>
+            <p>Model Performance: AUC 0.564 | Cost Basis: $15,000 avg readmission (2024 benchmark)</p>
+            <p style="margin-top: 8px; font-style: italic;">This is a demonstration project. For production use, retrain on current EHR data.</p>
+            <p>Repository: <a href="https://github.com/NateDevIO/readmit-risk" target="_blank">github.com/NateDevIO/readmit-risk</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll with navigation highlighting
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-container nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -18,7 +18,8 @@ const NATIONAL_BENCHMARKS = {
 
 export default function NationalBenchmarks({ riskSummary }: NationalBenchmarksProps) {
   const yourHighRiskPct = (riskSummary.high_risk_count / riskSummary.total_patients) * 100;
-  const yourReadmissionRate = riskSummary.readmission_rate_overall;
+  // Handle both readmission_rate_overall (UCI) and readmission_rate (MIMIC)
+  const yourReadmissionRate = riskSummary.readmission_rate_overall || riskSummary.readmission_rate || 0;
 
   const getPerformanceLevel = (value: number, benchmark: number, lowerIsBetter: boolean = true) => {
     const diff = lowerIsBetter ? benchmark - value : value - benchmark;

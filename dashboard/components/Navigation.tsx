@@ -11,6 +11,10 @@ const navItems = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/members', label: 'Members' },
   { href: '/geography', label: 'Geography' },
+  { href: '/care-queue', label: 'Care Queue' },
+  { href: '/impact-calculator', label: 'ROI Calculator' },
+  { href: '/model-performance', label: 'Model' },
+  { href: '/about', label: 'About' },
 ];
 
 export default function Navigation() {

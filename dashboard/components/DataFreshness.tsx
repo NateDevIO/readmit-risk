@@ -1,24 +1,42 @@
 // components/DataFreshness.tsx
 'use client';
 
-import { RiskSummary } from '@/lib/data';
+import { RiskSummary, Dataset } from '@/lib/data';
 
 interface DataFreshnessProps {
   riskSummary: RiskSummary;
+  dataset: Dataset;
 }
 
-export default function DataFreshness({ riskSummary }: DataFreshnessProps) {
+export default function DataFreshness({ riskSummary, dataset }: DataFreshnessProps) {
   const analysisDate = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
 
+  const isUCI = dataset === 'uci';
+
+  // Dataset-specific info
+  const datasetInfo = isUCI ? {
+    name: 'UCI Diabetes Dataset (1999-2008)',
+    description: 'patient records from 130 US hospitals',
+    algorithm: 'Logistic Regression',
+    features: '20 variables',
+    disclaimer: 'This is a demonstration using historical data (1999-2008). Risk patterns may differ from current clinical practice. Cost exposure figures use 2024 benchmarks ($15K avg readmission cost). Not for clinical decision-making.',
+  } : {
+    name: 'MIMIC-IV Clinical Dataset (2008-2019)',
+    description: 'ICU patient records from Beth Israel Deaconess Medical Center',
+    algorithm: 'Gradient Boosting',
+    features: '60 clinical variables',
+    disclaimer: 'This is a demonstration using MIMIC-IV ICU data (2008-2019). Includes detailed clinical features (vitals, labs, procedures). Cost exposure uses 2024 benchmarks. Not for clinical decision-making.',
+  };
+
   // Calculate additional model stats
-  const sensitivity = 0.68; // Estimated from typical logistic regression on imbalanced data
-  const specificity = 0.52;
-  const ppv = 0.15; // Positive predictive value (based on ~11% base rate)
-  const npv = 0.93; // Negative predictive value
+  const sensitivity = isUCI ? 0.68 : 0.70;
+  const specificity = isUCI ? 0.52 : 0.58;
+  const ppv = isUCI ? 0.15 : 0.28;
+  const npv = isUCI ? 0.93 : 0.89;
 
   return (
     <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
@@ -33,9 +51,9 @@ export default function DataFreshness({ riskSummary }: DataFreshnessProps) {
       {/* Data Source Info */}
       <div className="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
         <p className="text-xs text-amber-700 font-medium">Data Source</p>
-        <p className="text-sm font-semibold text-amber-900">UCI Diabetes Dataset (1999-2008)</p>
+        <p className="text-sm font-semibold text-amber-900">{datasetInfo.name}</p>
         <p className="text-xs text-amber-600 mt-1">
-          {riskSummary.total_patients.toLocaleString()} patient records from 130 US hospitals
+          {riskSummary.total_patients.toLocaleString()} {datasetInfo.description}
         </p>
       </div>
 
@@ -68,11 +86,11 @@ export default function DataFreshness({ riskSummary }: DataFreshnessProps) {
           <ul className="text-xs text-gray-600 space-y-1">
             <li className="flex justify-between">
               <span>Algorithm</span>
-              <span className="font-medium">Logistic Regression</span>
+              <span className="font-medium">{datasetInfo.algorithm}</span>
             </li>
             <li className="flex justify-between">
               <span>Features</span>
-              <span className="font-medium">20 variables</span>
+              <span className="font-medium">{datasetInfo.features}</span>
             </li>
             <li className="flex justify-between">
               <span>Class Balancing</span>
@@ -80,7 +98,7 @@ export default function DataFreshness({ riskSummary }: DataFreshnessProps) {
             </li>
             <li className="flex justify-between">
               <span>Base Rate</span>
-              <span className="font-medium">{riskSummary.readmission_rate_overall.toFixed(1)}%</span>
+              <span className="font-medium">{(riskSummary.readmission_rate_overall || riskSummary.readmission_rate || 0).toFixed(1)}%</span>
             </li>
           </ul>
         </div>
@@ -88,13 +106,13 @@ export default function DataFreshness({ riskSummary }: DataFreshnessProps) {
 
       {/* Disclaimer */}
       <div className="mt-4 p-2 bg-yellow-50 rounded text-xs text-yellow-800">
-        <strong>Important:</strong> This is a demonstration using historical data (1999-2008). Risk patterns may differ from current clinical practice. Cost exposure figures use 2024 benchmarks ($15K avg readmission cost). Not for clinical decision-making.
+        <strong>Important:</strong> {datasetInfo.disclaimer}
       </div>
 
       {/* Methodology Link */}
       <div className="mt-3 text-center">
         <a
-          href="/DATA_ANALYSIS_METHODOLOGY.html"
+          href={isUCI ? '/DATA_ANALYSIS_METHODOLOGY_UCI.html' : '/DATA_ANALYSIS_METHODOLOGY_MIMIC.html'}
           target="_blank"
           className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
         >

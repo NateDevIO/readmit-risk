@@ -6,20 +6,32 @@ import riskSummaryData from './risk_summary.json';
 import stateSummaryData from './state_summary.json';
 import hospitalMetricsData from './hospital_metrics.json';
 
+// MIMIC-IV data
+import patientRisksDataMimic from './patient_risks_mimic.json';
+import riskSummaryDataMimic from './risk_summary_mimic.json';
+import featureImportanceData from './feature_importance.json';
+
 // Type definitions
 export interface Patient {
   patient_id: number;
   age: number;
-  time_in_hospital: number;
-  num_medications: number;
-  number_diagnoses: number;
-  number_inpatient: number;
-  number_emergency: number;
-  total_visits: number;
-  num_med_changes: number;
   risk_score: number;
   estimated_cost: number;
   readmitted_30day: number;
+
+  // UCI-specific fields (optional)
+  time_in_hospital?: number;
+  num_medications?: number;
+  number_diagnoses?: number;
+  number_inpatient?: number;
+  number_emergency?: number;
+  total_visits?: number;
+  num_med_changes?: number;
+
+  // MIMIC-specific fields (optional)
+  hadm_id?: number;
+  medication_count?: number;
+  had_icu_stay?: number;
 }
 
 export interface RiskFactor {
@@ -41,17 +53,23 @@ export interface RiskSummary {
   high_risk_count: number;
   total_cost_exposure: number;
   avg_risk_score: number;
-  median_risk_score: number;
-  risk_distribution: Record<string, number>;
-  high_risk_distribution: Record<string, number>;
-  avg_risk_by_age: Record<string, number>;
-  model_auc: number;
   readmission_rate_overall: number;
-  critical_count: number;
-  very_high_count: number;
-  high_count: number;
-  risk_factors: RiskFactor[];
-  cost_by_tier: CostByTier[];
+  model_auc: number;
+
+  // Optional fields (may not be present in all datasets)
+  median_risk_score?: number;
+  risk_distribution?: Record<string, number>;
+  high_risk_distribution?: Record<string, number>;
+  avg_risk_by_age?: Record<string, number>;
+  critical_count?: number;
+  very_high_count?: number;
+  high_count?: number;
+  risk_factors?: RiskFactor[];
+  cost_by_tier?: CostByTier[];
+  readmission_rate?: number;
+  high_risk_readmission_rate?: number;
+  dataset?: string;
+  generated_at?: string;
 }
 
 export interface StateData {
@@ -71,13 +89,46 @@ export interface Hospital {
   city: string;
   readmission_rate: number;
   penalty_pct: number;
+  penalty_amount?: number; // Optional for backward compatibility
 }
 
-// Export typed data
+// Dataset type
+export type Dataset = 'uci' | 'mimic';
+
+// Export UCI data (default)
 export const patientRisks: Patient[] = patientRisksData as Patient[];
 export const riskSummary: RiskSummary = riskSummaryData as RiskSummary;
 export const stateSummary: StateData[] = stateSummaryData as StateData[];
 export const hospitalMetrics: Hospital[] = hospitalMetricsData as Hospital[];
+
+// Export MIMIC-IV data
+export const patientRisksMimic: Patient[] = patientRisksDataMimic as Patient[];
+export const riskSummaryMimic: RiskSummary = riskSummaryDataMimic as RiskSummary;
+
+// Export feature importance data
+export const featureImportance = featureImportanceData;
+
+// Get data by dataset type
+export function getDataset(dataset: Dataset) {
+  if (dataset === 'mimic') {
+    return {
+      patientRisks: patientRisksMimic,
+      riskSummary: riskSummaryMimic,
+      stateSummary: [], // MIMIC doesn't have state data
+      hospitalMetrics: [], // MIMIC doesn't have hospital data
+      name: 'MIMIC-IV',
+      description: 'Clinical data from MIMIC-IV (2008-2019)',
+    };
+  }
+  return {
+    patientRisks,
+    riskSummary,
+    stateSummary,
+    hospitalMetrics,
+    name: 'UCI Diabetes',
+    description: 'Diabetes patients from UCI dataset (1999-2008)',
+  };
+}
 
 // Utility functions
 export function formatCurrency(value: number): string {

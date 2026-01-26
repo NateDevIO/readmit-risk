@@ -27,11 +27,12 @@ export default function RiskDistributionChart({ riskSummary }: RiskDistributionC
     { range: '80-100%', color: '#ef4444' },
   ];
 
+  const riskDist = riskSummary.risk_distribution || {};
   const chartData = bins.map((bin) => ({
     range: bin.range,
-    count: riskSummary.risk_distribution[bin.range] || 0,
+    count: riskDist[bin.range] || 0,
     color: bin.color,
-    percentage: ((riskSummary.risk_distribution[bin.range] || 0) / riskSummary.total_patients * 100).toFixed(1),
+    percentage: ((riskDist[bin.range] || 0) / riskSummary.total_patients * 100).toFixed(1),
   }));
 
   return (

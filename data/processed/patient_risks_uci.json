@@ -1,0 +1,58 @@
+[
+  {
+    "patient_id": 10791774,
+    "age": 65,
+    "time_in_hospital": 6,
+    "num_medications": 25,
+    "number_diagnoses": 8,
+    "number_inpatient": 0,
+    "number_emergency": 0,
+    "total_visits": 0,
+    "num_med_changes": 1,
+    "risk_score": 67.36686692264217,
+    "estimated_cost": 10105.030038396326,
+    "readmitted_30day": 1
+  },
+  {
+    "patient_id": 41904171,
+    "age": 55,
+    "time_in_hospital": 14,
+    "num_medications": 60,
+    "number_diagnoses": 9,
+    "number_inpatient": 0,
+    "number_emergency": 0,
+    "total_visits": 0,
+    "num_med_changes": 2,
+    "risk_score": 60.387956246959284,
+    "estimated_cost": 9058.193437043892,
+    "readmitted_30day": 1
+  },
+  {
+    "patient_id": 40961997,
+    "age": 65,
+    "time_in_hospital": 6,
+    "num_medications": 14,
+    "number_diagnoses": 8,
+    "number_inpatient": 0,
+    "number_emergency": 0,
+    "total_visits": 0,
+    "num_med_changes": 0,
+    "risk_score": 62.28781662206971,
+    "estimated_cost": 9343.172493310456,
+    "readmitted_30day": 1
+  },
+  {
+    "patient_id": 45741132,
+    "age": 75,
+    "time_in_hospital": 8,
+    "num_medications": 57,
+    "number_diagnoses": 12,
+    "number_inpatient": 0,
+    "number_emergency": 0,
+    "total_visits": 0,
+    "num_med_changes": 1,
+    "risk_score": 61.70777750224807,
+    "estimated_cost": 9256.166625337211,
+    "readmitted_30day": 1
+  }
+]

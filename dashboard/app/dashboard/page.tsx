@@ -1,10 +1,12 @@
 // app/dashboard/page.tsx
+'use client';
+
+import { useState } from 'react';
 import ExecutiveSummary from '@/components/ExecutiveSummary';
 import AnimatedKPI from '@/components/AnimatedKPI';
 import SavingsCalculator from '@/components/SavingsCalculator';
 import RiskDistributionChart from '@/components/RiskDistributionChart';
 import HighRiskBreakdownChart from '@/components/HighRiskBreakdownChart';
-import RiskFactorsChart from '@/components/RiskFactorsChart';
 import AgeRiskChart from '@/components/AgeRiskChart';
 import CostImpactChart from '@/components/CostImpactChart';
 import NationalBenchmarks from '@/components/NationalBenchmarks';
@@ -12,9 +14,18 @@ import TrendSimulation from '@/components/TrendSimulation';
 import GoalTracker from '@/components/GoalTracker';
 import DataFreshness from '@/components/DataFreshness';
 import MemberTable from '@/components/MemberTable';
-import { patientRisks, riskSummary, formatCurrency, calculateTotalCostRange } from '@/lib/data';
+import DatasetSelector from '@/components/DatasetSelector';
+import DatasetInfo from '@/components/DatasetInfo';
+import FeatureImportanceChart from '@/components/FeatureImportanceChart';
+import { getDataset, Dataset, formatCurrency, calculateTotalCostRange } from '@/lib/data';
 
 export default function DashboardPage() {
+  const [selectedDataset, setSelectedDataset] = useState<Dataset>('mimic');
+
+  // Get current dataset
+  const currentData = getDataset(selectedDataset);
+  const { patientRisks, riskSummary } = currentData;
+
   // Calculate cost exposure range for high-risk patients
   const highRiskPatients = patientRisks.filter(p => p.risk_score >= 60);
   const totalCostRange = calculateTotalCostRange(highRiskPatients);
@@ -22,15 +33,31 @@ export default function DashboardPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
+      <div className="mb-6 flex items-start justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Executive Dashboard</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">
+            Real-time risk stratification and intervention planning
+          </p>
+        </div>
+        <DatasetSelector
+          currentDataset={selectedDataset}
+          onDatasetChange={setSelectedDataset}
+        />
+      </div>
+
+      {/* Dataset Information */}
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Executive Dashboard</h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-1">
-          Real-time risk stratification and intervention planning
-        </p>
+        <DatasetInfo
+          dataset={selectedDataset}
+          totalPatients={riskSummary.total_patients}
+          readmissionRate={riskSummary.readmission_rate_overall}
+          modelAuc={riskSummary.model_auc}
+        />
       </div>
 
       {/* Executive Summary - Full Width */}
-      <ExecutiveSummary riskSummary={riskSummary} />
+      <ExecutiveSummary riskSummary={riskSummary} dataset={selectedDataset} />
 
       {/* Animated KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -85,15 +112,15 @@ export default function DashboardPage() {
         <HighRiskBreakdownChart riskSummary={riskSummary} />
       </div>
 
-      {/* Charts Row 2 - Risk Factors & Age Analysis */}
+      {/* Charts Row 2 - Feature Importance & Age Analysis */}
       <div id="risk-factors" className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 scroll-mt-20">
-        <RiskFactorsChart riskFactors={riskSummary.risk_factors} />
-        <AgeRiskChart avgRiskByAge={riskSummary.avg_risk_by_age} />
+        <FeatureImportanceChart dataset={selectedDataset} />
+        <AgeRiskChart avgRiskByAge={riskSummary.avg_risk_by_age || {}} />
       </div>
 
       {/* Charts Row 3 - Cost Impact & Benchmarks */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <CostImpactChart costByTier={riskSummary.cost_by_tier} />
+        <CostImpactChart costByTier={riskSummary.cost_by_tier || []} />
         <NationalBenchmarks riskSummary={riskSummary} />
       </div>
 
@@ -117,11 +144,11 @@ export default function DashboardPage() {
             avgCostPerReadmission={15000}
           />
         </div>
-        <DataFreshness riskSummary={riskSummary} />
+        <DataFreshness riskSummary={riskSummary} dataset={selectedDataset} />
       </div>
 
       {/* Member Table (limited view) */}
-      <MemberTable members={patientRisks} initialLimit={15} />
+      <MemberTable members={patientRisks} initialLimit={15} dataset={selectedDataset} />
     </div>
   );
 }

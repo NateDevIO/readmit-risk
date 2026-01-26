@@ -1,0 +1,10 @@
+{
+  "total_patients": 71518,
+  "high_risk_count": 4,
+  "readmission_rate": 8.799183422355211,
+  "high_risk_readmission_rate": 100.0,
+  "avg_risk_score": 62.9376043234798,
+  "total_cost_exposure": 37762,
+  "dataset": "uci",
+  "generated_at": "2026-01-22T22:12:07.869049"
+}

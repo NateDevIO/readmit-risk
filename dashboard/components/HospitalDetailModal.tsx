@@ -21,9 +21,8 @@ export default function HospitalDetailModal({ hospital, onClose }: HospitalDetai
 
   const performance = getPerformanceLevel(hospital.readmission_rate);
 
-  // Calculate estimated penalty amount (based on avg Medicare payments)
-  const avgMedicarePayments = 5_000_000; // Estimated avg Medicare payments per hospital
-  const estimatedPenalty = avgMedicarePayments * (hospital.penalty_pct / 100);
+  // Use penalty amount from data (based on $100M avg Medicare payments)
+  const estimatedPenalty = hospital.penalty_amount || 0;
 
   // Generate recommendations based on rate
   const getRecommendations = (rate: number) => {

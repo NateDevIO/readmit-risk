@@ -2,18 +2,19 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Patient, getRiskLevel, formatCurrency, calculateCostRange } from '@/lib/data';
+import { Patient, Dataset, getRiskLevel, formatCurrency, calculateCostRange } from '@/lib/data';
 import PatientDetailModal from './PatientDetailModal';
 
 interface MemberTableProps {
   members: Patient[];
   initialLimit?: number;
+  dataset?: Dataset;
 }
 
 type RiskTier = 'all' | 'critical' | 'very-high' | 'high';
 type AgeGroup = 'all' | 'under50' | '50-69' | '70plus';
 
-export default function MemberTable({ members, initialLimit = 25 }: MemberTableProps) {
+export default function MemberTable({ members, initialLimit = 25, dataset = 'uci' }: MemberTableProps) {
   const [sortField, setSortField] = useState<keyof Patient>('risk_score');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [displayCount, setDisplayCount] = useState(initialLimit);
@@ -54,10 +55,43 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
     return [...filteredMembers].sort((a, b) => {
       const aVal = a[sortField];
       const bVal = b[sortField];
-      if (sortOrder === 'asc') {
-        return aVal > bVal ? 1 : -1;
+
+      // Handle undefined/null values - always push to end
+      const aIsEmpty = aVal === undefined || aVal === null;
+      const bIsEmpty = bVal === undefined || bVal === null;
+
+      if (aIsEmpty && bIsEmpty) return 0;
+      if (aIsEmpty) return 1;  // Always push undefined to end
+      if (bIsEmpty) return -1; // Always push undefined to end
+
+      // Determine if we're comparing numbers or strings
+      const aNum = typeof aVal === 'number' ? aVal : parseFloat(aVal as string);
+      const bNum = typeof bVal === 'number' ? bVal : parseFloat(bVal as string);
+
+      let comparison = 0;
+
+      // If both can be parsed as numbers, do numeric comparison
+      if (!isNaN(aNum) && !isNaN(bNum)) {
+        comparison = aNum - bNum;
+      } else {
+        // Otherwise, do string comparison
+        const aStr = String(aVal);
+        const bStr = String(bVal);
+        comparison = aStr.localeCompare(bStr);
       }
-      return aVal < bVal ? 1 : -1;
+
+      // Apply sort order
+      const result = sortOrder === 'asc' ? comparison : -comparison;
+
+      // Stable sort: if values are equal, maintain original order by unique ID
+      if (result === 0) {
+        // Use hadm_id for MIMIC (unique per admission), patient_id for UCI
+        const aId = dataset === 'mimic' && a.hadm_id ? a.hadm_id : a.patient_id;
+        const bId = dataset === 'mimic' && b.hadm_id ? b.hadm_id : b.patient_id;
+        return aId - bId;
+      }
+
+      return result;
     });
   }, [filteredMembers, sortField, sortOrder]);
 
@@ -65,8 +99,10 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
 
   const handleSort = (field: keyof Patient) => {
     if (field === sortField) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      // Toggle sort order using callback to ensure we have latest state
+      setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
     } else {
+      // New field - set to descending and update field
       setSortField(field);
       setSortOrder('desc');
     }
@@ -74,22 +110,41 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
 
   const exportToCSV = (count: number = 100) => {
     const exportData = sortedMembers.slice(0, count);
-    const headers = ['Patient ID', 'Age', 'Days Hospitalized', 'Medications', 'Diagnoses', 'Risk Score', 'Cost Low', 'Cost Mid', 'Cost High'];
+
+    const headers = dataset === 'uci'
+      ? ['Patient ID', 'Age', 'Days Hospitalized', 'Medications', 'Diagnoses', 'Total Visits', 'Risk Score', 'Cost Low', 'Cost Mid', 'Cost High']
+      : ['Patient ID', 'Admission ID', 'Age', 'Medication Count', 'ICU Stay', 'Risk Score', 'Cost Low', 'Cost Mid', 'Cost High'];
+
     const csvContent = [
       headers.join(','),
       ...exportData.map(m => {
         const costRange = calculateCostRange(m.risk_score);
-        return [
-          m.patient_id,
-          m.age,
-          m.time_in_hospital,
-          m.num_medications,
-          m.number_diagnoses,
-          m.risk_score.toFixed(1),
-          costRange.low.toFixed(2),
-          costRange.mid.toFixed(2),
-          costRange.high.toFixed(2)
-        ].join(',');
+        if (dataset === 'uci') {
+          return [
+            m.patient_id,
+            m.age,
+            m.time_in_hospital || '',
+            m.num_medications || '',
+            m.number_diagnoses || '',
+            m.total_visits || '',
+            m.risk_score.toFixed(1),
+            costRange.low.toFixed(2),
+            costRange.mid.toFixed(2),
+            costRange.high.toFixed(2)
+          ].join(',');
+        } else {
+          return [
+            m.patient_id,
+            m.hadm_id || '',
+            m.age,
+            m.medication_count || '',
+            m.had_icu_stay === 1 ? 'Yes' : 'No',
+            m.risk_score.toFixed(1),
+            costRange.low.toFixed(2),
+            costRange.mid.toFixed(2),
+            costRange.high.toFixed(2)
+          ].join(',');
+        }
       })
     ].join('\n');
 
@@ -224,7 +279,7 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
-                {[
+                {(dataset === 'uci' ? [
                   { key: 'patient_id', label: 'ID' },
                   { key: 'age', label: 'Age' },
                   { key: 'time_in_hospital', label: 'Days' },
@@ -233,7 +288,15 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
                   { key: 'total_visits', label: 'Visits' },
                   { key: 'risk_score', label: 'Risk Score' },
                   { key: 'estimated_cost', label: 'Cost Exposure' },
-                ].map((col) => (
+                ] : [
+                  { key: 'patient_id', label: 'ID' },
+                  { key: 'hadm_id', label: 'Admission' },
+                  { key: 'age', label: 'Age' },
+                  { key: 'medication_count', label: 'Meds' },
+                  { key: 'had_icu_stay', label: 'ICU' },
+                  { key: 'risk_score', label: 'Risk Score' },
+                  { key: 'estimated_cost', label: 'Cost Exposure' },
+                ]).map((col) => (
                   <th
                     key={col.key}
                     onClick={() => handleSort(col.key as keyof Patient)}
@@ -251,30 +314,48 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {displayedMembers.map((member) => (
+              {displayedMembers.map((member, index) => (
                 <tr
-                  key={member.patient_id}
+                  key={dataset === 'mimic' && member.hadm_id ? `${member.hadm_id}` : `${member.patient_id}-${index}`}
                   className="hover:bg-blue-50 transition-colors cursor-pointer"
                   onClick={() => setSelectedPatient(member)}
                 >
                   <td className="px-4 py-3 text-sm font-medium text-gray-900">
                     #{member.patient_id}
                   </td>
+                  {dataset === 'mimic' && (
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      #{member.hadm_id}
+                    </td>
+                  )}
                   <td className="px-4 py-3 text-sm text-gray-600">
                     {member.age}
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {member.time_in_hospital}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {member.num_medications}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {member.number_diagnoses}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {member.total_visits}
-                  </td>
+                  {dataset === 'uci' ? (
+                    <>
+                      <td className="px-4 py-3 text-sm text-gray-600">
+                        {member.time_in_hospital || '-'}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-600">
+                        {member.num_medications || '-'}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-600">
+                        {member.number_diagnoses || '-'}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-600">
+                        {member.total_visits || '-'}
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="px-4 py-3 text-sm text-gray-600">
+                        {member.medication_count || '-'}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-600">
+                        {member.had_icu_stay === 1 ? 'Yes' : 'No'}
+                      </td>
+                    </>
+                  )}
                   <td className="px-4 py-3">
                     <span
                       className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold border ${getRiskBadgeStyle(
@@ -324,6 +405,7 @@ export default function MemberTable({ members, initialLimit = 25 }: MemberTableP
         <PatientDetailModal
           patient={selectedPatient}
           onClose={() => setSelectedPatient(null)}
+          dataset={dataset}
         />
       )}
     </>

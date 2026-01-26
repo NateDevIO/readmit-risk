@@ -1,22 +1,33 @@
 // components/PatientDetailModal.tsx
 'use client';
 
-import { Patient, calculateCostRange, formatCurrency } from '@/lib/data';
+import { Patient, Dataset, calculateCostRange, formatCurrency } from '@/lib/data';
 
 interface PatientDetailModalProps {
   patient: Patient | null;
   onClose: () => void;
+  dataset?: Dataset;
 }
 
-export default function PatientDetailModal({ patient, onClose }: PatientDetailModalProps) {
+export default function PatientDetailModal({ patient, onClose, dataset = 'uci' }: PatientDetailModalProps) {
   if (!patient) return null;
+
+  const isUCI = dataset === 'uci';
+
+  const handleAddToOutreach = () => {
+    alert(`Patient ${patient.patient_id} has been added to the outreach list.`);
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
 
   // Determine risk factors for this patient
   const getRiskFactors = (p: Patient) => {
     const factors: { factor: string; value: string; impact: 'high' | 'medium' | 'low'; explanation: string }[] = [];
 
     // Prior visits (strongest predictor)
-    if (p.total_visits >= 3) {
+    if (p.total_visits !== undefined && p.total_visits >= 3) {
       factors.push({
         factor: 'High Healthcare Utilization',
         value: `${p.total_visits} prior visits`,
@@ -26,7 +37,7 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
     }
 
     // Inpatient history
-    if (p.number_inpatient >= 2) {
+    if (p.number_inpatient !== undefined && p.number_inpatient >= 2) {
       factors.push({
         factor: 'Prior Hospitalizations',
         value: `${p.number_inpatient} inpatient stays`,
@@ -36,7 +47,7 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
     }
 
     // Emergency visits
-    if (p.number_emergency >= 2) {
+    if (p.number_emergency !== undefined && p.number_emergency >= 2) {
       factors.push({
         factor: 'Emergency Department Use',
         value: `${p.number_emergency} ED visits`,
@@ -46,7 +57,7 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
     }
 
     // Polypharmacy
-    if (p.num_medications >= 15) {
+    if (p.num_medications !== undefined && p.num_medications >= 15) {
       factors.push({
         factor: 'Polypharmacy',
         value: `${p.num_medications} medications`,
@@ -56,7 +67,7 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
     }
 
     // Length of stay
-    if (p.time_in_hospital >= 7) {
+    if (p.time_in_hospital !== undefined && p.time_in_hospital >= 7) {
       factors.push({
         factor: 'Extended Hospital Stay',
         value: `${p.time_in_hospital} days`,
@@ -76,7 +87,7 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
     }
 
     // Diagnoses
-    if (p.number_diagnoses >= 7) {
+    if (p.number_diagnoses !== undefined && p.number_diagnoses >= 7) {
       factors.push({
         factor: 'Multiple Comorbidities',
         value: `${p.number_diagnoses} diagnoses`,
@@ -86,12 +97,32 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
     }
 
     // Medication changes
-    if (p.num_med_changes >= 2) {
+    if (p.num_med_changes !== undefined && p.num_med_changes >= 2) {
       factors.push({
         factor: 'Medication Adjustments',
         value: `${p.num_med_changes} changes`,
         impact: 'low',
         explanation: 'Recent medication changes require careful monitoring'
+      });
+    }
+
+    // MIMIC-specific: ICU stay
+    if (p.had_icu_stay !== undefined && p.had_icu_stay === 1) {
+      factors.push({
+        factor: 'ICU Stay',
+        value: 'Had ICU admission',
+        impact: 'high',
+        explanation: 'ICU stay indicates critical illness'
+      });
+    }
+
+    // MIMIC-specific: Medication count
+    if (p.medication_count !== undefined && p.medication_count >= 10) {
+      factors.push({
+        factor: 'High Medication Count',
+        value: `${p.medication_count} medications`,
+        impact: 'medium',
+        explanation: 'Multiple medications increase complexity'
       });
     }
 
@@ -188,15 +219,21 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
             </div>
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="text-xs text-gray-500">Hospital Stay</p>
-              <p className="text-lg font-semibold">{patient.time_in_hospital} days</p>
+              <p className="text-lg font-semibold">
+                {isUCI ? (patient.time_in_hospital || 0) : (patient.hadm_id ? 'ICU' : 'N/A')} {isUCI ? 'days' : ''}
+              </p>
             </div>
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="text-xs text-gray-500">Medications</p>
-              <p className="text-lg font-semibold">{patient.num_medications}</p>
+              <p className="text-lg font-semibold">
+                {isUCI ? (patient.num_medications || 0) : (patient.medication_count || 0)}
+              </p>
             </div>
             <div className="bg-gray-50 rounded-lg p-3">
-              <p className="text-xs text-gray-500">Diagnoses</p>
-              <p className="text-lg font-semibold">{patient.number_diagnoses}</p>
+              <p className="text-xs text-gray-500">{isUCI ? 'Diagnoses' : 'ICU Stay'}</p>
+              <p className="text-lg font-semibold">
+                {isUCI ? (patient.number_diagnoses || 0) : (patient.had_icu_stay === 1 ? 'Yes' : 'No')}
+              </p>
             </div>
           </div>
 
@@ -244,10 +281,16 @@ export default function PatientDetailModal({ patient, onClose }: PatientDetailMo
 
           {/* Action Buttons */}
           <div className="flex gap-3 pt-4 border-t">
-            <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+            <button
+              onClick={handleAddToOutreach}
+              className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            >
               Add to Outreach List
             </button>
-            <button className="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium">
+            <button
+              onClick={handlePrint}
+              className="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+            >
               Print Summary
             </button>
           </div>

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadmitRisk Executive Report - Combined Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #f9fafb;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            color: white;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            left: 0;
+            top: 120px;
+            width: 280px;
+            height: calc(100vh - 120px);
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            overflow-y: auto;
+            padding: 3rem 0;
+            z-index: 50;
+        }
+
+        .nav-container nav a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-container nav a:hover {
+            background: #f3f4f6;
+            color: #1e40af;
+            border-left-color: #1e40af;
+        }
+
+        .nav-container nav a.active {
+            background: #eff6ff;
+            color: #1e40af;
+            border-left-color: #1e40af;
+        }
+
+        /* Main Content */
+        .container {
+            margin-left: 280px;
+            max-width: 1200px;
+            padding: 3rem 2rem 2rem 4rem;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #1e40af;
+            font-size: 1.875rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e5e7eb;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #374151;
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: #4b5563;
+            font-size: 1.125rem;
+            margin: 1rem 0 0.5rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+
+        /* Alert Box */
+        .alert-info {
+            background: #dbeafe;
+            border-left: 4px solid #1e40af;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .alert-info p {
+            margin: 0;
+            color: #1e3a8a;
+            font-size: 0.875rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box h4 {
+            color: #92400e;
+            margin-top: 0;
+        }
+
+        .highlight-box p {
+            color: #78350f;
+        }
+
+        /* Recommendation Box */
+        .recommendation-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid #1e40af;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .recommendation-box h4 {
+            color: #1e40af;
+            margin-top: 0;
+        }
+
+        .recommendation-box p {
+            color: #1e3a8a;
+        }
+
+        /* Dataset Section */
+        .dataset-section {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            border-left: 4px solid #1e40af;
+        }
+
+        /* Report Links */
+        .report-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .report-link-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .report-link-card:hover {
+            border-color: #1e40af;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(30, 64, 175, 0.2);
+        }
+
+        .report-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .report-icon svg {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+
+        .report-link-content h4 {
+            margin: 0 0 0.5rem 0;
+            color: #1e40af;
+            font-size: 1.125rem;
+        }
+
+        .report-link-content p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header, .nav-container {
+                display: none;
+            }
+            .container {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            .content-section {
+                break-inside: avoid;
+                box-shadow: none;
+            }
+            .new-page {
+                break-before: page;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                display: none;
+            }
+            .container {
+                margin-left: 0;
+                padding: 1.5rem 1rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .report-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <h1>📊 ReadmitRisk Platform - Combined Executive Report</h1>
+            <p class="subtitle">Comprehensive analysis across MIMIC-IV ICU, UCI Diabetes, and National Geographic datasets</p>
+        </div>
+    </div>
+
+    <!-- Side Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#comparison">Dataset Comparison</a>
+            <a href="#mimic">MIMIC-IV Insights</a>
+            <a href="#uci">UCI Diabetes Insights</a>
+            <a href="#geographic">Geographic Analysis</a>
+            <a href="#strategy">Risk Strategy</a>
+            <a href="#roi">ROI Analysis</a>
+            <a href="#roadmap">Integration Roadmap</a>
+            <a href="#recommendations">Recommendations</a>
+            <a href="#reports">Detailed Reports</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-section" id="overview">
+            <div class="alert-info">
+                <p><strong>📋 Platform Overview:</strong> This report synthesizes insights from three complementary datasets: MIMIC-IV ICU clinical data (211K admissions, 2008-2019), UCI Diabetes multi-hospital data (71K patients, 1999-2008), and CMS Hospital Readmissions Reduction Program geographic data (205 hospitals, 5 states). Together, these provide comprehensive readmission risk intelligence across care settings and geographies.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">282,872</div>
+                    <div class="stat-label">Total Patients Analyzed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">205</div>
+                    <div class="stat-label">Hospitals Benchmarked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$2.0B</div>
+                    <div class="stat-label">Combined Cost Exposure</div>
+                </div>
+            </div>
+
+            <h2>Executive Summary</h2>
+
+            <p>The ReadmitRisk platform provides multi-dimensional readmission risk intelligence by integrating three distinct data sources:</p>
+
+            <ol>
+                <li><strong>MIMIC-IV ICU Data:</strong> Deep clinical features for critically ill populations</li>
+                <li><strong>UCI Diabetes Data:</strong> General diabetes population risk patterns</li>
+                <li><strong>CMS Geographic Data:</strong> Hospital performance benchmarks and penalty exposure</li>
+            </ol>
+
+            <p>This combined approach enables healthcare organizations to: (a) identify high-risk patients using validated ML models, (b) benchmark provider performance against national standards, and (c) prioritize interventions based on evidence-based ROI projections.</p>
+
+            <div class="highlight-box">
+                <h4>🎯 Key Strategic Insight</h4>
+                <p>ICU populations show 5.5× higher high-risk prevalence (54.2%) compared to general diabetes populations (9.9%). Organizations must deploy differentiated care management strategies: intensive transitional care for ICU survivors vs. medication management and outpatient coordination for general medical/surgical patients.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="comparison">
+            <h2>Dataset Comparison</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>MIMIC-IV<br/>(ICU)</th>
+                        <th>UCI Diabetes<br/>(General Pop)</th>
+                        <th>CMS Geographic<br/>(National)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Sample Size</strong></td>
+                        <td>211,354 admissions</td>
+                        <td>71,518 patients</td>
+                        <td>205 hospitals</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Readmission Rate</strong></td>
+                        <td>20.5%</td>
+                        <td>8.8%</td>
+                        <td>15.5% (avg across 5 states)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High-Risk %</strong></td>
+                        <td>54.2% (≥60%)</td>
+                        <td>9.9% (≥60%)</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Model AUC</strong></td>
+                        <td>0.630 (Gradient Boosting)</td>
+                        <td>0.564 (Logistic Regression)</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Features</strong></td>
+                        <td>60+ clinical variables</td>
+                        <td>12 administrative variables</td>
+                        <td>State/hospital aggregates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Time Period</strong></td>
+                        <td>2008-2019</td>
+                        <td>1999-2008</td>
+                        <td>Current (2023)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cost Exposure</strong></td>
+                        <td>$1.92B (high-risk cohort)</td>
+                        <td>$78.5M (high-risk cohort)</td>
+                        <td>$21M penalties (5 states)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-section" id="mimic">
+            <h2>MIMIC-IV ICU Population</h2>
+
+            <div class="dataset-section">
+                <p><strong>🏥 Best for:</strong> Post-ICU transitional care programs, critical illness survivors, mechanically ventilated patients</p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>54.2% classified as high-risk (≥60%) - far exceeding general populations</li>
+                    <li>Top risk drivers: Age (36.5%), procedure count (10.3%), lab abnormalities (bilirubin 8.9%, potassium 7.1%)</li>
+                    <li>114,589 patients in high-risk cohort with $1.92B cost exposure</li>
+                    <li>20.5% overall readmission rate vs. 26.3% in high-risk cohort</li>
+                </ul>
+
+                <h3>Recommended Actions</h3>
+                <ul>
+                    <li>Implement ICU-to-home transitional care programs with 48-hour home health visits</li>
+                    <li>Deploy clinical pharmacists for medication reconciliation (avg 20+ meds)</li>
+                    <li>Screen for post-ICU syndrome (PICS) and provide cognitive/physical rehabilitation</li>
+                    <li>Establish post-ICU recovery clinics for complex patients</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section" id="uci">
+            <h2>UCI Diabetes Population</h2>
+
+            <div class="dataset-section">
+                <p><strong>💊 Best for:</strong> General medical/surgical populations, diabetes-specific programs, multi-hospital systems</p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>9.9% classified as high-risk (≥60%) - typical for general populations</li>
+                    <li>Top risk drivers: Total prior visits (4.36 coefficient), number of medications (0.28), lab procedures (0.10)</li>
+                    <li>7,083 high-risk patients representing $78.5M cost exposure</li>
+                    <li>Outpatient visits show strong protective effect (-3.12 coefficient)</li>
+                </ul>
+
+                <h3>Recommended Actions</h3>
+                <ul>
+                    <li>Strengthen discharge-to-outpatient handoffs (follow-up within 7 days)</li>
+                    <li>Deploy nurse-led phone calls within 48-72 hours for medication adherence</li>
+                    <li>Implement diabetes-specific education programs before discharge</li>
+                    <li>Focus on polypharmacy management and deprescribing protocols</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section" id="geographic">
+            <h2>CMS Geographic Data</h2>
+
+            <div class="dataset-section">
+                <p><strong>🗺️ Best for:</strong> Provider network optimization, value-based contracting, regional quality improvement</p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>205 hospitals across 5 states (AL, AK, AR, AZ, CA) tracked for CMS penalty exposure</li>
+                    <li>$21M total penalty exposure across analyzed states</li>
+                    <li>Regional variation: 16.2% (CA) to 14.9% (AK) average readmission rate</li>
+                    <li>Individual hospital penalties range from $560K to $2.08M annually</li>
+                </ul>
+
+                <h3>Recommended Actions</h3>
+                <ul>
+                    <li>Map provider networks against hospital penalty tiers</li>
+                    <li>Engage high-penalty hospitals in quality improvement partnerships</li>
+                    <li>Deploy care managers in geographic areas with highest penalty concentration</li>
+                    <li>Structure value-based contracts to reward below-benchmark performance</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section" id="strategy">
+            <h2>Integrated Risk Stratification Strategy</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient Segment</th>
+                        <th>Risk Level</th>
+                        <th>Primary Dataset</th>
+                        <th>Intervention Strategy</th>
+                        <th>Expected Reduction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ICU Survivors</strong></td>
+                        <td>Critical (80%+)</td>
+                        <td>MIMIC-IV</td>
+                        <td>ICU transitional care + home health</td>
+                        <td>25-35%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Complex Chronic</strong></td>
+                        <td>Very High (70-80%)</td>
+                        <td>UCI + MIMIC</td>
+                        <td>Case management + pharmacist</td>
+                        <td>20-30%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Diabetes/Multi-morbid</strong></td>
+                        <td>High (60-70%)</td>
+                        <td>UCI Diabetes</td>
+                        <td>Nurse calls + outpatient coordination</td>
+                        <td>15-25%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High-Penalty Hospitals</strong></td>
+                        <td>Regional Focus</td>
+                        <td>CMS Geographic</td>
+                        <td>Quality collaboratives + SDOH screening</td>
+                        <td>10-20%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-section" id="roi">
+            <h2>Combined ROI Analysis</h2>
+
+            <p>Based on intervention effectiveness literature and platform risk stratification:</p>
+
+            <h3>ICU Population (MIMIC-IV - 68,962 critical patients)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Intervention</th>
+                        <th>Cost/Patient</th>
+                        <th>Patients Targeted</th>
+                        <th>Readmissions Prevented</th>
+                        <th>Savings</th>
+                        <th>Net ROI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ICU Transitional Care</td>
+                        <td>$850</td>
+                        <td>68,962</td>
+                        <td>4,827 (28% of expected)</td>
+                        <td>$72.4M</td>
+                        <td>$13.8M (24% ROI)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>General Population (UCI - 7,083 high-risk patients)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Intervention</th>
+                        <th>Cost/Patient</th>
+                        <th>Patients Targeted</th>
+                        <th>Readmissions Prevented</th>
+                        <th>Savings</th>
+                        <th>Net ROI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Transitional Care Mgmt</td>
+                        <td>$300</td>
+                        <td>7,083</td>
+                        <td>425 (20% reduction)</td>
+                        <td>$6.4M</td>
+                        <td>$4.3M (200% ROI)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-section" id="roadmap">
+            <h2>Technology Integration Roadmap</h2>
+
+            <h3>Phase 1: Risk Scoring Integration (Months 1-3)</h3>
+            <ul>
+                <li>Integrate ML models into EHR discharge workflow</li>
+                <li>Automated risk score generation at discharge summary completion</li>
+                <li>Trigger care management referrals for 60%+ risk scores</li>
+                <li>Dashboard for real-time high-risk patient census</li>
+            </ul>
+
+            <h3>Phase 2: Intervention Deployment (Months 4-6)</h3>
+            <ul>
+                <li>Launch tiered intervention protocols by risk score</li>
+                <li>Deploy nurse call programs (60-70% tier)</li>
+                <li>Activate case management (70-80% tier)</li>
+                <li>Implement ICU transitional care (80%+ tier)</li>
+            </ul>
+
+            <h3>Phase 3: Outcomes Tracking (Months 7-12)</h3>
+            <ul>
+                <li>Link readmission events to risk scores and interventions</li>
+                <li>Calculate actual vs. predicted readmission rates by tier</li>
+                <li>Measure intervention ROI with claims data</li>
+                <li>Refine models with local data and observed outcomes</li>
+            </ul>
+        </div>
+
+        <div class="content-section" id="recommendations">
+            <h2>Strategic Recommendations</h2>
+
+            <div class="recommendation-box">
+                <h4>1. Deploy Differentiated Care Models by Acuity</h4>
+                <p>ICU and general populations require fundamentally different transitional care approaches. Allocate highest-intensity resources (home health, pharmacists, case managers) to ICU survivors; leverage lower-cost nurse calls and outpatient coordination for general medical/surgical patients.</p>
+            </div>
+
+            <div class="recommendation-box">
+                <h4>2. Geographic Targeting for Provider Engagement</h4>
+                <p>Use CMS geographic data to prioritize quality improvement partnerships with hospitals showing high penalty rates. These facilities offer greatest opportunity for penalty reduction and collaborative gain.</p>
+            </div>
+
+            <div class="recommendation-box">
+                <h4>3. Real-Time EHR Integration</h4>
+                <p>Embed risk scoring into discharge workflow to enable proactive intervention deployment rather than retrospective case-finding. Target &lt;72 hour activation for all high-risk patients.</p>
+            </div>
+
+            <div class="recommendation-box">
+                <h4>4. Measure and Iterate</h4>
+                <p>Establish baseline readmission rates by risk tier, then track quarterly performance. Use local outcomes data to retrain models and adjust intervention intensity to optimize ROI.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="reports">
+            <h2>📑 Detailed Report Links</h2>
+
+            <div class="report-links">
+                <a href="EXECUTIVE_REPORT_MIMIC.html" class="report-link-card">
+                    <div class="report-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <div class="report-link-content">
+                        <h4>MIMIC-IV Analysis</h4>
+                        <p>ICU population risk analysis with 211K admissions</p>
+                    </div>
+                </a>
+
+                <a href="EXECUTIVE_REPORT_UCI.html" class="report-link-card">
+                    <div class="report-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <div class="report-link-content">
+                        <h4>UCI Diabetes Analysis</h4>
+                        <p>General population diabetes risk analysis</p>
+                    </div>
+                </a>
+
+                <a href="EXECUTIVE_REPORT_GEOGRAPHY.html" class="report-link-card">
+                    <div class="report-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+                        </svg>
+                    </div>
+                    <div class="report-link-content">
+                        <h4>Geographic Analysis</h4>
+                        <p>CMS hospital penalty and regional benchmarks</p>
+                    </div>
+                </a>
+
+                <a href="DATA_ANALYSIS_METHODOLOGY_MIMIC.html" class="report-link-card">
+                    <div class="report-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                    <div class="report-link-content">
+                        <h4>MIMIC Methodology</h4>
+                        <p>Data extraction and feature engineering details</p>
+                    </div>
+                </a>
+
+                <a href="DATA_ANALYSIS_METHODOLOGY_UCI.html" class="report-link-card">
+                    <div class="report-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                    <div class="report-link-content">
+                        <h4>UCI Methodology</h4>
+                        <p>Model training and validation approach</p>
+                    </div>
+                </a>
+
+                <a href="DATA_ANALYSIS_METHODOLOGY_GEOGRAPHY.html" class="report-link-card">
+                    <div class="report-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                    <div class="report-link-content">
+                        <h4>Geographic Methodology</h4>
+                        <p>CMS data processing and analysis methods</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>ReadmitRisk Platform</strong> | Combined Executive Report</p>
+            <p>Generated: January 2026 | Integrates MIMIC-IV (2008-2019), UCI Diabetes (1999-2008), and CMS HRRP data</p>
+            <p>Platform Dashboard: <a href="/">View Interactive Dashboard</a></p>
+            <p>GitHub Repository: <a href="https://github.com/NateDevIO/readmit-risk" target="_blank">github.com/NateDevIO/readmit-risk</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll with navigation highlighting
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-container nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

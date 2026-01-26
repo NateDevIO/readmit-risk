@@ -36,6 +36,10 @@ export default function AgeRiskChart({ avgRiskByAge }: AgeRiskChartProps) {
 
   const overallAvg = Object.values(avgRiskByAge).reduce((a, b) => a + b, 0) / Object.values(avgRiskByAge).length;
 
+  // Calculate dynamic Y-axis domain
+  const maxRisk = Math.max(...chartData.map(d => d.risk));
+  const yAxisMax = Math.ceil(maxRisk / 10) * 10 + 10; // Round up to nearest 10, plus padding
+
   return (
     <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
       <h2 className="text-xl font-bold text-gray-900 mb-2">
@@ -56,7 +60,9 @@ export default function AgeRiskChart({ avgRiskByAge }: AgeRiskChartProps) {
           <YAxis
             tick={{ fontSize: 12 }}
             axisLine={{ stroke: '#e0e0e0' }}
-            domain={[0, 35]}
+            domain={[0, yAxisMax]}
+            ticks={[0, Math.round(yAxisMax * 0.25), Math.round(yAxisMax * 0.5), Math.round(yAxisMax * 0.75), yAxisMax]}
+            tickFormatter={(value) => `${Math.round(value)}`}
             label={{
               value: 'Avg Risk Score (%)',
               angle: -90,

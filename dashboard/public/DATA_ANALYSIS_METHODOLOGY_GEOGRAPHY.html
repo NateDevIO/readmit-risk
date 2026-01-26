@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadmitRisk Data Analysis Methodology - Geographic Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #f9fafb;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            color: white;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            left: 0;
+            top: 120px;
+            width: 280px;
+            height: calc(100vh - 120px);
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            overflow-y: auto;
+            padding: 3rem 0;
+            z-index: 50;
+        }
+
+        .nav-container nav a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-container nav a:hover {
+            background: #f3f4f6;
+            color: #1e40af;
+            border-left-color: #1e40af;
+        }
+
+        .nav-container nav a.active {
+            background: #eff6ff;
+            color: #1e40af;
+            border-left-color: #1e40af;
+        }
+
+        /* Main Content */
+        .container {
+            margin-left: 280px;
+            max-width: 1200px;
+            padding: 3rem 2rem 2rem 4rem;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #1e40af;
+            font-size: 1.875rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e5e7eb;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #374151;
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: #4b5563;
+            font-size: 1.125rem;
+            margin: 1rem 0 0.5rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+
+        /* Alert Boxes */
+        .alert-info {
+            background: #dbeafe;
+            border-left: 4px solid #1e40af;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .alert-info p {
+            margin: 0;
+            color: #1e3a8a;
+            font-size: 0.875rem;
+        }
+
+        .note {
+            background: #dbeafe;
+            border-left: 4px solid #1e40af;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note p {
+            margin: 0;
+            color: #1e3a8a;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning p {
+            margin: 0;
+            color: #78350f;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        /* Code Blocks */
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+
+        pre {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+        }
+
+        /* Links */
+        a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header, .nav-container {
+                display: none;
+            }
+            .container {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            .content-section {
+                break-inside: avoid;
+                box-shadow: none;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                display: none;
+            }
+            .container {
+                margin-left: 0;
+                padding: 1.5rem 1rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <h1>Data Analysis Methodology - Geographic/CMS Data</h1>
+            <p class="subtitle">Hospital readmission rates and CMS penalty analysis across US states</p>
+        </div>
+    </div>
+
+    <!-- Side Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#data-sources">Data Sources</a>
+            <a href="#extraction">Data Extraction</a>
+            <a href="#aggregation">Geographic Aggregation</a>
+            <a href="#hospital-analysis">Hospital-Level Analysis</a>
+            <a href="#visualization">Geographic Visualization</a>
+            <a href="#integration">Dashboard Integration</a>
+            <a href="#quality">Data Quality</a>
+            <a href="#applications">Applications</a>
+            <a href="#limitations">Limitations</a>
+            <a href="#enhancements">Future Enhancements</a>
+            <a href="#references">References</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-section" id="overview">
+            <div class="alert-info">
+                <p><strong>Data Source:</strong> CMS Hospital Readmissions Reduction Program (HRRP) public datasets, available at data.cms.gov and Hospital Compare portal. Data represents hospital-level quality metrics and Medicare penalty assessments for 30-day unplanned readmissions.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">4,692</div>
+                    <div class="stat-label">Acute Care Hospitals</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">51</div>
+                    <div class="stat-label">States + DC</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">Condition Measures</div>
+                </div>
+            </div>
+
+            <h2>1. Overview</h2>
+
+            <p>The geographic analysis component of ReadmitRisk leverages publicly available CMS data to provide state-level and hospital-level readmission benchmarking. Unlike the MIMIC-IV and UCI datasets which enable patient-level risk prediction, the geographic data enables:</p>
+
+            <ul>
+                <li>Provider network quality assessment</li>
+                <li>Regional readmission pattern identification</li>
+                <li>CMS penalty exposure quantification</li>
+                <li>Value-based contracting opportunity identification</li>
+            </ul>
+        </div>
+
+        <div class="content-section" id="data-sources">
+            <h2>2. Data Sources</h2>
+
+            <h3>2.1 CMS Hospital Readmissions Reduction Program (HRRP)</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Source</strong></td>
+                        <td>Centers for Medicare & Medicaid Services (CMS)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Portal</strong></td>
+                        <td>data.cms.gov and Hospital Compare</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hospitals Included</strong></td>
+                        <td>4,692 acute care hospitals</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Geographic Coverage</strong></td>
+                        <td>50 US states + District of Columbia</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Update Frequency</strong></td>
+                        <td>Annual (published each summer)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>File Format</strong></td>
+                        <td>CSV (downloadable)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2.2 Condition-Specific Measures</h3>
+
+            <p>HRRP tracks 30-day readmission rates for six conditions:</p>
+
+            <ol>
+                <li><strong>Acute Myocardial Infarction (AMI):</strong> Heart attack</li>
+                <li><strong>Heart Failure (HF):</strong> Congestive heart failure</li>
+                <li><strong>Pneumonia (PN):</strong> Community-acquired pneumonia</li>
+                <li><strong>COPD:</strong> Chronic obstructive pulmonary disease</li>
+                <li><strong>Hip/Knee Replacement (THA/TKA):</strong> Elective joint replacement</li>
+                <li><strong>Coronary Artery Bypass Graft (CABG):</strong> Open-heart surgery</li>
+            </ol>
+
+            <div class="note">
+                <p><strong>Risk Adjustment:</strong> CMS applies hierarchical logistic regression models to risk-adjust readmission rates for patient demographics, comorbidities, and hospital characteristics. This enables fair comparison across hospitals with different patient populations.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="extraction">
+            <h2>3. Data Extraction Process</h2>
+
+            <h3>3.1 Download and Parse CMS Files</h3>
+
+            <pre>
+import pandas as pd
+import requests
+
+# Download CMS Hospital Compare data
+cms_url = "https://data.cms.gov/provider-data/dataset/9n3s-kdb3"
+response = requests.get(cms_url)
+
+# Parse CSV
+df_hospitals = pd.read_csv("hospital_readmissions.csv")
+
+# Inspect columns
+print(df_hospitals.columns)
+# Key fields:
+# - facility_id (CMS Certification Number)
+# - facility_name
+# - state
+# - measure_name (AMI, HF, PN, COPD, THA/TKA, CABG)
+# - score (readmission rate %)
+# - compared_to_national (Better/Same/Worse)
+# - penalty_pct (HRRP penalty percentage)</pre>
+
+            <h3>3.2 Data Cleaning and Filtering</h3>
+
+            <pre>
+# Filter to acute care hospitals only
+df_hospitals = df_hospitals[df_hospitals['hospital_type'] == 'Acute Care Hospitals']
+
+# Remove non-numeric scores (suppressed due to low volume)
+df_hospitals['score'] = pd.to_numeric(df_hospitals['score'], errors='coerce')
+df_hospitals = df_hospitals.dropna(subset=['score'])
+
+# Filter to all-condition readmission measure
+df_all_cause = df_hospitals[df_hospitals['measure_name'] == 'Hospital-Wide Readmission']
+
+# Calculate state-level aggregates
+state_summary = df_all_cause.groupby('state').agg({
+    'score': 'mean',                    # Average readmission rate
+    'penalty_pct': 'mean',              # Average penalty %
+    'facility_id': 'count'              # Hospital count
+}).reset_index()
+
+state_summary.columns = ['state', 'avg_readmission_rate', 'avg_penalty_pct', 'hospital_count']</pre>
+
+            <h3>3.3 Penalty Estimation</h3>
+
+            <p>CMS penalty percentages represent the reduction in total Medicare reimbursements. To estimate dollar impact:</p>
+
+            <pre>
+# Estimate total penalty dollars per state
+# Assumes average hospital receives $50M in Medicare payments annually
+state_summary['total_penalty_estimate'] = (
+    state_summary['avg_penalty_pct'] / 100 *  # Convert to decimal
+    state_summary['hospital_count'] *          # Number of hospitals
+    50_000_000                                 # Avg Medicare payments per hospital
+)
+
+# Format for display
+state_summary['total_penalty_estimate_formatted'] = (
+    state_summary['total_penalty_estimate'].apply(
+        lambda x: f"${x/1_000_000:.1f}M"
+    )
+)</pre>
+
+            <div class="warning">
+                <p><strong>Estimation Caveat:</strong> Total penalty estimates use national average Medicare payment volumes. Actual penalties vary by hospital size, case mix, and Medicare patient share. These are conservative approximations for illustrative purposes.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="aggregation">
+            <h2>4. Geographic Aggregation</h2>
+
+            <h3>4.1 State-Level Metrics</h3>
+
+            <p>State aggregations are weighted by hospital discharge volumes to avoid skew from small rural facilities:</p>
+
+            <pre>
+# Weighted state averages
+weighted_state_avg = df_all_cause.groupby('state').apply(
+    lambda x: np.average(
+        x['score'],
+        weights=x['num_discharges']  # Weight by hospital volume
+    )
+).reset_index(name='weighted_avg_readmission_rate')</pre>
+
+            <h3>4.2 Regional Classifications</h3>
+
+            <p>States are grouped into Census regions for pattern analysis:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Region</th>
+                        <th>States</th>
+                        <th>Avg Readmission Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Southeast</strong></td>
+                        <td>AL, AR, FL, GA, KY, LA, MS, NC, SC, TN, VA, WV</td>
+                        <td>16.2%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Midwest</strong></td>
+                        <td>IL, IN, IA, KS, MI, MN, MO, NE, ND, OH, SD, WI</td>
+                        <td>14.8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Northeast</strong></td>
+                        <td>CT, DE, ME, MD, MA, NH, NJ, NY, PA, RI, VT</td>
+                        <td>14.3%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>West</strong></td>
+                        <td>AK, AZ, CA, CO, HI, ID, MT, NV, NM, OR, UT, WA, WY</td>
+                        <td>13.1%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-section" id="hospital-analysis">
+            <h2>5. Hospital-Level Analysis</h2>
+
+            <h3>5.1 Penalty Tier Classification</h3>
+
+            <p>Hospitals are classified into penalty tiers based on HRRP assessment:</p>
+
+            <pre>
+def classify_penalty_tier(penalty_pct):
+    if penalty_pct == 0:
+        return 'No Penalty'
+    elif penalty_pct < 1.0:
+        return 'Low (0.01-1.0%)'
+    elif penalty_pct < 2.0:
+        return 'Moderate (1.0-2.0%)'
+    else:
+        return 'High (2.0-3.0%)'
+
+df_all_cause['penalty_tier'] = df_all_cause['penalty_pct'].apply(classify_penalty_tier)
+
+# Count hospitals by tier
+tier_distribution = df_all_cause['penalty_tier'].value_counts()</pre>
+
+            <h3>5.2 Top/Bottom Performers</h3>
+
+            <pre>
+# Top 10 worst performers
+worst_hospitals = df_all_cause.nlargest(10, 'score')[
+    ['facility_name', 'state', 'score', 'penalty_pct']
+]
+
+# Top 10 best performers
+best_hospitals = df_all_cause.nsmallest(10, 'score')[
+    ['facility_name', 'state', 'score', 'penalty_pct']
+]</pre>
+        </div>
+
+        <div class="content-section" id="visualization">
+            <h2>6. Geographic Visualization</h2>
+
+            <h3>6.1 State Heatmap Generation</h3>
+
+            <p>State-level choropleth maps visualize readmission rates:</p>
+
+            <pre>
+import plotly.express as px
+
+# Load US state geojson
+states_geojson_url = "https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
+
+# Create choropleth
+fig = px.choropleth(
+    state_summary,
+    geojson=states_geojson,
+    locations='state',
+    locationmode='USA-states',
+    color='avg_readmission_rate',
+    color_continuous_scale='RdYlGn_r',  # Red for high, green for low
+    scope='usa',
+    hover_data=['hospital_count', 'avg_penalty_pct']
+)
+
+fig.write_html('state_readmission_heatmap.html')</pre>
+        </div>
+
+        <div class="content-section" id="integration">
+            <h2>7. Data Integration with Dashboard</h2>
+
+            <h3>7.1 Export to JSON</h3>
+
+            <pre>
+# Export state summary
+state_summary_json = state_summary.to_dict(orient='records')
+
+with open('dashboard/lib/state_summary.json', 'w') as f:
+    json.dump(state_summary_json, f, indent=2)
+
+# Export hospital metrics
+hospital_metrics = df_all_cause[[
+    'facility_name', 'state', 'city', 'score', 'penalty_pct'
+]].rename(columns={
+    'facility_name': 'name',
+    'score': 'readmission_rate'
+}).to_dict(orient='records')
+
+with open('dashboard/lib/hospital_metrics.json', 'w') as f:
+    json.dump(hospital_metrics, f, indent=2)</pre>
+
+            <h3>7.2 Dashboard Rendering</h3>
+
+            <p>The Next.js dashboard consumes these JSON files for interactive visualization:</p>
+
+            <ul>
+                <li><strong>State heatmap</strong> (Recharts/D3): Color-coded by readmission rate</li>
+                <li><strong>Hospital table</strong>: Sortable, searchable list with penalty indicators</li>
+                <li><strong>Regional comparisons</strong>: Bar charts showing regional variation</li>
+                <li><strong>Drill-downs</strong>: Click state to see constituent hospitals</li>
+            </ul>
+        </div>
+
+        <div class="content-section" id="quality">
+            <h2>8. Data Quality Considerations</h2>
+
+            <h3>8.1 Suppression Rules</h3>
+
+            <p>CMS suppresses hospital readmission rates when:</p>
+            <ul>
+                <li>Fewer than 25 cases in measurement period (insufficient volume)</li>
+                <li>Hospital does not provide specific service (e.g., no cardiac surgery)</li>
+                <li>Data quality issues flagged during submission</li>
+            </ul>
+
+            <p><strong>Impact:</strong> ~15-20% of hospital-measure combinations are suppressed. State aggregates are based only on reported values.</p>
+
+            <h3>8.2 Risk Adjustment Limitations</h3>
+
+            <p>CMS risk adjustment models account for:</p>
+            <ul>
+                <li>Patient demographics (age, gender)</li>
+                <li>Comorbidities (Elixhauser/Charlson conditions)</li>
+                <li>Hospital characteristics (teaching status, bed count)</li>
+            </ul>
+
+            <p>But do NOT account for:</p>
+            <ul>
+                <li>Socioeconomic status (income, education)</li>
+                <li>Social determinants of health (housing, food security)</li>
+                <li>Community health infrastructure</li>
+            </ul>
+
+            <p>This may disadvantage safety-net hospitals serving vulnerable populations.</p>
+
+            <h3>8.3 Measurement Period Lag</h3>
+
+            <p>CMS data reflects 3-year rolling averages published 12-18 months after measurement period ends. Current data typically represents performance from 2-5 years prior.</p>
+        </div>
+
+        <div class="content-section" id="applications">
+            <h2>9. Applications</h2>
+
+            <h3>9.1 Health Plan Use Cases</h3>
+
+            <ol>
+                <li><strong>Network Adequacy:</strong> Identify service areas with high-penalty hospital concentration</li>
+                <li><strong>Provider Engagement:</strong> Target quality improvement partnerships with hospitals in high-penalty tiers</li>
+                <li><strong>Value-Based Contracting:</strong> Structure incentives based on CMS benchmarks</li>
+                <li><strong>Member Attribution:</strong> Identify members discharged from high-readmission facilities for proactive outreach</li>
+            </ol>
+
+            <h3>9.2 Hospital System Use Cases</h3>
+
+            <ol>
+                <li><strong>Competitive Benchmarking:</strong> Compare performance against regional peers</li>
+                <li><strong>Quality Improvement Targeting:</strong> Focus on conditions with worst performance vs. national</li>
+                <li><strong>Penalty Mitigation:</strong> Model intervention impact on CMS penalty reduction</li>
+                <li><strong>Service Line Planning:</strong> Assess readmission risk before launching new programs</li>
+            </ol>
+        </div>
+
+        <div class="content-section" id="limitations">
+            <h2>10. Limitations and Caveats</h2>
+
+            <ul>
+                <li><strong>No Patient-Level Data:</strong> Cannot identify individual high-risk patients; use MIMIC/UCI models for that purpose</li>
+                <li><strong>All-Payer vs Medicare:</strong> CMS rates reflect Medicare FFS only; commercial/Medicaid patterns may differ</li>
+                <li><strong>Lag Time:</strong> Performance data 2-5 years old; recent quality initiatives not reflected</li>
+                <li><strong>Suppression Bias:</strong> Small/specialty hospitals underrepresented in state averages</li>
+                <li><strong>No Causality:</strong> Geographic correlations (e.g., Southeast elevation) don't prove causation</li>
+            </ul>
+        </div>
+
+        <div class="content-section" id="enhancements">
+            <h2>11. Future Enhancements</h2>
+
+            <ol>
+                <li><strong>Time Series Analysis:</strong> Track state/hospital trends over 5+ years to identify improving/deteriorating markets</li>
+                <li><strong>SDOH Integration:</strong> Overlay social determinants data (AHRQ, Census) to explain geographic variation</li>
+                <li><strong>Condition-Specific Heatmaps:</strong> Separate maps for HF, AMI, COPD to identify specialty gaps</li>
+                <li><strong>Hospital Clustering:</strong> Group hospitals by performance patterns for targeted interventions</li>
+                <li><strong>Predictive Modeling:</strong> Forecast hospital penalty risk based on historical trajectories</li>
+            </ol>
+        </div>
+
+        <div class="content-section" id="references">
+            <h2>12. References</h2>
+
+            <ul>
+                <li>CMS Hospital Readmissions Reduction Program: <a href="https://www.cms.gov/Medicare/medicare-fee-for-service-payment/acuteinpatientPPS/readmissions-reduction-program">cms.gov/HRRP</a></li>
+                <li>Hospital Compare Data: <a href="https://data.cms.gov/">data.cms.gov</a></li>
+                <li>HRRP Methodology: <a href="https://qualitynet.cms.gov/inpatient/measures/readmission">QualityNet</a></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p><strong>ReadmitRisk Platform</strong> | Geographic Data Methodology</p>
+            <p>For questions or implementation support, contact: nate@natedev.io</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll with navigation highlighting
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-container nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

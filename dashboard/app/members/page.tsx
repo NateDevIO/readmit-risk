@@ -1,8 +1,18 @@
 // app/members/page.tsx
+'use client';
+
+import { useState } from 'react';
 import MemberTable from '@/components/MemberTable';
-import { patientRisks, riskSummary } from '@/lib/data';
+import DatasetSelector from '@/components/DatasetSelector';
+import { getDataset, Dataset } from '@/lib/data';
 
 export default function MembersPage() {
+  const [selectedDataset, setSelectedDataset] = useState<Dataset>('mimic');
+
+  // Get current dataset
+  const currentData = getDataset(selectedDataset);
+  const { patientRisks, riskSummary } = currentData;
+
   // Calculate stats from the actual patient data
   const criticalCount = patientRisks.filter(p => p.risk_score >= 80).length;
   const veryHighCount = patientRisks.filter(p => p.risk_score >= 70 && p.risk_score < 80).length;
@@ -10,12 +20,18 @@ export default function MembersPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Member Risk List</h1>
-        <p className="text-gray-500 mt-1">
-          {patientRisks.length.toLocaleString()} high-risk members (60%+ risk score) from{' '}
-          {riskSummary.total_patients.toLocaleString()} total patients
-        </p>
+      <div className="mb-8 flex items-start justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Member Risk List</h1>
+          <p className="text-gray-500 mt-1">
+            {patientRisks.length.toLocaleString()} high-risk members (60%+ risk score) from{' '}
+            {riskSummary.total_patients.toLocaleString()} total patients
+          </p>
+        </div>
+        <DatasetSelector
+          currentDataset={selectedDataset}
+          onDatasetChange={setSelectedDataset}
+        />
       </div>
 
       {/* Quick Stats */}
@@ -26,18 +42,18 @@ export default function MembersPage() {
         </div>
         <div className="bg-white rounded-lg p-4 border">
           <p className="text-sm text-gray-500">Median Risk Score</p>
-          <p className="text-2xl font-bold">{riskSummary.median_risk_score.toFixed(1)}%</p>
+          <p className="text-2xl font-bold">{(riskSummary.median_risk_score || riskSummary.avg_risk_score).toFixed(1)}%</p>
         </div>
         <div className="bg-white rounded-lg p-4 border">
           <p className="text-sm text-gray-500">Critical (80%+)</p>
           <p className="text-2xl font-bold text-red-600">
-            {criticalCount.toLocaleString()}
+            {(criticalCount || riskSummary.critical_count || 0).toLocaleString()}
           </p>
         </div>
         <div className="bg-white rounded-lg p-4 border">
           <p className="text-sm text-gray-500">Very High (70-80%)</p>
           <p className="text-2xl font-bold text-orange-600">
-            {veryHighCount.toLocaleString()}
+            {(veryHighCount || riskSummary.very_high_count || 0).toLocaleString()}
           </p>
         </div>
       </div>
@@ -65,7 +81,7 @@ export default function MembersPage() {
       </div>
 
       {/* Full Member Table */}
-      <MemberTable members={patientRisks} initialLimit={50} />
+      <MemberTable members={patientRisks} initialLimit={50} dataset={selectedDataset} />
     </div>
   );
 }

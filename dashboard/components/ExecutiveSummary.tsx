@@ -2,23 +2,28 @@
 'use client';
 
 import Link from 'next/link';
-import { RiskSummary, formatCurrency, patientRisks, calculateTotalCostRange } from '@/lib/data';
+import { RiskSummary, formatCurrency, calculateTotalCostRange, Dataset, getDataset } from '@/lib/data';
 
 interface ExecutiveSummaryProps {
   riskSummary: RiskSummary;
+  dataset?: Dataset;
 }
 
-export default function ExecutiveSummary({ riskSummary }: ExecutiveSummaryProps) {
+export default function ExecutiveSummary({ riskSummary, dataset = 'uci' }: ExecutiveSummaryProps) {
   // Calculate cost exposure range for high-risk patients
-  const highRiskPatients = patientRisks.filter(p => p.risk_score >= 60);
+  const currentData = getDataset(dataset);
+  const highRiskPatients = currentData.patientRisks.filter(p => p.risk_score >= 60);
   const totalCostRange = calculateTotalCostRange(highRiskPatients);
+
+  // Determine report filename based on dataset
+  const reportFilename = dataset === 'mimic' ? 'EXECUTIVE_REPORT_MIMIC.html' : 'EXECUTIVE_REPORT_UCI.html';
 
   // Generate dynamic insights based on data
   const insights = [
     {
       icon: '⚠️',
       title: 'Critical Priority',
-      description: `${riskSummary.critical_count.toLocaleString()} patients have 80%+ risk scores requiring immediate intervention`,
+      description: `${(riskSummary.critical_count || 0).toLocaleString()} patients have 80%+ risk scores requiring immediate intervention`,
       action: 'Review critical patient list',
       actionHref: '/members',
       urgency: 'high' as const,
@@ -62,7 +67,7 @@ export default function ExecutiveSummary({ riskSummary }: ExecutiveSummaryProps)
             year: 'numeric'
           })}</p>
           <a
-            href="/EXECUTIVE_REPORT.html"
+            href={`/${reportFilename}`}
             target="_blank"
             className="text-xs text-slate-400 hover:text-slate-200 transition-colors"
           >
