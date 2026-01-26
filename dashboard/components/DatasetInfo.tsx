@@ -54,7 +54,7 @@ export default function DatasetInfo({
         <div>
           <p className="text-sm text-gray-500 dark:text-gray-400">Readmission Rate</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-white">
-            {(readmissionRate * 100).toFixed(1)}%
+            {readmissionRate.toFixed(1)}%
           </p>
         </div>
         <div>
