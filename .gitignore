@@ -33,6 +33,16 @@ Thumbs.db
 # Data (exclude raw data - too large, can be downloaded)
 data/raw/
 
+# MIMIC-IV Data (CRITICAL: Protected health data, requires PhysioNet credentials)
+# Never commit MIMIC data - violates data use agreement
+*mimic*.json
+*mimic*.parquet
+*mimic*.csv
+data/mimic_raw/
+data/mimic_processed/
+data/mimic_cache/
+dashboard/lib/*mimic*.json
+
 # Logs
 *.log
 npm-debug.log*
