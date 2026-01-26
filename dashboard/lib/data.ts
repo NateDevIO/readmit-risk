@@ -7,17 +7,20 @@ import stateSummaryData from './state_summary.json';
 import hospitalMetricsData from './hospital_metrics.json';
 import featureImportanceData from './feature_importance.json';
 
-// MIMIC-IV data (conditionally loaded - files don't exist in production)
-let patientRisksDataMimic: any[] = [];
-let riskSummaryDataMimic: any = null;
+// MIMIC-IV data - import with fallbacks
+let patientRisksDataMimic: any;
+let riskSummaryDataMimic: any;
 
 try {
-  // Try to import MIMIC files (only available locally, not in production)
+  // These imports will fail on Vercel but work locally
   patientRisksDataMimic = require('./patient_risks_mimic.json');
   riskSummaryDataMimic = require('./risk_summary_mimic.json');
-} catch (e) {
-  // MIMIC files not available (expected in production deployment)
-  console.log('MIMIC data files not found - using UCI dataset only');
+  console.log('✅ MIMIC data loaded successfully');
+} catch (error) {
+  // Expected to fail on Vercel (files in .gitignore)
+  patientRisksDataMimic = [];
+  riskSummaryDataMimic = null;
+  console.log('ℹ️ MIMIC data not available (using UCI only)');
 }
 
 // Type definitions
