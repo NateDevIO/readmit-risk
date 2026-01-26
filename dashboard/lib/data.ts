@@ -5,11 +5,20 @@ import patientRisksData from './patient_risks.json';
 import riskSummaryData from './risk_summary.json';
 import stateSummaryData from './state_summary.json';
 import hospitalMetricsData from './hospital_metrics.json';
-
-// MIMIC-IV data
-import patientRisksDataMimic from './patient_risks_mimic.json';
-import riskSummaryDataMimic from './risk_summary_mimic.json';
 import featureImportanceData from './feature_importance.json';
+
+// MIMIC-IV data (conditionally loaded - files don't exist in production)
+let patientRisksDataMimic: any[] = [];
+let riskSummaryDataMimic: any = null;
+
+try {
+  // Try to import MIMIC files (only available locally, not in production)
+  patientRisksDataMimic = require('./patient_risks_mimic.json');
+  riskSummaryDataMimic = require('./risk_summary_mimic.json');
+} catch (e) {
+  // MIMIC files not available (expected in production deployment)
+  console.log('MIMIC data files not found - using UCI dataset only');
+}
 
 // Type definitions
 export interface Patient {
@@ -101,16 +110,16 @@ export const riskSummary: RiskSummary = riskSummaryData as RiskSummary;
 export const stateSummary: StateData[] = stateSummaryData as StateData[];
 export const hospitalMetrics: Hospital[] = hospitalMetricsData as Hospital[];
 
-// Export MIMIC-IV data
-export const patientRisksMimic: Patient[] = patientRisksDataMimic as Patient[];
-export const riskSummaryMimic: RiskSummary = riskSummaryDataMimic as RiskSummary;
+// Export MIMIC-IV data (empty if not available)
+export const patientRisksMimic: Patient[] = (patientRisksDataMimic || []) as Patient[];
+export const riskSummaryMimic: RiskSummary | null = riskSummaryDataMimic as RiskSummary | null;
 
 // Export feature importance data
 export const featureImportance = featureImportanceData;
 
 // Get data by dataset type
 export function getDataset(dataset: Dataset) {
-  if (dataset === 'mimic') {
+  if (dataset === 'mimic' && riskSummaryMimic && patientRisksMimic.length > 0) {
     return {
       patientRisks: patientRisksMimic,
       riskSummary: riskSummaryMimic,
@@ -120,6 +129,7 @@ export function getDataset(dataset: Dataset) {
       description: 'Clinical data from MIMIC-IV (2008-2019)',
     };
   }
+  // Fall back to UCI if MIMIC requested but not available
   return {
     patientRisks,
     riskSummary,

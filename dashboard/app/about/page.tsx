@@ -248,7 +248,7 @@ export default function About() {
                   <h4 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">Length of Stay (LOS)</h4>
                   <p className="text-xs text-gray-600 dark:text-gray-400">
                     <strong>Krumholz et al. (1997):</strong> Longer LOS correlates with illness severity, functional
-                    decline, and higher readmission risk (especially >7 days).
+                    decline, and higher readmission risk (especially &gt;7 days).
                   </p>
                 </div>
 
@@ -289,7 +289,7 @@ export default function About() {
               <h4 className="font-semibold text-gray-900 dark:text-white text-sm">Excess Readmission Ratio</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400">
                 CMS metric comparing a hospital's readmission rate to national expected rate, adjusted for patient mix.
-                >1.0 = higher than expected, triggers HRRP penalties.
+                &gt;1.0 = higher than expected, triggers HRRP penalties.
               </p>
             </div>
 
