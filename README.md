@@ -1,7 +1,7 @@
 # ReadmitRisk - Hospital Readmission Prevention Platform
 
 <p align="center">
-  <img src="docs/screenshots/hero-dashboard.png" alt="ReadmitRisk Executive Dashboard" width="900">
+  <img src="docs/screenshots/hero-dashboard.png?v=2" alt="ReadmitRisk Executive Dashboard" width="900">
 </p>
 
 <p align="center">
@@ -39,7 +39,7 @@ ReadmitRisk is a full-stack care management platform that identifies high-risk p
 ## 🎬 Demo
 
 <p align="center">
-  <img src="docs/screenshots/care-queue-demo.png" alt="Care Queue Workflow" width="800">
+  <img src="docs/screenshots/care-queue-demo.png?v=2" alt="Care Queue Workflow" width="800">
 </p>
 
 *Prioritizing high-risk patients and viewing personalized intervention recommendations*
@@ -51,7 +51,7 @@ ReadmitRisk is a full-stack care management platform that identifies high-risk p
 ### 1. **Risk Stratification Dashboard**
 Real-time patient risk scoring with machine learning models trained on 282K+ patient records.
 
-<img src="docs/screenshots/dashboard-overview.png" alt="Dashboard Overview" width="800">
+<img src="docs/screenshots/dashboard-overview.png?v=2" alt="Dashboard Overview" width="800">
 
 **Capabilities:**
 - Multi-dataset analysis (UCI Diabetes + MIMIC-IV)
@@ -59,7 +59,7 @@ Real-time patient risk scoring with machine learning models trained on 282K+ pat
 - Dynamic cost exposure calculations
 - Interactive data visualizations with Recharts
 
-<img src="docs/screenshots/dataset-comparison.png" alt="Multi-Dataset Comparison" width="800">
+<img src="docs/screenshots/dataset-comparison.png?v=2" alt="Multi-Dataset Comparison" width="800">
 
 *Switch between UCI and MIMIC-IV datasets to compare model performance and patient populations*
 
@@ -68,7 +68,7 @@ Real-time patient risk scoring with machine learning models trained on 282K+ pat
 ### 2. **Care Management Queue**
 Prioritized patient worklist with clinical reasoning and actionable recommendations.
 
-<img src="docs/screenshots/care-queue-demo.png" alt="Care Management Queue" width="800">
+<img src="docs/screenshots/care-queue-demo.png?v=2" alt="Care Management Queue" width="800">
 
 **Features:**
 - Top 50 high-risk patients with sortable views
@@ -81,7 +81,7 @@ Prioritized patient worklist with clinical reasoning and actionable recommendati
 ### 3. **Interactive ROI Calculator**
 Calculate potential savings from targeted care management interventions.
 
-<img src="docs/screenshots/roi-calculator.png" alt="ROI Calculator" width="800">
+<img src="docs/screenshots/roi-calculator.png?v=2" alt="ROI Calculator" width="800">
 
 **Inputs:**
 - Population size
@@ -100,7 +100,7 @@ Calculate potential savings from targeted care management interventions.
 ### 4. **Geographic Analysis**
 State-by-state CMS penalty tracking and hospital benchmarking.
 
-<img src="docs/screenshots/geography-heatmap.png" alt="Geographic Analysis" width="800">
+<img src="docs/screenshots/geography-heatmap.png?v=2" alt="Geographic Analysis" width="800">
 
 **Data Sources:**
 - 205 acute care hospitals
@@ -113,7 +113,7 @@ State-by-state CMS penalty tracking and hospital benchmarking.
 ### 5. **Model Performance & Explainability**
 Transparent ML model evaluation with feature importance analysis.
 
-<img src="docs/screenshots/model-performance.png" alt="Model Performance" width="800">
+<img src="docs/screenshots/model-performance.png?v=2" alt="Model Performance" width="800">
 
 **Analytics:**
 - ROC-AUC curves and precision-recall metrics
