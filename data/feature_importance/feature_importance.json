@@ -1,0 +1,447 @@
+{
+  "uci": {
+    "features": [
+      {
+        "feature": "time_in_hospital",
+        "importance": 0.32445270118651537
+      },
+      {
+        "feature": "number_inpatient",
+        "importance": 0.19975957532824976
+      },
+      {
+        "feature": "age_numeric",
+        "importance": 0.15617641793774428
+      },
+      {
+        "feature": "number_diagnoses",
+        "importance": 0.11685882058750813
+      },
+      {
+        "feature": "num_procedures",
+        "importance": 0.10727469533879755
+      },
+      {
+        "feature": "num_medications",
+        "importance": 0.04797323197708427
+      },
+      {
+        "feature": "number_outpatient",
+        "importance": 0.026719622139836474
+      },
+      {
+        "feature": "num_lab_procedures",
+        "importance": 0.009184418748763783
+      },
+      {
+        "feature": "number_emergency",
+        "importance": 0.006346495358502738
+      },
+      {
+        "feature": "num_medications_changed",
+        "importance": 0.004115260626230217
+      },
+      {
+        "feature": "insulin_changed",
+        "importance": 0.0010512545962715358
+      },
+      {
+        "feature": "diabetesMed_changed",
+        "importance": 8.750617449576202e-05
+      }
+    ],
+    "top_10": [
+      {
+        "feature": "time_in_hospital",
+        "importance": 0.32445270118651537
+      },
+      {
+        "feature": "number_inpatient",
+        "importance": 0.19975957532824976
+      },
+      {
+        "feature": "age_numeric",
+        "importance": 0.15617641793774428
+      },
+      {
+        "feature": "number_diagnoses",
+        "importance": 0.11685882058750813
+      },
+      {
+        "feature": "num_procedures",
+        "importance": 0.10727469533879755
+      },
+      {
+        "feature": "num_medications",
+        "importance": 0.04797323197708427
+      },
+      {
+        "feature": "number_outpatient",
+        "importance": 0.026719622139836474
+      },
+      {
+        "feature": "num_lab_procedures",
+        "importance": 0.009184418748763783
+      },
+      {
+        "feature": "number_emergency",
+        "importance": 0.006346495358502738
+      },
+      {
+        "feature": "num_medications_changed",
+        "importance": 0.004115260626230217
+      }
+    ]
+  },
+  "mimic": {
+    "features": [
+      {
+        "feature": "age",
+        "importance": 0.3645891041891289
+      },
+      {
+        "feature": "procedure_count",
+        "importance": 0.10320352929931034
+      },
+      {
+        "feature": "bilirubin_max",
+        "importance": 0.08877473228974662
+      },
+      {
+        "feature": "potassium_min",
+        "importance": 0.07068603602859257
+      },
+      {
+        "feature": "sodium_max",
+        "importance": 0.06200929803825578
+      },
+      {
+        "feature": "hgb_min",
+        "importance": 0.02940673190696988
+      },
+      {
+        "feature": "hgb_mean",
+        "importance": 0.027644676974400775
+      },
+      {
+        "feature": "on_antibiotic",
+        "importance": 0.023583569704991654
+      },
+      {
+        "feature": "creatinine_max",
+        "importance": 0.02256128904053165
+      },
+      {
+        "feature": "sodium_min",
+        "importance": 0.019611796379116718
+      },
+      {
+        "feature": "on_steroid",
+        "importance": 0.016607968411521106
+      },
+      {
+        "feature": "anemia",
+        "importance": 0.016228705270959497
+      },
+      {
+        "feature": "lactate_max",
+        "importance": 0.014186309405164748
+      },
+      {
+        "feature": "medication_count",
+        "importance": 0.014150065093291355
+      },
+      {
+        "feature": "on_heparin",
+        "importance": 0.013840907291795816
+      },
+      {
+        "feature": "wbc_mean",
+        "importance": 0.008172016139937803
+      },
+      {
+        "feature": "glucose_max",
+        "importance": 0.007196212877129086
+      },
+      {
+        "feature": "chloride_mean",
+        "importance": 0.007092324407006777
+      },
+      {
+        "feature": "creatinine_mean",
+        "importance": 0.0070048399586776135
+      },
+      {
+        "feature": "bun_mean",
+        "importance": 0.006666850261402868
+      },
+      {
+        "feature": "wbc_min",
+        "importance": 0.00650045590105223
+      },
+      {
+        "feature": "bicarbonate_mean",
+        "importance": 0.005941899813059012
+      },
+      {
+        "feature": "potassium_max",
+        "importance": 0.005139139224818453
+      },
+      {
+        "feature": "wbc_max",
+        "importance": 0.005096240216120731
+      },
+      {
+        "feature": "dbp_min",
+        "importance": 0.004891064955530762
+      },
+      {
+        "feature": "bun_max",
+        "importance": 0.004730336691433869
+      },
+      {
+        "feature": "glucose_mean",
+        "importance": 0.004717263627524432
+      },
+      {
+        "feature": "platelets_mean",
+        "importance": 0.004343928509765593
+      },
+      {
+        "feature": "on_insulin",
+        "importance": 0.0033270149302025813
+      },
+      {
+        "feature": "platelets_min",
+        "importance": 0.0030915466107576408
+      },
+      {
+        "feature": "polypharmacy",
+        "importance": 0.002601744032053353
+      },
+      {
+        "feature": "sodium_mean",
+        "importance": 0.0023827729677137802
+      },
+      {
+        "feature": "had_central_line",
+        "importance": 0.00204330359369904
+      },
+      {
+        "feature": "on_warfarin",
+        "importance": 0.00189598389650289
+      },
+      {
+        "feature": "on_opioid",
+        "importance": 0.0017250333168565839
+      },
+      {
+        "feature": "resp_rate_max",
+        "importance": 0.0016867876386580608
+      },
+      {
+        "feature": "icu_los_days",
+        "importance": 0.0014996443958731646
+      },
+      {
+        "feature": "spo2_min",
+        "importance": 0.0014441601877995991
+      },
+      {
+        "feature": "sbp_min",
+        "importance": 0.0013633881938523078
+      },
+      {
+        "feature": "thrombocytopenia",
+        "importance": 0.0012966509776868263
+      },
+      {
+        "feature": "elevated_creatinine",
+        "importance": 0.001243805853570336
+      },
+      {
+        "feature": "hr_std",
+        "importance": 0.0012009898443320745
+      },
+      {
+        "feature": "vital_instability",
+        "importance": 0.0010406315181138992
+      },
+      {
+        "feature": "hr_min",
+        "importance": 0.0009025748525932913
+      },
+      {
+        "feature": "hr_mean",
+        "importance": 0.000895486365833473
+      },
+      {
+        "feature": "spo2_mean",
+        "importance": 0.0008557375839066716
+      },
+      {
+        "feature": "dbp_max",
+        "importance": 0.0007861407736675292
+      },
+      {
+        "feature": "hr_max",
+        "importance": 0.0007406536070032868
+      },
+      {
+        "feature": "sbp_mean",
+        "importance": 0.0006432239258812262
+      },
+      {
+        "feature": "resp_rate_mean",
+        "importance": 0.0006353385978551512
+      },
+      {
+        "feature": "dbp_mean",
+        "importance": 0.0006002979532237318
+      },
+      {
+        "feature": "temp_mean",
+        "importance": 0.0005773594653984028
+      },
+      {
+        "feature": "icu_count",
+        "importance": 0.0003407977650580123
+      },
+      {
+        "feature": "sbp_max",
+        "importance": 0.0003223606339303722
+      },
+      {
+        "feature": "had_hypoxia",
+        "importance": 0.00020392954400038035
+      },
+      {
+        "feature": "temp_max",
+        "importance": 7.23640600462071e-05
+      },
+      {
+        "feature": "had_mechanical_vent",
+        "importance": 2.985006693357932e-06
+      },
+      {
+        "feature": "had_dialysis",
+        "importance": 0.0
+      },
+      {
+        "feature": "had_hypotension",
+        "importance": 0.0
+      },
+      {
+        "feature": "had_icu_stay",
+        "importance": 0.0
+      }
+    ],
+    "top_15": [
+      {
+        "feature": "age",
+        "importance": 0.3645891041891289
+      },
+      {
+        "feature": "procedure_count",
+        "importance": 0.10320352929931034
+      },
+      {
+        "feature": "bilirubin_max",
+        "importance": 0.08877473228974662
+      },
+      {
+        "feature": "potassium_min",
+        "importance": 0.07068603602859257
+      },
+      {
+        "feature": "sodium_max",
+        "importance": 0.06200929803825578
+      },
+      {
+        "feature": "hgb_min",
+        "importance": 0.02940673190696988
+      },
+      {
+        "feature": "hgb_mean",
+        "importance": 0.027644676974400775
+      },
+      {
+        "feature": "on_antibiotic",
+        "importance": 0.023583569704991654
+      },
+      {
+        "feature": "creatinine_max",
+        "importance": 0.02256128904053165
+      },
+      {
+        "feature": "sodium_min",
+        "importance": 0.019611796379116718
+      },
+      {
+        "feature": "on_steroid",
+        "importance": 0.016607968411521106
+      },
+      {
+        "feature": "anemia",
+        "importance": 0.016228705270959497
+      },
+      {
+        "feature": "lactate_max",
+        "importance": 0.014186309405164748
+      },
+      {
+        "feature": "medication_count",
+        "importance": 0.014150065093291355
+      },
+      {
+        "feature": "on_heparin",
+        "importance": 0.013840907291795816
+      }
+    ],
+    "groups": {
+      "Demographics": {
+        "count": 2,
+        "total_importance": 0.36608874858500207,
+        "mean_importance": 0.18304437429250103,
+        "max_importance": 0.3645891041891289
+      },
+      "Vital Signs": {
+        "count": 14,
+        "total_importance": 0.015295802402998935,
+        "mean_importance": 0.001092557314499924,
+        "max_importance": 0.004891064955530762
+      },
+      "Laboratory": {
+        "count": 20,
+        "total_importance": 0.26837436195163167,
+        "mean_importance": 0.013418718097581583,
+        "max_importance": 0.07068603602859257
+      },
+      "Medications": {
+        "count": 1,
+        "total_importance": 0.014150065093291355,
+        "mean_importance": 0.014150065093291355,
+        "max_importance": 0.014150065093291355
+      },
+      "Procedures": {
+        "count": 3,
+        "total_importance": 0.1032065143060037,
+        "mean_importance": 0.03440217143533456,
+        "max_importance": 0.10320352929931034
+      },
+      "ICU Metrics": {
+        "count": 2,
+        "total_importance": 0.0003407977650580123,
+        "mean_importance": 0.00017039888252900616,
+        "max_importance": 0.0003407977650580123
+      },
+      "Other": {
+        "count": 18,
+        "total_importance": 0.2325437098960141,
+        "mean_importance": 0.012919094994223008,
+        "max_importance": 0.08877473228974662
+      }
+    }
+  },
+  "generated_at": "2026-01-22T23:27:36.801189"
+}

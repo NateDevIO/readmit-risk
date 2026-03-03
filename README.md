@@ -110,7 +110,31 @@ State-by-state CMS penalty tracking and hospital benchmarking.
 
 ---
 
-### 5. **Model Performance & Explainability**
+### 5. **MCP Server (Remote API)**
+Connect any MCP-compatible AI assistant to ReadmitRisk data — no clone or install needed.
+
+```json
+{
+  "mcpServers": {
+    "readmit-risk": {
+      "url": "https://readmit-risk-mcp-production.up.railway.app/sse"
+    }
+  }
+}
+```
+
+**7 Tools Available:**
+- Patient risk lookups across UCI and MIMIC-IV datasets
+- High-risk patient filtering with age/threshold controls
+- Hospital readmission metrics and CMS penalty data
+- Live ML predictions using trained Gradient Boosting models
+- Feature importance and dataset comparison analytics
+
+Deployed on Railway via SSE transport. Also runs locally via stdio — see [mcp_server/README.md](mcp_server/README.md) for details.
+
+---
+
+### 6. **Model Performance & Explainability**
 Transparent ML model evaluation with feature importance analysis.
 
 <img src="docs/screenshots/model-performance.png?v=2" alt="Model Performance" width="800">
@@ -226,9 +250,14 @@ readmit-risk/
 │   ├── components/        # React components
 │   ├── lib/              # Data and utilities
 │   └── public/           # Static assets & reports
+├── mcp_server/           # MCP server (deployed on Railway)
+│   ├── server.py        # FastMCP tool definitions
+│   ├── data_loader.py   # Lazy-loading data store
+│   ├── train_model.py   # Model training script
+│   └── models/          # Trained model artifacts
 ├── data/                 # Processed datasets
-│   ├── processed/        # UCI data (included)
-│   └── mimic_*/         # MIMIC data (gitignored)
+│   ├── processed/        # UCI + MIMIC data
+│   └── mimic_*/         # MIMIC raw data (gitignored)
 ├── notebooks/           # Jupyter analysis notebooks
 ├── *.py                # Python ML pipeline scripts
 └── docs/               # Documentation and screenshots

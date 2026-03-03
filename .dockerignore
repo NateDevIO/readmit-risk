@@ -1,0 +1,21 @@
+# Deny everything by default
+*
+
+# Allow MCP server code
+!mcp_server/
+mcp_server/__pycache__/
+
+# Allow data files needed at runtime
+!data/processed/patient_risks.json
+!data/processed/patient_risks_mimic.json
+!data/processed/risk_summary.json
+!data/processed/risk_summary_mimic.json
+!data/processed/risk_summary_uci.json
+!data/processed/hospital_metrics.json
+!data/processed/state_summary.json
+!data/feature_importance/feature_importance.json
+!data/comparison_reports/dataset_comparison.csv
+
+# Allow build files
+!requirements-server.txt
+!Dockerfile
