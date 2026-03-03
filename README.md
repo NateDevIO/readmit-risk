@@ -117,7 +117,7 @@ Connect any MCP-compatible AI assistant to ReadmitRisk data — no clone or inst
 {
   "mcpServers": {
     "readmit-risk": {
-      "url": "https://readmit-risk-mcp-production.up.railway.app/sse"
+      "url": "https://readmit-risk-production.up.railway.app/sse"
     }
   }
 }

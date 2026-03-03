@@ -65,7 +65,7 @@ The server is deployed on Railway and available publicly — no clone or install
 {
   "mcpServers": {
     "readmit-risk": {
-      "url": "https://readmit-risk-mcp-production.up.railway.app/sse"
+      "url": "https://readmit-risk-production.up.railway.app/sse"
     }
   }
 }
