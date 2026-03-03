@@ -8,6 +8,7 @@ from typing import Optional
 import numpy as np
 import pandas as pd
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 
 from .data_loader import store
 
@@ -433,4 +434,7 @@ if __name__ == "__main__":
         port = int(os.environ.get("PORT", "8000"))
         mcp.settings.host = "0.0.0.0"
         mcp.settings.port = port
+        mcp.settings.transport_security = TransportSecuritySettings(
+            enable_dns_rebinding_protection=False
+        )
     mcp.run(transport=transport)
