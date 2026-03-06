@@ -28,21 +28,16 @@ mcp = FastMCP(
 # Helpers
 # ---------------------------------------------------------------------------
 
-RISK_TIERS = [
-    (90, 100, "Critical"),
-    (80, 89, "Very High"),
-    (70, 79, "High"),
-    (60, 69, "Elevated"),
-    (40, 59, "Moderate"),
-    (0, 39, "Low"),
-]
-
-
 def _risk_tier(score: float) -> str:
-    for lo, hi, label in RISK_TIERS:
-        if lo <= score <= hi:
-            return label
-    return "Unknown"
+    if score >= 80:
+        return "Critical"
+    if score >= 70:
+        return "Very High"
+    if score >= 60:
+        return "High"
+    if score >= 40:
+        return "Moderate"
+    return "Low"
 
 
 def _df_to_json(df: pd.DataFrame, limit: int | None = None) -> str:
@@ -378,9 +373,8 @@ def predict_risk(
     scaler = joblib.load(scaler_path)
     feature_columns: list[str] = json.loads(columns_path.read_text(encoding="utf-8"))
 
-    # Build base features from explicit params
+    # Build feature vector from explicit params
     base = {
-        "age": age,
         "age_numeric": age,
         "time_in_hospital": time_in_hospital,
         "num_medications": num_medications,
@@ -390,26 +384,33 @@ def predict_risk(
         "number_outpatient": number_outpatient,
         "num_lab_procedures": num_lab_procedures,
         "num_procedures": num_procedures,
-        "total_visits": number_outpatient + number_emergency + number_inpatient,
-        "medication_intensity": num_medications / (time_in_hospital + 1),
-        "num_med_changes": 0,
-        "medication_count": num_medications,
-        "procedure_count": num_procedures,
     }
 
-    # Merge additional features
     if additional_features:
         extra = json.loads(additional_features)
         base.update(extra)
 
-    # Construct feature vector aligned to training columns
-    row = {col: base.get(col, 0.0) for col in feature_columns}
-    X = pd.DataFrame([row])[feature_columns]
-    X = X.fillna(0).replace([np.inf, -np.inf], 0)
+    # Load population-median defaults for features not provided
+    defaults_path = MODELS_DIR / f"{ds}_feature_defaults.json"
+    defaults = {}
+    if defaults_path.exists():
+        defaults = json.loads(defaults_path.read_text(encoding="utf-8"))
 
+    row = {col: base.get(col, defaults.get(col, 0.0)) for col in feature_columns}
+    X = pd.DataFrame([row])[feature_columns]
     X_scaled = scaler.transform(X)
-    prob = model.predict_proba(X_scaled)[0, 1]
-    risk_score = round(prob * 100, 2)
+    prob = float(model.predict_proba(X_scaled)[0, 1])
+
+    # Map probability to the 0-100 risk scale using the
+    # training population's CDF.
+    calibration_path = MODELS_DIR / f"{ds}_calibration.json"
+    if calibration_path.exists():
+        calibration = json.loads(calibration_path.read_text(encoding="utf-8"))
+        grid = np.linspace(0, 100, len(calibration))
+        risk_score = round(float(np.interp(prob, calibration, grid)), 2)
+    else:
+        risk_score = round(prob * 100, 2)
+
     tier = _risk_tier(risk_score)
     estimated_cost = round(risk_score / 100 * 15000, 2)
 
@@ -419,7 +420,6 @@ def predict_risk(
         "risk_tier": tier,
         "estimated_cost": estimated_cost,
         "readmission_probability": round(prob, 4),
-        "input_features": {k: v for k, v in row.items() if v != 0},
         "model_type": type(model).__name__,
     }, default=str)
 
