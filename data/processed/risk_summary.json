@@ -2,7 +2,7 @@
   "total_patients": 71518,
   "high_risk_count": 7083,
   "total_cost_exposure": 78501391.70939398,
-  "avg_risk_score": 73.8871398271862,
+  "avg_risk_score": 26.39,
   "median_risk_score": 72.49555484141311,
   "risk_distribution": {
     "0-20%": 37663,
@@ -97,5 +97,7 @@
       "avg_cost": 9719.151595477628,
       "avg_risk": 64.79434396985086
     }
-  ]
+  ],
+  "high_risk_readmission_rate": 13.29,
+  "avg_risk_score_high_risk": 73.89
 }

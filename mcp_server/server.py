@@ -20,13 +20,53 @@ mcp = FastMCP(
     instructions=(
         "Hospital readmission risk analytics for UCI Diabetes (71K patients) "
         "and MIMIC-IV (211K admissions). Query patient risk scores, hospital "
-        "metrics, feature importance, and run live predictions."
+        "metrics, feature importance, and run live predictions.\n\n"
+        "Known limitations:\n"
+        "- UCI model AUC is 0.56 (barely above random). Scores are useful "
+        "for relative ranking but are not clinically validated predictions.\n"
+        "- MIMIC model AUC is 0.63 — better but still modest.\n"
+        "- UCI age values are decade-bucket midpoints (5, 15, 25...), not "
+        "exact ages. The original data uses ranges like [0-10).\n"
+        "- The two datasets use different algorithms and feature sets, so "
+        "cross-dataset score comparisons should be interpreted carefully.\n"
+        "- predict_risk uses a numeric-only model and quantile-maps its "
+        "output to match the stored-score distribution. Scores approximate "
+        "but may not exactly match pre-computed patient lookups."
     ),
 )
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def _build_stored_score_cdf(summary: dict) -> tuple[list[float], list[float]]:
+    """Build a CDF from the pre-computed risk distribution.
+
+    Returns (cumulative_percentiles, score_boundaries) for use with
+    np.interp to map a percentile rank to the stored-score scale.
+    """
+    dist = summary.get("risk_distribution", {})
+    high_dist = summary.get("high_risk_distribution", {})
+    total = summary.get("total_patients", 1)
+
+    cum_pct = [0.0]
+    scores = [0.0]
+
+    # Coarse bins 0-60
+    cum = 0.0
+    for label, hi in [("0-20%", 20), ("20-40%", 40), ("40-60%", 60)]:
+        cum += dist.get(label, 0) / total * 100
+        cum_pct.append(cum)
+        scores.append(hi)
+
+    # Fine bins 60-100
+    for label, hi in [("60-70%", 70), ("70-80%", 80), ("80-90%", 90), ("90-100%", 100)]:
+        cum += high_dist.get(label, 0) / total * 100
+        cum_pct.append(cum)
+        scores.append(hi)
+
+    return cum_pct, scores
+
 
 def _risk_tier(score: float) -> str:
     if score >= 80:
@@ -277,9 +317,10 @@ def compare_datasets() -> str:
         "key_differences": [
             "MIMIC-IV has 3x more patients (211K vs 72K).",
             "MIMIC readmission rate is much higher (20.5% vs 8.8%).",
-            "MIMIC uses GradientBoosting; UCI uses LogisticRegression.",
+            "Pre-computed scores: UCI uses LogisticRegression, MIMIC uses GradientBoosting.",
             "MIMIC-IV has richer features (labs, vitals, ICU) vs UCI (diabetes-specific).",
-            "MIMIC model AUC is higher (0.63 vs 0.56).",
+            "MIMIC model AUC is higher (0.63 vs 0.56). Both are modest.",
+            "UCI avg risk score (~26) reflects mostly low-risk diabetes patients; MIMIC avg (~61) reflects sicker ICU population.",
         ],
     }, default=str)
 
@@ -328,24 +369,28 @@ def predict_risk(
     num_procedures: float = 1,
     additional_features: Optional[str] = None,
 ) -> str:
-    """Run a live risk prediction using a trained model.
+    """Run a live risk prediction using a trained numeric-only model.
 
-    For the UCI model, the 10 core numeric features above are used.
-    For the MIMIC model, pass extra features via `additional_features`
-    as a JSON object (e.g. '{"medication_count": 12, "had_icu_stay": 1}').
+    Scores are quantile-mapped to match the pre-computed score distribution,
+    so they are on the same 0-100 scale as get_patient_risk_score. However,
+    this model uses only numeric features (not categorical), so scores are
+    approximate and may not exactly match stored patient lookups.
 
-    Models must be trained first with: python -m mcp_server.train_model
+    For MIMIC, pass clinical features via `additional_features` as a JSON
+    object, e.g. '{"creatinine_max": 4.0, "bilirubin_max": 5.0,
+    "vital_instability": 1}'. MIMIC predictions improve significantly when
+    lab values and clinical flags are provided.
 
     Args:
         dataset: "uci" or "mimic".
         age: Patient age in years.
-        time_in_hospital: Days in hospital.
+        time_in_hospital: Days in hospital (UCI only — not used for MIMIC).
         num_medications: Total medications prescribed.
-        number_diagnoses: Count of distinct diagnoses.
-        number_inpatient: Prior inpatient visits (last year).
-        number_emergency: Prior emergency visits (last year).
-        number_outpatient: Prior outpatient visits (last year).
-        num_lab_procedures: Number of lab procedures performed.
+        number_diagnoses: Count of distinct diagnoses (UCI only).
+        number_inpatient: Prior inpatient visits (UCI only).
+        number_emergency: Prior emergency visits (UCI only).
+        number_outpatient: Prior outpatient visits (UCI only).
+        num_lab_procedures: Number of lab procedures (UCI only).
         num_procedures: Number of procedures performed.
         additional_features: JSON string of extra features (mainly for MIMIC).
     """
@@ -401,13 +446,21 @@ def predict_risk(
     X_scaled = scaler.transform(X)
     prob = float(model.predict_proba(X_scaled)[0, 1])
 
-    # Map probability to the 0-100 risk scale using the
-    # training population's CDF.
+    # Map probability to the 0-100 risk scale:
+    # 1. Calibration CDF: model probability → percentile rank (0-100)
+    # 2. Stored-score mapping: percentile → pre-computed score scale
+    # This ensures predict_risk outputs match the distribution of
+    # scores returned by get_patient_risk_score.
     calibration_path = MODELS_DIR / f"{ds}_calibration.json"
     if calibration_path.exists():
         calibration = json.loads(calibration_path.read_text(encoding="utf-8"))
         grid = np.linspace(0, 100, len(calibration))
-        risk_score = round(float(np.interp(prob, calibration, grid)), 2)
+        percentile = float(np.interp(prob, calibration, grid))
+
+        # Map percentile to stored-score scale
+        summary = store.risk_summary_for(ds)
+        cum_pct, score_bounds = _build_stored_score_cdf(summary)
+        risk_score = round(float(np.interp(percentile, cum_pct, score_bounds)), 2)
     else:
         risk_score = round(prob * 100, 2)
 
