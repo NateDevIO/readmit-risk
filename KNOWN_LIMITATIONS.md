@@ -26,8 +26,10 @@ The `predict_risk` tool uses a **separate, numeric-only model** trained on the s
 
 Because of this:
 - **Scores are approximate.** A live prediction for the same patient may not exactly match their stored risk score. The quantile mapping ensures outputs are on the same scale and distribution, but the underlying model is different.
-- **UCI predict_risk uses 9 features** (age, time in hospital, medications, diagnoses, prior visits, lab procedures, procedures). The full pre-computed model uses 70 features (12 numeric + 58 one-hot categoricals).
+- **Expected score gap is 10-20 points** for some patients, because the stored scores are driven primarily by categorical features (discharge disposition, admission type, etc.) that the live model cannot access. Tier classification (Low / Moderate / High / Very High / Critical) is consistent across both tools; exact numeric scores may vary.
+- **UCI predict_risk uses 9 features** (age, time in hospital, medications, diagnoses, prior visits, lab procedures, procedures). The full pre-computed model uses 70 features (12 numeric + 58 one-hot categoricals). The categorical features account for ~89% of the full model's predictive importance — this is the primary source of the score gap.
 - **MIMIC predict_risk uses 18 features** (age, medications, procedures, plus lab values and clinical flags via `additional_features`). MIMIC predictions improve significantly when clinical data is provided.
+- **For the most authoritative score on an existing patient, use `get_patient_risk_score`**, which returns the pre-computed full-model score. Use `predict_risk` for hypothetical scenarios or patients not in the dataset.
 
 ## Cross-Dataset Comparisons
 

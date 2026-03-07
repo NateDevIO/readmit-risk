@@ -21,17 +21,20 @@ mcp = FastMCP(
         "Hospital readmission risk analytics for UCI Diabetes (71K patients) "
         "and MIMIC-IV (211K admissions). Query patient risk scores, hospital "
         "metrics, feature importance, and run live predictions.\n\n"
-        "Known limitations:\n"
-        "- UCI model AUC is 0.56 (barely above random). Scores are useful "
-        "for relative ranking but are not clinically validated predictions.\n"
-        "- MIMIC model AUC is 0.63 — better but still modest.\n"
+        "Important context for interpreting results:\n"
+        "- UCI model AUC is 0.56, MIMIC is 0.63 — scores are useful for "
+        "relative risk ranking but are not calibrated clinical predictions.\n"
+        "- Risk scores are quantile ranks (0-100) against the patient "
+        "population, not readmission probabilities.\n"
+        "- Live predictions (predict_risk) use a numeric-only model and may "
+        "differ from stored full-model scores (get_patient_risk_score) by "
+        "10-20 points. Tier classification is consistent; exact scores may "
+        "vary. For the most authoritative score on an existing patient, use "
+        "get_patient_risk_score.\n"
         "- UCI age values are decade-bucket midpoints (5, 15, 25...), not "
-        "exact ages. The original data uses ranges like [0-10).\n"
+        "exact ages.\n"
         "- The two datasets use different algorithms and feature sets, so "
-        "cross-dataset score comparisons should be interpreted carefully.\n"
-        "- predict_risk uses a numeric-only model and quantile-maps its "
-        "output to match the stored-score distribution. Scores approximate "
-        "but may not exactly match pre-computed patient lookups."
+        "cross-dataset score comparisons should be interpreted carefully."
     ),
 )
 
@@ -474,6 +477,18 @@ def predict_risk(
         "estimated_cost": estimated_cost,
         "readmission_probability": round(prob, 4),
         "model_type": type(model).__name__,
+        "score_interpretation": (
+            "risk_score is a relative ranking (0-100) against the patient "
+            "population, not a probability. readmission_probability is the "
+            "model's estimated chance of 30-day readmission."
+        ),
+        "note": (
+            "Live predictions use a numeric-only model and may differ from "
+            "stored scores which incorporate categorical features. Tier "
+            "classification is consistent; exact scores may vary by 10-20 "
+            "points. For the most authoritative score on an existing patient, "
+            "use get_patient_risk_score."
+        ),
     }, default=str)
 
 
