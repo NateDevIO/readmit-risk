@@ -83,6 +83,7 @@ export default function ChatWidget() {
           if (done) break;
 
           buffer += decoder.decode(value, { stream: true });
+          buffer = buffer.replace(/\r\n/g, '\n');
           const chunks = buffer.split('\n\n');
           buffer = chunks.pop() || '';
 
