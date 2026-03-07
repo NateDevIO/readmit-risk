@@ -1,14 +1,16 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback, FormEvent } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:8000';
 
 const SUGGESTED_PROMPTS = [
-  'Show me a high-risk patient',
+  'Look up a critical-tier patient and explain their risk factors',
   'Compare the UCI and MIMIC datasets',
-  'What are the top readmission risk factors?',
-  'Predict risk for a custom patient',
+  'What are the top 10 readmission risk factors?',
+  'Predict risk for a 72-year-old with 8 days in hospital, 18 medications, 9 diagnoses, and 3 prior inpatient visits',
   "What are the model's limitations?",
 ];
 
@@ -297,15 +299,17 @@ export default function ChatWidget() {
                   key={i}
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div
-                    className={`max-w-[85%] px-3.5 py-2 text-sm leading-relaxed whitespace-pre-wrap break-words ${
-                      msg.role === 'user'
-                        ? 'bg-blue-600 text-white rounded-2xl rounded-br-md'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-2xl rounded-bl-md'
-                    }`}
-                  >
-                    {msg.content}
-                  </div>
+                  {msg.role === 'user' ? (
+                    <div className="max-w-[85%] px-3.5 py-2 text-sm leading-relaxed whitespace-pre-wrap break-words bg-blue-600 text-white rounded-2xl rounded-br-md">
+                      {msg.content}
+                    </div>
+                  ) : (
+                    <div className="max-w-[85%] px-3.5 py-2 text-sm leading-relaxed break-words bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-2xl rounded-bl-md chat-md">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {msg.content}
+                      </ReactMarkdown>
+                    </div>
+                  )}
                 </div>
               ))}
 
