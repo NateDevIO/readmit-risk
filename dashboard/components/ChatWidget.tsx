@@ -26,6 +26,7 @@ export default function ChatWidget() {
   const [streaming, setStreaming] = useState(false);
   const [activeTool, setActiveTool] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showLabel, setShowLabel] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -40,6 +41,24 @@ export default function ChatWidget() {
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 150);
   }, [open]);
+
+  // Auto-hide label after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setShowLabel(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Hide label immediately when chat opens
+  useEffect(() => {
+    if (open) setShowLabel(false);
+  }, [open]);
+
+  // Listen for external open-chat events (e.g. from homepage CTA)
+  useEffect(() => {
+    const handler = () => setOpen(true);
+    window.addEventListener('open-chat', handler);
+    return () => window.removeEventListener('open-chat', handler);
+  }, []);
 
   const send = useCallback(
     async (text: string) => {
@@ -181,6 +200,19 @@ export default function ChatWidget() {
 
   return (
     <>
+      {/* Label tooltip */}
+      <div
+        className={`fixed bottom-[2.35rem] right-[5.5rem] z-50
+          bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200
+          text-xs font-medium px-3 py-1.5 rounded-full
+          shadow-md border border-gray-200 dark:border-gray-600
+          whitespace-nowrap
+          transition-all duration-500
+          ${showLabel && !open ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}
+      >
+        Ask about the data
+      </div>
+
       {/* Floating action button */}
       <button
         onClick={() => setOpen(true)}
@@ -189,6 +221,7 @@ export default function ChatWidget() {
           shadow-lg hover:shadow-xl
           transition-all duration-300
           flex items-center justify-center group
+          animate-chat-glow
           ${open ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'}`}
         aria-label="Open chat"
       >
