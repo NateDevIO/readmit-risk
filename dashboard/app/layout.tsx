@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
+import ChatWidget from '@/components/ChatWidget';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
+        <ChatWidget />
         <footer className="bg-white dark:bg-gray-800 border-t dark:border-gray-700 py-8 transition-colors">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid md:grid-cols-3 gap-8 mb-6">
