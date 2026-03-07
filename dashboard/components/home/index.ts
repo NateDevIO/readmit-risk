@@ -1,0 +1,10 @@
+export { default as HeroSection } from './HeroSection';
+export { default as ChallengeSection } from './ChallengeSection';
+export { default as TalkToDataSection } from './TalkToDataSection';
+export { default as BeforeAfterSection } from './BeforeAfterSection';
+export { default as CaseStudySection } from './CaseStudySection';
+export { default as TestimonialsSection } from './TestimonialsSection';
+export { default as DataSourcesSection } from './DataSourcesSection';
+export { default as MethodologySection } from './MethodologySection';
+export { default as TechStackSection } from './TechStackSection';
+export { default as AboutSection } from './AboutSection';
