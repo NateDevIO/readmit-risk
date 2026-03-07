@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback, FormEvent } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { parseSSEChunk } from '@/lib/parse-sse';
 
 const API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:8000';
 
@@ -103,25 +104,16 @@ export default function ChatWidget() {
           const { done, value } = await reader.read();
           if (done) break;
 
-          buffer += decoder.decode(value, { stream: true });
-          buffer = buffer.replace(/\r\n/g, '\n');
-          const chunks = buffer.split('\n\n');
-          buffer = chunks.pop() || '';
+          const raw = decoder.decode(value, { stream: true });
+          const { events, remaining } = parseSSEChunk(buffer, raw);
+          buffer = remaining;
 
-          for (const chunk of chunks) {
-            let eventType = '';
-            let data = '';
-            for (const line of chunk.split('\n')) {
-              if (line.startsWith('event:'))
-                eventType = line.slice(6).trim();
-              else if (line.startsWith('data:'))
-                data = line.slice(5).trim();
-            }
-            if (!data) continue;
+          for (const sseEvent of events) {
+            if (!sseEvent.data) continue;
 
             try {
-              const parsed = JSON.parse(data);
-              if (eventType === 'text' && parsed.text) {
+              const parsed = JSON.parse(sseEvent.data);
+              if (sseEvent.event === 'text' && parsed.text) {
                 assistantText += parsed.text;
                 setMessages((prev) => {
                   const next = [...prev];
@@ -132,11 +124,11 @@ export default function ChatWidget() {
                   return next;
                 });
                 setActiveTool(null);
-              } else if (eventType === 'tool_start') {
+              } else if (sseEvent.event === 'tool_start') {
                 setActiveTool(parsed.tool || 'tool');
-              } else if (eventType === 'tool_result') {
+              } else if (sseEvent.event === 'tool_result') {
                 setActiveTool(null);
-              } else if (eventType === 'error') {
+              } else if (sseEvent.event === 'error') {
                 setError(parsed.error || 'Something went wrong');
               }
             } catch {
