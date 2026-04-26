@@ -11,6 +11,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
 
 from .data_loader import store
+from . import retrieval
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 MODELS_DIR = Path(__file__).resolve().parent / "models"
@@ -489,6 +490,102 @@ def predict_risk(
             "points. For the most authoritative score on an existing patient, "
             "use get_patient_risk_score."
         ),
+    }, default=str)
+
+
+@mcp.tool()
+def search_clinical_notes(
+    query: str,
+    note_type: Optional[str] = None,
+    k: int = 5,
+) -> str:
+    """Semantic search over a corpus of ~10K chunks from ~5K transcribed
+    clinical notes (the public MTSamples dataset). Embeds the query with
+    voyage-3-lite and returns the top-k chunks ranked by cosine similarity.
+
+    Use this tool for open-ended *clinical-knowledge* questions where the
+    answer lives in real clinical documentation — e.g. "what does our
+    corpus say about beta-blocker contraindications?", "show me notes
+    discussing post-operative cardiac complications", "find documentation
+    of heparin-induced thrombocytopenia". Each result includes a
+    ``citation`` block (corpus, sample_name, medical_specialty, soap_section,
+    chunk_index/total_chunks) so you can attribute the information back to
+    its source report when answering the user.
+
+    Do NOT use this tool for:
+      - Specific patient lookups → use get_patient_risk_score.
+      - Risk-score predictions → use predict_risk.
+      - Hospital-level metrics → use get_hospital_metrics.
+      - Aggregate distributions / cohort stats → use get_risk_distribution.
+      - Side-by-side dataset comparisons → use compare_datasets.
+      - Feature importance rankings → use get_feature_importance.
+    Use find_similar_cases instead when the user wants whole reports
+    similar to a case description rather than passages on a topic.
+
+    Args:
+        query: Natural-language question or phrase. Must be non-empty.
+        note_type: Optional exact-match filter on note_type. The corpus
+            uses medical-specialty values like "Surgery", "Cardiovascular
+            / Pulmonary", "Neurology", and section-derived values like "Discharge 
+            Summary", "SOAP / Chart / Progress Notes", "Consult - History and Phy.".
+        k: Number of chunks to return. Capped at 20 (default 5).
+    """
+    if not query or not query.strip():
+        raise ValueError("query is required and must be non-empty")
+
+    capped_k = retrieval.cap_k(k)
+    results = retrieval.search_chunks(
+        query, k=capped_k, note_type=note_type
+    )
+
+    return json.dumps({
+        "query": query,
+        "note_type_filter": note_type,
+        "k": capped_k,
+        "result_count": len(results),
+        "results": results,
+    }, default=str)
+
+
+@mcp.tool()
+def find_similar_cases(case_description: str, k: int = 3) -> str:
+    """Find whole clinical reports semantically similar to a case
+    description. Operates on the same MTSamples corpus as
+    search_clinical_notes, but aggregates matching chunks back to the
+    report level so you get k *distinct* reports — not k chunks that may
+    all come from the same report.
+
+    Use this when the user describes a patient or scenario and wants
+    comparable real-world cases — e.g. "65-year-old male with substernal
+    chest pain, prior CABG, presenting to ED", "post-op patient with
+    fever and elevated WBC on day 3", "infant with poor feeding and
+    failure to thrive". The response gives, per report: sample_name,
+    medical_specialty, the best-matching chunk's similarity score, and
+    up to 5 matching chunks within that report (best-matching first).
+
+    Use search_clinical_notes instead when the user wants passages on a
+    *topic* rather than full *cases* similar to a description. Do NOT use
+    this tool for structured patient lookups (get_patient_risk_score) or
+    risk predictions (predict_risk).
+
+    Args:
+        case_description: Free-text description of the current patient
+            or case. Must be non-empty.
+        k: Number of distinct reports to return. Capped at 20 (default 3).
+    """
+    if not case_description or not case_description.strip():
+        raise ValueError("case_description is required and must be non-empty")
+
+    capped_k = retrieval.cap_k(k)
+    results = retrieval.search_similar_reports(
+        case_description, k=capped_k
+    )
+
+    return json.dumps({
+        "case_description_length": len(case_description),
+        "k": capped_k,
+        "result_count": len(results),
+        "results": results,
     }, default=str)
 
 

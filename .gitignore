@@ -41,6 +41,9 @@ data/mimic_cache/
 data/processed/*mimic*.json
 *.parquet
 
+# MTSamples raw clinical corpus (downloaded via ingest_mtsamples.py)
+data/mtsamples_raw/
+
 # Logs
 *.log
 npm-debug.log*
