@@ -54,3 +54,24 @@ improve retrieval precision and enable section-filtered queries.
 Planned Phase 6 improvement: extend section detection to recognize
 MTSamples' conventional headers, with measurement against the Phase 5
 eval baseline to validate the improvement.
+
+
+## Deployment — Railway monorepo config (Phase 5)
+
+The `chat_api` Railway service fails to use `chat_api/Dockerfile`
+despite a per-service `chat_api/railway.json`. The root-level
+`railway.json` (used for the MCP server build) ends up taking
+precedence in monorepo mode, so deploys for `chat_api` don't pick
+up changes made there.
+
+This is an infrastructure-config conflict, not an application bug.
+The production `chat_api` is therefore pinned to the Phase 4 image,
+which is feature-complete for RAG citations — the system prompt
+update, `_process_rag_result` helper, citations SSE event, and
+frontend Sources block all live in that build. Phase 5 did not
+modify `chat_api/`, so production behaviour is unaffected.
+
+Fix is non-urgent infrastructure cleanup (root vs per-service
+config precedence, possibly switching to Railway's "monorepo with
+service root directories" setting), not application logic. Defer
+until a future infra pass.
