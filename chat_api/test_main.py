@@ -6,7 +6,15 @@ from unittest.mock import AsyncMock, patch, MagicMock
 import pytest
 from fastapi.testclient import TestClient
 
-from main import app, _get_client_ip, ALLOWED_ORIGINS, MODEL, SYSTEM_PROMPT
+from main import (
+    app,
+    _get_client_ip,
+    _process_rag_result,
+    ALLOWED_ORIGINS,
+    MODEL,
+    RAG_TOOLS,
+    SYSTEM_PROMPT,
+)
 
 
 @pytest.fixture
@@ -217,3 +225,222 @@ class TestStreamFormat:
         )
         body = resp.text
         assert "event: done" in body
+
+
+# --- RAG citation handling ---
+
+
+_SEARCH_TOOL_PAYLOAD = {
+    "query": "beta-blocker contraindications",
+    "note_type_filter": None,
+    "k": 2,
+    "result_count": 2,
+    "results": [
+        {
+            "source_id": "mtsamples_chest-pain-eval_chunk_0",
+            "note_type": "Cardiovascular / Pulmonary",
+            "content": "Patient presents with substernal chest pain.",
+            "similarity": 0.91,
+            "metadata": {},
+            "citation": {
+                "corpus": "mtsamples",
+                "sample_name": "Chest Pain Evaluation",
+                "medical_specialty": "Cardiovascular / Pulmonary",
+                "soap_section": None,
+                "chunk_index": 0,
+                "total_chunks": 3,
+            },
+        },
+        {
+            "source_id": "mtsamples_cabg-followup_chunk_0",
+            "note_type": "Cardiovascular / Pulmonary",
+            "content": "Status post CABG, doing well.",
+            "similarity": 0.74,
+            "metadata": {},
+            "citation": {
+                "corpus": "mtsamples",
+                "sample_name": "CABG Followup",
+                "medical_specialty": "Cardiovascular / Pulmonary",
+                "soap_section": "subjective",
+                "chunk_index": 0,
+                "total_chunks": 4,
+            },
+        },
+    ],
+}
+
+
+_SIMILAR_TOOL_PAYLOAD = {
+    "case_description_length": 60,
+    "k": 2,
+    "result_count": 2,
+    "results": [
+        {
+            "sample_name": "CABG Followup",
+            "medical_specialty": "Cardiovascular / Pulmonary",
+            "note_type": "Cardiovascular / Pulmonary",
+            "best_similarity": 0.535,
+            "best_match_source_id": "mtsamples_cabg-followup_chunk_0",
+            "matching_chunks": [
+                {
+                    "source_id": "mtsamples_cabg-followup_chunk_0",
+                    "content": "Status post CABG, doing well.",
+                    "similarity": 0.535,
+                },
+                {
+                    "source_id": "mtsamples_cabg-followup_chunk_2",
+                    "content": "Continues on aspirin and statin.",
+                    "similarity": 0.42,
+                },
+            ],
+            "citation": {"corpus": "mtsamples"},
+        },
+        {
+            "sample_name": "Stress Test",
+            "medical_specialty": "Cardiovascular / Pulmonary",
+            "note_type": "Cardiovascular / Pulmonary",
+            "best_similarity": 0.51,
+            "best_match_source_id": "mtsamples_stress-test_chunk_0",
+            "matching_chunks": [
+                {
+                    "source_id": "mtsamples_stress-test_chunk_0",
+                    "content": "Bruce protocol, achieved target HR.",
+                    "similarity": 0.51,
+                },
+            ],
+            "citation": {"corpus": "mtsamples"},
+        },
+    ],
+}
+
+
+class TestRAGToolsConstant:
+    def test_rag_tools_is_set_of_two(self):
+        assert RAG_TOOLS == {"search_clinical_notes", "find_similar_cases"}
+
+
+class TestSystemPromptRouting:
+    def test_mentions_search_clinical_notes(self):
+        assert "search_clinical_notes" in SYSTEM_PROMPT
+
+    def test_mentions_find_similar_cases(self):
+        assert "find_similar_cases" in SYSTEM_PROMPT
+
+    def test_mentions_predict_risk_routing(self):
+        assert "predict_risk" in SYSTEM_PROMPT
+
+    def test_explains_citation_index_field(self):
+        assert "citation_index" in SYSTEM_PROMPT
+
+    def test_instructs_bracketed_citation_marker(self):
+        # Look for the literal "[N]" instruction.
+        assert "[N]" in SYSTEM_PROMPT
+
+    def test_forbids_fabricating_citations(self):
+        lower = SYSTEM_PROMPT.lower()
+        assert "fabricat" in lower or "invent" in lower
+
+
+class TestProcessRagResultSearch:
+    def test_indexes_each_result_starting_at_offset_plus_one(self):
+        text = json.dumps(_SEARCH_TOOL_PAYLOAD)
+        modified, citations = _process_rag_result(
+            "search_clinical_notes", text, citation_offset=0
+        )
+        assert [c["index"] for c in citations] == [1, 2]
+        # The annotated JSON Claude sees must include citation_index too.
+        annotated = json.loads(modified)
+        assert annotated["results"][0]["citation_index"] == 1
+        assert annotated["results"][1]["citation_index"] == 2
+
+    def test_carries_metadata_into_citation(self):
+        text = json.dumps(_SEARCH_TOOL_PAYLOAD)
+        _, citations = _process_rag_result(
+            "search_clinical_notes", text, citation_offset=0
+        )
+        first = citations[0]
+        assert first["source_id"] == "mtsamples_chest-pain-eval_chunk_0"
+        assert first["sample_name"] == "Chest Pain Evaluation"
+        assert first["medical_specialty"] == "Cardiovascular / Pulmonary"
+        assert first["chunk_index"] == 0
+        assert first["total_chunks"] == 3
+        assert first["similarity"] == pytest.approx(0.91)
+        assert first["content"].startswith("Patient presents")
+        assert first["tool"] == "search_clinical_notes"
+
+    def test_offset_is_respected_across_calls(self):
+        text = json.dumps(_SEARCH_TOOL_PAYLOAD)
+        # Offset of 5 → indices 6, 7
+        _, citations = _process_rag_result(
+            "search_clinical_notes", text, citation_offset=5
+        )
+        assert [c["index"] for c in citations] == [6, 7]
+
+
+class TestProcessRagResultSimilar:
+    def test_one_citation_per_report(self):
+        text = json.dumps(_SIMILAR_TOOL_PAYLOAD)
+        modified, citations = _process_rag_result(
+            "find_similar_cases", text, citation_offset=0
+        )
+        assert len(citations) == 2
+        assert [c["sample_name"] for c in citations] == ["CABG Followup", "Stress Test"]
+        annotated = json.loads(modified)
+        assert annotated["results"][0]["citation_index"] == 1
+        assert annotated["results"][1]["citation_index"] == 2
+
+    def test_uses_best_match_chunk_content(self):
+        text = json.dumps(_SIMILAR_TOOL_PAYLOAD)
+        _, citations = _process_rag_result(
+            "find_similar_cases", text, citation_offset=0
+        )
+        assert citations[0]["content"] == "Status post CABG, doing well."
+        assert citations[0]["source_id"] == "mtsamples_cabg-followup_chunk_0"
+        assert citations[0]["similarity"] == pytest.approx(0.535)
+        assert citations[0]["matching_chunks_count"] == 2
+        assert citations[0]["tool"] == "find_similar_cases"
+
+    def test_handles_empty_matching_chunks(self):
+        payload = {
+            "result_count": 1,
+            "results": [
+                {
+                    "sample_name": "Lonely Sample",
+                    "medical_specialty": "Surgery",
+                    "note_type": "Surgery",
+                    "best_similarity": 0.5,
+                    "best_match_source_id": "mtsamples_lonely_chunk_0",
+                    "matching_chunks": [],
+                }
+            ],
+        }
+        _, citations = _process_rag_result(
+            "find_similar_cases", json.dumps(payload), citation_offset=0
+        )
+        assert len(citations) == 1
+        assert citations[0]["content"] is None
+
+
+class TestProcessRagResultEdgeCases:
+    def test_malformed_json_returns_original_and_empty_citations(self):
+        modified, citations = _process_rag_result(
+            "search_clinical_notes", "not-json{{", citation_offset=0
+        )
+        assert modified == "not-json{{"
+        assert citations == []
+
+    def test_empty_results_array_returns_empty_citations(self):
+        text = json.dumps({"result_count": 0, "results": []})
+        modified, citations = _process_rag_result(
+            "search_clinical_notes", text, citation_offset=0
+        )
+        assert citations == []
+        assert modified == text  # Unchanged (no items to index)
+
+    def test_missing_results_key_is_safe(self):
+        text = json.dumps({"unexpected": "shape"})
+        modified, citations = _process_rag_result(
+            "search_clinical_notes", text, citation_offset=0
+        )
+        assert citations == []
+        assert modified == text

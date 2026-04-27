@@ -4,7 +4,68 @@ import { useState, useRef, useEffect, useCallback, FormEvent } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useChat, SUGGESTED_PROMPTS } from '@/lib/use-chat';
-import type { Message } from '@/lib/use-chat';
+import type { Citation, Message } from '@/lib/use-chat';
+
+/**
+ * Renders the numbered "Sources" block beneath an assistant message that
+ * cited retrieved chunks. Each row collapses to a one-line summary; the
+ * full chunk content appears when the row is expanded.
+ */
+function Sources({ citations }: { citations: Citation[] }) {
+  const sorted = [...citations].sort((a, b) => a.index - b.index);
+
+  return (
+    <div className="mt-2 rounded-2xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 p-3">
+      <div className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2">
+        Sources
+      </div>
+      <ol className="space-y-1.5">
+        {sorted.map((c) => (
+          <li key={c.index}>
+            <details className="group">
+              <summary className="cursor-pointer list-none flex items-start gap-2 text-xs text-gray-700 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-300">
+                <span className="flex-shrink-0 inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-semibold">
+                  {c.index}
+                </span>
+                <span className="flex-1 min-w-0">
+                  <span className="font-medium text-gray-900 dark:text-gray-100">
+                    {c.sample_name || c.source_id}
+                  </span>
+                  {c.note_type && (
+                    <span className="text-gray-500 dark:text-gray-400">
+                      {' · '}
+                      {c.note_type}
+                    </span>
+                  )}
+                  {typeof c.similarity === 'number' && (
+                    <span className="text-gray-400 dark:text-gray-500">
+                      {' · '}
+                      {(c.similarity * 100).toFixed(0)}% match
+                    </span>
+                  )}
+                </span>
+                <span className="flex-shrink-0 text-[10px] text-blue-600 dark:text-blue-400 group-open:hidden">
+                  View chunk
+                </span>
+                <span className="flex-shrink-0 text-[10px] text-blue-600 dark:text-blue-400 hidden group-open:inline">
+                  Hide
+                </span>
+              </summary>
+              {c.content && (
+                <div className="mt-1.5 ml-7 text-[11px] text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900/40 border border-gray-200 dark:border-gray-700 rounded-lg p-2 whitespace-pre-wrap">
+                  {c.content}
+                </div>
+              )}
+              <div className="mt-1 ml-7 text-[10px] text-gray-400 dark:text-gray-500 font-mono break-all">
+                {c.source_id}
+              </div>
+            </details>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
 
 export default function ChatWidget() {
   const {
@@ -191,10 +252,15 @@ export default function ChatWidget() {
                       {msg.content}
                     </div>
                   ) : (
-                    <div className="max-w-[85%] px-3.5 py-2 text-sm leading-relaxed break-words bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-2xl rounded-bl-md chat-md">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {msg.content}
-                      </ReactMarkdown>
+                    <div className="max-w-[85%] flex flex-col">
+                      <div className="px-3.5 py-2 text-sm leading-relaxed break-words bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-2xl rounded-bl-md chat-md">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                          {msg.content}
+                        </ReactMarkdown>
+                      </div>
+                      {msg.citations && msg.citations.length > 0 && (
+                        <Sources citations={msg.citations} />
+                      )}
                     </div>
                   )}
                 </div>

@@ -34,15 +34,36 @@ MCP_SERVERS: dict[str, str] = {
 SYSTEM_PROMPT = """\
 You are ReadmitRisk Assistant, an AI-powered clinical analytics helper for \
 hospital readmission risk analysis. You have access to tools that query two \
-patient datasets:
+patient datasets and a corpus of transcribed clinical notes:
 
 - UCI Diabetes Dataset: 71,518 diabetes patients with readmission outcomes
 - MIMIC-IV Dataset: 211,073 hospital admissions with ICU data
+- MTSamples corpus: ~10K embedded chunks from ~5K transcribed clinical notes
 
-Use the available tools to answer questions about patient risk scores, hospital \
-performance metrics, feature importance, risk distributions, and dataset \
-comparisons. You can also run live risk predictions for hypothetical patient \
-scenarios.
+Tool routing:
+- Quantitative risk questions about a specific patient or hypothetical \
+  scenario → predict_risk, get_patient_risk_score, get_high_risk_patients, \
+  get_risk_distribution, get_feature_importance, compare_datasets, \
+  get_hospital_metrics. Use these for anything involving risk scores, \
+  cohort stats, hospital benchmarks, or feature importance.
+- Open-ended clinical-knowledge questions ("what does the corpus say \
+  about X?", "show me notes discussing Y") → search_clinical_notes.
+- Case-similarity questions ("find cases similar to a 65-year-old male \
+  with substernal chest pain") → find_similar_cases.
+- Hybrid questions: call multiple tools as needed and combine the \
+  evidence in your answer.
+
+Citing retrieved chunks (search_clinical_notes / find_similar_cases):
+- Each result in the tool's `results` array carries a `citation_index` \
+  field with a 1-based number that is unique across the whole turn.
+- Cite each fact you take from a retrieved chunk inline as [N], using \
+  the chunk's `citation_index`. Multiple citations: [1][3].
+- Do NOT invent citation numbers. If the tool returned no results \
+  (`result_count: 0` or empty `results`), say plainly that no relevant \
+  documentation was found rather than fabricating sources.
+- The chunks are clinical documentation, not patient outcomes — when \
+  citing them, frame them as "the corpus describes ..." not "the data \
+  shows ...".
 
 Important context:
 - Risk scores are relative rankings (0-100), not readmission probabilities.
@@ -59,6 +80,78 @@ ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://natedev.io",
 ]
+
+# Tools whose results should be parsed into a structured "citations" SSE
+# event for the chat widget to render. Both produce a top-level `results`
+# array of items that can be cited.
+RAG_TOOLS = {"search_clinical_notes", "find_similar_cases"}
+
+
+def _process_rag_result(
+    tool_name: str, result_text: str, citation_offset: int
+) -> tuple[str, list[dict]]:
+    """Annotate a RAG tool's JSON result with 1-based ``citation_index``
+    fields and extract a flat citations list for the SSE event.
+
+    The annotated JSON is what we hand back to Claude so it can use the
+    same indices in its ``[N]`` markers; the citations list is what the
+    frontend renders.
+
+    ``citation_offset`` is the highest index emitted earlier in the same
+    turn — this function indexes from ``offset + 1`` so multiple RAG
+    tool calls in one turn share a single global numbering.
+
+    Falls back gracefully (returns the original text + empty list) if
+    the tool result is not parseable JSON or is shaped unexpectedly.
+    """
+    try:
+        data = json.loads(result_text)
+    except (ValueError, TypeError):
+        return result_text, []
+
+    items = data.get("results")
+    if not isinstance(items, list) or not items:
+        return result_text, []
+
+    citations: list[dict] = []
+    for offset, item in enumerate(items):
+        if not isinstance(item, dict):
+            continue
+        index = citation_offset + 1 + offset
+        item["citation_index"] = index
+
+        if tool_name == "search_clinical_notes":
+            cite_meta = item.get("citation") or {}
+            citations.append({
+                "index": index,
+                "tool": tool_name,
+                "source_id": item.get("source_id"),
+                "note_type": item.get("note_type"),
+                "content": item.get("content"),
+                "similarity": item.get("similarity"),
+                "sample_name": cite_meta.get("sample_name"),
+                "medical_specialty": cite_meta.get("medical_specialty"),
+                "soap_section": cite_meta.get("soap_section"),
+                "chunk_index": cite_meta.get("chunk_index"),
+                "total_chunks": cite_meta.get("total_chunks"),
+            })
+        elif tool_name == "find_similar_cases":
+            chunks = item.get("matching_chunks") or []
+            best_chunk_content = chunks[0].get("content") if chunks else None
+            citations.append({
+                "index": index,
+                "tool": tool_name,
+                "source_id": item.get("best_match_source_id"),
+                "note_type": item.get("note_type"),
+                "content": best_chunk_content,
+                "similarity": item.get("best_similarity"),
+                "sample_name": item.get("sample_name"),
+                "medical_specialty": item.get("medical_specialty"),
+                "matching_chunks_count": len(chunks),
+            })
+
+    return json.dumps(data, default=str), citations
+
 
 # --- App setup ---
 
@@ -151,6 +244,11 @@ async def _agentic_loop(
     """Stream Claude responses, execute MCP tools, loop until done."""
     client = anthropic.AsyncAnthropic()
     conversation = list(messages)
+    # Global running citation counter so multiple RAG tool calls in the
+    # same turn share one numbering scheme — the same numbering Claude
+    # uses for [N] markers because we inject these indices into the
+    # tool_result JSON it sees.
+    citation_offset = 0
 
     for _ in range(MAX_TURNS):
         tool_calls: list[dict] = []
@@ -232,6 +330,24 @@ async def _agentic_loop(
             result_text = await _execute_tool(
                 mcp_session, tc["name"], tc["input"]
             )
+
+            # For RAG tools, parse out citations and inject indices into
+            # the JSON Claude sees so its [N] markers line up with what
+            # the frontend renders.
+            citations: list[dict] = []
+            if tc["name"] in RAG_TOOLS:
+                result_text, citations = _process_rag_result(
+                    tc["name"], result_text, citation_offset
+                )
+                if citations:
+                    citation_offset = citations[-1]["index"]
+                    yield {
+                        "event": "citations",
+                        "data": json.dumps(
+                            {"tool": tc["name"], "citations": citations}
+                        ),
+                    }
+
             yield {
                 "event": "tool_result",
                 "data": json.dumps(

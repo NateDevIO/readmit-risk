@@ -414,4 +414,102 @@ describe('ChatWidget', () => {
       expect(screen.getByText('ReadmitRisk Assistant')).toBeVisible();
     });
   });
+
+  describe('citations', () => {
+    function streamWithCitations() {
+      const encoder = new TextEncoder();
+      const citations = [
+        {
+          index: 1,
+          tool: 'search_clinical_notes',
+          source_id: 'mtsamples_chest-pain-eval_chunk_0',
+          note_type: 'Cardiovascular / Pulmonary',
+          content: 'Patient presents with substernal chest pain.',
+          similarity: 0.91,
+          sample_name: 'Chest Pain Evaluation',
+          medical_specialty: 'Cardiovascular / Pulmonary',
+          chunk_index: 0,
+          total_chunks: 3,
+        },
+        {
+          index: 2,
+          tool: 'search_clinical_notes',
+          source_id: 'mtsamples_cabg-followup_chunk_0',
+          note_type: 'Cardiovascular / Pulmonary',
+          content: 'Status post CABG, doing well.',
+          similarity: 0.74,
+          sample_name: 'CABG Followup',
+          medical_specialty: 'Cardiovascular / Pulmonary',
+        },
+      ];
+      return new ReadableStream({
+        start(controller) {
+          controller.enqueue(
+            encoder.encode(
+              'event: text\ndata: {"text": "Per the corpus [1][2], "}\n\n' +
+                `event: citations\ndata: ${JSON.stringify({
+                  tool: 'search_clinical_notes',
+                  citations,
+                })}\n\n` +
+                'event: text\ndata: {"text": "details follow."}\n\n' +
+                'event: done\ndata: {}\n\n'
+            )
+          );
+          controller.close();
+        },
+      });
+    }
+
+    it('renders the Sources block when citations arrive', async () => {
+      mockFetch.mockResolvedValueOnce({ ok: true, body: streamWithCitations() });
+
+      render(<ChatWidget />);
+      fireEvent.click(screen.getByLabelText('Open chat'));
+
+      const input = screen.getByPlaceholderText('Ask a question...');
+      fireEvent.change(input, { target: { value: 'beta blockers' } });
+      fireEvent.submit(input.closest('form')!);
+
+      await waitFor(() => {
+        expect(screen.getByText('Sources')).toBeInTheDocument();
+      });
+      expect(screen.getByText('Chest Pain Evaluation')).toBeInTheDocument();
+      expect(screen.getByText('CABG Followup')).toBeInTheDocument();
+      // Numbered chips for [1] and [2]
+      expect(screen.getByText('1')).toBeInTheDocument();
+      expect(screen.getByText('2')).toBeInTheDocument();
+      // Source IDs visible (collapsed mode still shows them as monospace footers)
+      expect(
+        screen.getByText('mtsamples_chest-pain-eval_chunk_0')
+      ).toBeInTheDocument();
+    });
+
+    it('does not render Sources when no citations are emitted', async () => {
+      const encoder = new TextEncoder();
+      const stream = new ReadableStream({
+        start(controller) {
+          controller.enqueue(
+            encoder.encode(
+              'event: text\ndata: {"text": "Plain answer with no RAG."}\n\n' +
+                'event: done\ndata: {}\n\n'
+            )
+          );
+          controller.close();
+        },
+      });
+      mockFetch.mockResolvedValueOnce({ ok: true, body: stream });
+
+      render(<ChatWidget />);
+      fireEvent.click(screen.getByLabelText('Open chat'));
+
+      const input = screen.getByPlaceholderText('Ask a question...');
+      fireEvent.change(input, { target: { value: 'no citations' } });
+      fireEvent.submit(input.closest('form')!);
+
+      await waitFor(() => {
+        expect(screen.getByText('Plain answer with no RAG.')).toBeInTheDocument();
+      });
+      expect(screen.queryByText('Sources')).not.toBeInTheDocument();
+    });
+  });
 });

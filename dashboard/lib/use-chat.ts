@@ -13,9 +13,30 @@ export const SUGGESTED_PROMPTS = [
   "What are the model's limitations?",
 ];
 
+/**
+ * One retrieved chunk surfaced as a numbered citation. ``index`` is
+ * 1-based and unique across the whole assistant turn — it matches the
+ * ``[N]`` markers the model emits in the response text.
+ */
+export interface Citation {
+  index: number;
+  tool: 'search_clinical_notes' | 'find_similar_cases';
+  source_id: string;
+  note_type: string | null;
+  content: string | null;
+  similarity: number | null;
+  sample_name: string | null;
+  medical_specialty: string | null;
+  soap_section?: string | null;
+  chunk_index?: number | null;
+  total_chunks?: number | null;
+  matching_chunks_count?: number | null;
+}
+
 export interface Message {
   role: 'user' | 'assistant';
   content: string;
+  citations?: Citation[];
 }
 
 export function useChat(): {
@@ -110,7 +131,11 @@ export function useChat(): {
                 assistantText += parsed.text;
                 setMessages((prev) => {
                   const next = [...prev];
+                  // Preserve any fields (e.g. citations) attached earlier
+                  // in this same turn so successive text deltas don't
+                  // wipe them out.
                   next[next.length - 1] = {
+                    ...next[next.length - 1],
                     role: 'assistant',
                     content: assistantText,
                   };
@@ -121,6 +146,21 @@ export function useChat(): {
                 setActiveTool(parsed.tool || 'tool');
               } else if (sseEvent.event === 'tool_result') {
                 setActiveTool(null);
+              } else if (sseEvent.event === 'citations') {
+                const incoming = (parsed.citations || []) as Citation[];
+                if (incoming.length > 0) {
+                  setMessages((prev) => {
+                    const next = [...prev];
+                    const last = next[next.length - 1];
+                    if (last?.role === 'assistant') {
+                      next[next.length - 1] = {
+                        ...last,
+                        citations: [...(last.citations || []), ...incoming],
+                      };
+                    }
+                    return next;
+                  });
+                }
               } else if (sseEvent.event === 'error') {
                 setError(parsed.error || 'Something went wrong');
               }
