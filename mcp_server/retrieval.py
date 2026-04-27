@@ -32,6 +32,15 @@ MATCHES_PER_REPORT = 5
 SIMILAR_OVERFETCH_FACTOR = 5
 SIMILAR_OVERFETCH_CAP = 100
 
+# Multiplier used when over-fetching for chunk-level dedup. The
+# clinical_notes table can hold multiple rows per source_id (the
+# ingest pipeline writes one row per medical_specialty for samples
+# that span specialties), so the same chunk shows up several times in
+# raw cosine results. We over-fetch and collapse in Python, keeping
+# the highest-similarity row for each source_id.
+SEARCH_OVERFETCH_FACTOR = 4
+SEARCH_OVERFETCH_CAP = 80
+
 
 def cap_k(k: int) -> int:
     """Clamp ``k`` to the inclusive range ``[1, K_MAX]``."""
@@ -85,6 +94,7 @@ def search_chunks(
     Returns: list of chunk dicts; ``[]`` if no rows match.
     """
     k = cap_k(k)
+    fetch_limit = min(k * SEARCH_OVERFETCH_FACTOR, SEARCH_OVERFETCH_CAP)
     t0 = time.perf_counter()
     embedding = embed_text(query)
 
@@ -97,7 +107,7 @@ def search_chunks(
             "ORDER BY embedding <=> %s::vector "
             "LIMIT %s"
         )
-        params: tuple = (embedding, note_type, embedding, k)
+        params: tuple = (embedding, note_type, embedding, fetch_limit)
     else:
         sql = (
             "SELECT source_id, note_type, content, metadata, "
@@ -106,21 +116,39 @@ def search_chunks(
             "ORDER BY embedding <=> %s::vector "
             "LIMIT %s"
         )
-        params = (embedding, embedding, k)
+        params = (embedding, embedding, fetch_limit)
 
     with connect() as conn, conn.cursor() as cur:
         cur.execute(sql, params)
         rows = cur.fetchall()
 
-    results = [_row_to_chunk(r) for r in rows]
+    # Collapse duplicate source_ids. Rows arrive sorted by similarity
+    # DESC, so the first occurrence of any source_id is its highest-
+    # similarity row — exactly what we want to keep.
+    seen_ids: set[str] = set()
+    results: list[dict[str, Any]] = []
+    duplicates_dropped = 0
+    for row in rows:
+        sid = row[0]
+        if sid in seen_ids:
+            duplicates_dropped += 1
+            continue
+        seen_ids.add(sid)
+        results.append(_row_to_chunk(row))
+        if len(results) >= k:
+            break
+
     latency = time.perf_counter() - t0
     logger.info(
-        "search_chunks query_len=%d k=%d note_type=%r latency=%.3fs results=%d",
+        "search_chunks query_len=%d k=%d note_type=%r latency=%.3fs "
+        "results=%d duplicates_dropped=%d fetch_limit=%d",
         len(query),
         k,
         note_type,
         latency,
         len(results),
+        duplicates_dropped,
+        fetch_limit,
     )
     return results
 
@@ -162,17 +190,25 @@ def search_similar_reports(
 
     # Dedupe by sample_name. Rows are already sorted by similarity DESC,
     # so the first chunk we see for any sample is the best match for that
-    # sample. Subsequent chunks from the same sample are stashed as extras.
+    # sample. Subsequent chunks from the same sample are stashed as extras
+    # — but the same source_id can appear multiple times in the raw rows
+    # (one row per medical_specialty for samples that span specialties),
+    # so we also dedupe matching_chunks by source_id within each sample.
     by_sample: dict[str, dict[str, Any]] = {}
+    seen_chunks: dict[str, set[str]] = {}
     for row in rows:
         chunk = _row_to_chunk(row)
         meta = chunk["metadata"] or {}
         sample = meta.get("sample_name") or chunk["source_id"]
+        sid = chunk["source_id"]
 
         if sample in by_sample:
+            if sid in seen_chunks[sample]:
+                continue
             entry = by_sample[sample]
             if len(entry["matching_chunks"]) < MATCHES_PER_REPORT:
                 entry["matching_chunks"].append(_chunk_summary(chunk))
+                seen_chunks[sample].add(sid)
             continue
 
         if len(by_sample) >= k:
@@ -183,10 +219,11 @@ def search_similar_reports(
             "medical_specialty": meta.get("medical_specialty"),
             "note_type": chunk["note_type"],
             "best_similarity": chunk["similarity"],
-            "best_match_source_id": chunk["source_id"],
+            "best_match_source_id": sid,
             "matching_chunks": [_chunk_summary(chunk)],
             "citation": chunk["citation"],
         }
+        seen_chunks[sample] = {sid}
 
     results = list(by_sample.values())
     latency = time.perf_counter() - t0

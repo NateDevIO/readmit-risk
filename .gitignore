@@ -44,6 +44,11 @@ data/processed/*mimic*.json
 # MTSamples raw clinical corpus (downloaded via ingest_mtsamples.py)
 data/mtsamples_raw/
 
+# Retrieval eval reports (generated per run; methodology + question set
+# are committed, but the timestamped artifacts are not)
+evals/retrieval/reports/*.md
+evals/retrieval/questions_seed.yaml
+
 # Logs
 *.log
 npm-debug.log*

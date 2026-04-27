@@ -36,3 +36,21 @@ Because of this:
 - The two datasets use **different algorithms** (LogisticRegression for UCI pre-computed, GradientBoosting for MIMIC pre-computed) and **different feature sets** (diabetes-specific vs. ICU clinical data). Direct score comparisons across datasets should be interpreted with caution.
 - UCI represents a diabetes outpatient population (8.8% readmission rate); MIMIC represents a general hospital/ICU population (20.5% readmission rate). The populations are fundamentally different.
 - UCI avg risk score (~26) is much lower than MIMIC (~61) because most UCI diabetes patients are low-risk, while MIMIC's post-processed scores spread across a wider range.
+
+
+## Chunking limitations (Phase 2)
+
+The chunker has a SOAP-aware path that activates when 2+ distinct
+SOAP markers (Subjective, Objective, Assessment, Plan) are detected
+in a report. On the MTSamples corpus this path did not activate for
+any of 4,966 reports because MTSamples uses semantic section headers
+(PAST MEDICAL HISTORY, PHYSICAL EXAMINATION, ASSESSMENT, PLAN, etc.)
+rather than strict S/O/A/P labels.
+
+All 10,287 chunks went through the recursive character-based fallback
+chunker. This works but loses semantic section information that could
+improve retrieval precision and enable section-filtered queries.
+
+Planned Phase 6 improvement: extend section detection to recognize
+MTSamples' conventional headers, with measurement against the Phase 5
+eval baseline to validate the improvement.

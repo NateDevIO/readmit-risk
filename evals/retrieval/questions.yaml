@@ -1,0 +1,202 @@
+# Retrieval evaluation question set.
+#
+# Source_ids verified against questions_seed.yaml output for the
+# ingested MTSamples corpus. expected_relevant_source_ids is broadly
+# scoped: any chunk that genuinely answers the question counts as
+# relevant, including chunks from semantically-equivalent reports
+# (e.g. a question about HIV management is satisfied by either
+# HIV Followup or a similar chronic-disease followup chunk).
+#
+# This reflects how human evaluators judge retrieval quality:
+# "did the system find a good answer?" rather than "did it find
+# the one specific chunk I had in mind?"
+#
+# Schema:
+#   id            stable identifier so the per-question report rows can
+#                 be diffed across runs
+#   category      one of: factual, comparative, case_similarity, edge_case
+#   question      the natural-language query as it would be posed
+#   expected_relevant_source_ids
+#                 chunks that SHOULD appear in the top-k. Anything from
+#                 the same report is fair game; list multiple chunks
+#                 when the question's answer spans them.
+#   expected_irrelevant_source_ids   (optional)
+#                 chunks that should NOT make it into the top-5; used to
+#                 catch surface-similarity false positives.
+
+questions:
+  # ---------------------------------------------------------------
+  # Report 1: Cardiovascular - Letter (cardiac eval, 67yo obese male)
+  # ---------------------------------------------------------------
+  - id: q01
+    category: factual
+    question: "What medication changes were made for a patient with hypertension and family history of coronary disease?"
+    expected_relevant_source_ids:
+      - mtsamples_cardiovascular-letter_chunk_2
+      - mtsamples_cardiovascular-letter_chunk_1
+      - mtsamples_hypertension-progress-note_chunk_0
+      - mtsamples_hypertension-consult_chunk_4
+
+  - id: q02
+    category: factual
+    question: "Why might a patient be switched from verapamil to a beta-blocker?"
+    expected_relevant_source_ids:
+      - mtsamples_cardiovascular-letter_chunk_2
+      - mtsamples_hypertension-consult_chunk_4
+
+  - id: q03
+    category: factual
+    question: "What lipid panel and metabolic findings are typical in a borderline diabetic with hypertension?"
+    expected_relevant_source_ids:
+      - mtsamples_cardiovascular-letter_chunk_1
+      - mtsamples_cardiovascular-letter_chunk_0
+      - mtsamples_gen-med-soap-2_chunk_0
+      - mtsamples_gen-med-consult-30_chunk_0
+
+  - id: q04
+    category: case_similarity
+    question: "Find consultation notes for a 67-year-old obese male with hypertension referred for cardiac evaluation."
+    expected_relevant_source_ids:
+      - mtsamples_cardiovascular-letter_chunk_0
+      - mtsamples_cardiovascular-letter_chunk_1
+      - mtsamples_cardiovascular-letter_chunk_2
+
+  # ---------------------------------------------------------------
+  # Report 2: Iliopsoas Hematoma - 1 (neurology consult, stroke workup)
+  # ---------------------------------------------------------------
+  - id: q05
+    category: factual
+    question: "What workup is performed for a patient presenting with sudden onset unilateral weakness and gait difficulty?"
+    expected_relevant_source_ids:
+      - mtsamples_iliopsoas-hematoma-1_chunk_0
+      - mtsamples_iliopsoas-hematoma-1_chunk_1
+      - mtsamples_tia-lumbar-stenosis_chunk_2
+      - mtsamples_neurologic-consultation-5_chunk_0
+
+  - id: q06
+    category: factual
+    question: "What does a carotid duplex study evaluate in stroke workup?"
+    expected_relevant_source_ids:
+      - mtsamples_iliopsoas-hematoma-1_chunk_1
+      - mtsamples_carotid-cerebral-arteriograms_chunk_0
+      - mtsamples_carotid-ultrasound_chunk_0
+      - mtsamples_carotid-ultrasound_chunk_1
+
+  - id: q07
+    category: case_similarity
+    question: "Find cases involving acute neurological deficits with stroke evaluation and TOAST trial enrollment."
+    expected_relevant_source_ids:
+      - mtsamples_iliopsoas-hematoma-1_chunk_0
+      - mtsamples_iliopsoas-hematoma-1_chunk_1
+
+  # ---------------------------------------------------------------
+  # Report 3: HIV Followup - 1 (chronic disease management)
+  # ---------------------------------------------------------------
+  - id: q08
+    category: factual
+    question: "What problems are tracked at a routine HIV followup appointment?"
+    expected_relevant_source_ids:
+      - mtsamples_hiv-followup-1_chunk_0
+      - mtsamples_hiv-followup-1_chunk_1
+
+  - id: q09
+    category: factual
+    question: "How is medication adherence assessed for HIV patients?"
+    expected_relevant_source_ids:
+      - mtsamples_hiv-followup-1_chunk_0
+      - mtsamples_hiv-followup-1_chunk_1
+
+  - id: q10
+    category: comparative
+    question: "How does HIV management differ from other chronic disease followups in terms of routine screening?"
+    expected_relevant_source_ids:
+      - mtsamples_hiv-followup-1_chunk_0
+      - mtsamples_hiv-followup-1_chunk_1
+
+  # ---------------------------------------------------------------
+  # Report 4: Carbohydrate Counting (dietary consult, type 1 DM, post-DKA)
+  # ---------------------------------------------------------------
+  - id: q11
+    category: factual
+    question: "What dietary education is provided to a type 1 diabetic recovering from DKA?"
+    expected_relevant_source_ids:
+      - mtsamples_carbohydrate-counting_chunk_0
+      - mtsamples_carbohydrate-counting_chunk_1
+      - mtsamples_dietary-consult-diabetes-2_chunk_0
+      - mtsamples_dietary-consult-diabetes-2_chunk_1
+
+  - id: q12
+    category: factual
+    question: "How should insulin dosing be timed relative to carbohydrate intake?"
+    expected_relevant_source_ids:
+      - mtsamples_carbohydrate-counting_chunk_1
+      - mtsamples_carbohydrate-counting_chunk_0
+
+  - id: q13
+    category: case_similarity
+    question: "Find consultation notes for a patient hospitalized for diabetic ketoacidosis and discharged needing dietary counseling."
+    expected_relevant_source_ids:
+      - mtsamples_carbohydrate-counting_chunk_0
+      - mtsamples_carbohydrate-counting_chunk_1
+      - mtsamples_dietary-consult-diabetes-2_chunk_0
+
+  - id: q14
+    category: comparative
+    question: "Compare carbohydrate counting strategies for elevated versus stable blood sugar patterns."
+    expected_relevant_source_ids:
+      - mtsamples_carbohydrate-counting_chunk_0
+      - mtsamples_carbohydrate-counting_chunk_1
+
+  # ---------------------------------------------------------------
+  # Report 5: Anaplastic Astrocytoma - Letter (neuro-oncology, treatment refusal)
+  # ---------------------------------------------------------------
+  - id: q15
+    category: factual
+    question: "What treatment options are discussed for a patient with anaplastic astrocytoma?"
+    expected_relevant_source_ids:
+      - mtsamples_anaplastic-astrocytoma-letter_chunk_0
+      - mtsamples_anaplastic-astrocytoma-letter_chunk_1
+      - mtsamples_malignant-meningioma-consult_chunk_1
+
+  - id: q16
+    category: factual
+    question: "How are steroids used in the management of brain tumors?"
+    expected_relevant_source_ids:
+      - mtsamples_anaplastic-astrocytoma-letter_chunk_1
+      - mtsamples_anaplastic-astrocytoma-letter_chunk_0
+      - mtsamples_craniotomy-neuronavigation_chunk_1
+      - mtsamples_craniotomy-occipital_chunk_0
+
+  - id: q17
+    category: case_similarity
+    question: "Find clinic letters where a patient is refusing or hesitant about cancer treatment recommendations."
+    expected_relevant_source_ids:
+      - mtsamples_anaplastic-astrocytoma-letter_chunk_0
+      - mtsamples_anaplastic-astrocytoma-letter_chunk_1
+      - mtsamples_malignant-meningioma-consult_chunk_1
+
+  # ---------------------------------------------------------------
+  # Edge cases (3 questions intentionally out-of-scope or ambiguous)
+  # ---------------------------------------------------------------
+  - id: q18
+    category: edge_case
+    # No specific report should cover this — the corpus is clinical
+    # notes, not policy documents. Recall@5 is expected to be 0; we
+    # care that the system doesn't confidently surface irrelevant
+    # cardiology / surgery notes just because the words overlap.
+    question: "What is the company's policy on remote work?"
+    expected_relevant_source_ids: []
+
+  - id: q19
+    category: edge_case
+    # Many reports could partially match — we don't pin a single
+    # answer. Tracked as MRR=0 unless you fill in source_ids; useful
+    # for monitoring how the system handles ambiguous queries.
+    question: "What does post-operative care look like?"
+    expected_relevant_source_ids: []
+
+  - id: q20
+    category: edge_case
+    # Out-of-domain technical query. Should not match clinical notes.
+    question: "How do I configure a Postgres connection pool?"
+    expected_relevant_source_ids: []
