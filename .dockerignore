@@ -1,11 +1,18 @@
 # Deny everything by default
 *
 
-# Allow MCP server code
+# Allow parent directories so we can traverse into them
 !mcp_server/
+!data/
+!data/processed/
+!data/feature_importance/
+!data/comparison_reports/
+
+# Re-deny everything inside those directories
+data/**
 mcp_server/__pycache__/
 
-# Allow data files needed at runtime
+# Allow specific data files
 !data/processed/patient_risks.json
 !data/processed/patient_risks_mimic.json
 !data/processed/risk_summary.json
@@ -15,6 +22,9 @@ mcp_server/__pycache__/
 !data/processed/state_summary.json
 !data/feature_importance/feature_importance.json
 !data/comparison_reports/dataset_comparison.csv
+
+# Allow MCP server code (already allowed above; ensure code subdirs work)
+!mcp_server/**
 
 # Allow build files
 !requirements-server.txt
