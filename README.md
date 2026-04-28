@@ -23,6 +23,7 @@ ReadmitRisk is a full-stack care management platform that identifies high-risk p
 
 **Key Metrics:**
 - 📊 **282K+ patients** analyzed across two clinical datasets
+- 📚 **~10K embedded chunks** from ~5K transcribed clinical notes (MTSamples) for RAG-grounded Q&A
 - 💰 **$1.5B** in cost exposure identified
 - 🎯 **122K high-risk members** flagged for intervention
 - 🏥 **205 hospitals** benchmarked with CMS penalty data
@@ -123,18 +124,44 @@ Connect any MCP-compatible AI assistant to ReadmitRisk data — no clone or inst
 }
 ```
 
-**7 Tools Available:**
+**9 Tools Available:**
+
+*Quantitative analytics (7):*
 - Patient risk lookups across UCI and MIMIC-IV datasets
 - High-risk patient filtering with age/threshold controls
 - Hospital readmission metrics and CMS penalty data
 - Live ML predictions using trained Gradient Boosting models
 - Feature importance and dataset comparison analytics
 
+*RAG over clinical notes (2):*
+- `search_clinical_notes` — semantic search across the MTSamples corpus
+- `find_similar_cases` — retrieve clinically similar reports given a free-text case description
+
 Deployed on Railway via SSE transport. Also runs locally via stdio — see [mcp_server/README.md](mcp_server/README.md) for details.
 
 ---
 
-### 6. **Model Performance & Explainability**
+### 6. **Conversational AI Assistant (RAG-grounded)**
+
+A separate FastAPI chat service (`chat_api/`) bridges the dashboard's chat widget to Claude with full MCP tool access. The model picks the right tool per turn — quantitative tools for risk questions, retrieval tools for clinical-knowledge questions.
+
+**RAG pipeline:**
+- **Corpus:** ~5K MTSamples transcribed clinical notes → ~10K chunks via SOAP-aware + recursive character chunking
+- **Embeddings:** Voyage AI `voyage-3-lite` (512-dim)
+- **Vector store:** Postgres + pgvector with HNSW index, cosine similarity
+- **Retrieval:** k-NN with per-report dedup and result-cap controls
+- **Citations:** Every retrieved chunk carries a `citation_index`; the assistant cites inline as `[N]`, and a Sources block in the UI links each citation back to its source chunk
+
+**Streaming + safety:**
+- Server-sent events for token streaming
+- `slowapi` rate limiting per origin
+- Origin-allowlisted CORS
+
+**Eval harness:** `evals/retrieval/` ships a YAML question set, retrieval metrics, and an eval runner so retrieval quality can be measured against a baseline before changes ship. See [evals/retrieval/README.md](evals/retrieval/README.md).
+
+---
+
+### 7. **Model Performance & Explainability**
 Transparent ML model evaluation with feature importance analysis.
 
 <img src="docs/screenshots/model-performance.png?v=2" alt="Model Performance" width="800">
@@ -165,10 +192,19 @@ Transparent ML model evaluation with feature importance analysis.
 - **SMOTE** - Class imbalance handling
 - **Google BigQuery** - MIMIC-IV data extraction
 
+**RAG / Conversational AI:**
+- **FastMCP** - MCP server framework (stdio + SSE transports)
+- **FastAPI + sse-starlette** - Streaming chat proxy
+- **Anthropic Claude** - Reasoning + tool selection (Sonnet 4)
+- **Voyage AI** - `voyage-3-lite` embeddings (512-dim)
+- **Postgres + pgvector** - Vector store with HNSW cosine index
+- **slowapi** - Per-origin rate limiting on the chat API
+
 **Data Sources:**
 - **MIMIC-IV** (211K admissions) - ICU clinical database from MIT
 - **UCI Diabetes** (71K patients) - Hospital readmission records
 - **CMS HRRP** (205 hospitals) - Public penalty data
+- **MTSamples** (~5K reports / ~10K chunks) - Transcribed clinical notes used as the RAG corpus
 
 ---
 
@@ -247,18 +283,32 @@ readmit-risk/
 │   │   ├── impact-calculator/  # ROI calculator
 │   │   ├── geography/     # State analysis
 │   │   └── model-performance/  # ML metrics
-│   ├── components/        # React components
+│   ├── components/        # React components (incl. chat widget + Sources block)
 │   ├── lib/              # Data and utilities
 │   └── public/           # Static assets & reports
+├── chat_api/             # FastAPI streaming chat proxy (separate Railway service)
+│   ├── main.py           # SSE endpoint, MCP client, citation pipeline, rate limiting
+│   ├── Dockerfile
+│   └── test_main.py
 ├── mcp_server/           # MCP server (deployed on Railway)
-│   ├── server.py        # FastMCP tool definitions
+│   ├── server.py        # FastMCP tool definitions (9 tools)
 │   ├── data_loader.py   # Lazy-loading data store
+│   ├── retrieval.py     # pgvector cosine search helpers
+│   ├── embeddings.py    # Voyage AI embedding client
+│   ├── chunking.py      # SOAP-aware + recursive chunker
+│   ├── db.py            # Postgres connection
+│   ├── migrate.py       # Schema migration runner
+│   ├── migrations/      # SQL migrations (incl. pgvector init)
 │   ├── train_model.py   # Model training script
 │   └── models/          # Trained model artifacts
+├── evals/
+│   └── retrieval/       # Retrieval quality eval harness (questions, metrics, runner)
+├── ingest_mtsamples.py   # MTSamples → chunks → embeddings → pgvector pipeline
 ├── data/                 # Processed datasets
 │   ├── processed/        # UCI + MIMIC data
 │   └── mimic_*/         # MIMIC raw data (gitignored)
 ├── notebooks/           # Jupyter analysis notebooks
+├── KNOWN_LIMITATIONS.md  # Model + RAG caveats and deployment notes
 ├── *.py                # Python ML pipeline scripts
 └── docs/               # Documentation and screenshots
 ```
