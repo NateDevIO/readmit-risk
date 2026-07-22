@@ -20,7 +20,7 @@ from sse_starlette.sse import EventSourceResponse
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-MODEL = os.getenv("CHAT_MODEL", "claude-sonnet-4-6")
+MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-6")
 MAX_TURNS = 10
 MAX_TOKENS = 4096
 
